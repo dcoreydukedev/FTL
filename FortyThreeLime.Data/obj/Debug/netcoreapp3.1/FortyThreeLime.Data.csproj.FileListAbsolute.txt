@@ -1,0 +1,15 @@
+C:\Users\DCoreyDuke Developer\source\repos\FTL\FortyThreeLime.Data\bin\Debug\netcoreapp3.1\FortyThreeLime.Data.deps.json
+C:\Users\DCoreyDuke Developer\source\repos\FTL\FortyThreeLime.Data\bin\Debug\netcoreapp3.1\FortyThreeLime.Data.dll
+C:\Users\DCoreyDuke Developer\source\repos\FTL\FortyThreeLime.Data\obj\Debug\netcoreapp3.1\FortyThreeLime.Data.csprojAssemblyReference.cache
+C:\Users\DCoreyDuke Developer\source\repos\FTL\FortyThreeLime.Data\obj\Debug\netcoreapp3.1\FortyThreeLime.Data.AssemblyInfoInputs.cache
+C:\Users\DCoreyDuke Developer\source\repos\FTL\FortyThreeLime.Data\obj\Debug\netcoreapp3.1\FortyThreeLime.Data.AssemblyInfo.cs
+C:\Users\DCoreyDuke Developer\source\repos\FTL\FortyThreeLime.Data\bin\Debug\netcoreapp3.1\FortyThreeLime.Data.runtimeconfig.json
+C:\Users\DCoreyDuke Developer\source\repos\FTL\FortyThreeLime.Data\bin\Debug\netcoreapp3.1\FortyThreeLime.Data.runtimeconfig.dev.json
+C:\Users\DCoreyDuke Developer\source\repos\FTL\FortyThreeLime.Data\obj\Debug\netcoreapp3.1\FortyThreeLime.Data.genruntimeconfig.cache
+C:\Users\DCoreyDuke Developer\source\repos\FTL\FortyThreeLime.Data\bin\Debug\netcoreapp3.1\FortyThreeLime.Data.pdb
+C:\Users\DCoreyDuke Developer\source\repos\FTL\FortyThreeLime.Data\obj\Debug\netcoreapp3.1\FortyThreeLime.Data.csproj.CoreCompileInputs.cache
+C:\Users\DCoreyDuke Developer\source\repos\FTL\FortyThreeLime.Data\obj\Debug\netcoreapp3.1\FortyThreeLime.Data.dll
+C:\Users\DCoreyDuke Developer\source\repos\FTL\FortyThreeLime.Data\obj\Debug\netcoreapp3.1\FortyThreeLime.Data.pdb
+C:\Users\DCoreyDuke Developer\source\repos\FTL\FortyThreeLime.Data\bin\Debug\netcoreapp3.1\FortyThreeLime.Models.dll
+C:\Users\DCoreyDuke Developer\source\repos\FTL\FortyThreeLime.Data\bin\Debug\netcoreapp3.1\FortyThreeLime.Models.pdb
+C:\Users\DCoreyDuke Developer\source\repos\FTL\FortyThreeLime.Data\obj\Debug\netcoreapp3.1\FortyThreeLime.Data.csproj.CopyComplete
