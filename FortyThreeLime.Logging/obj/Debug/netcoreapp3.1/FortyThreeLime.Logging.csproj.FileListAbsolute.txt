@@ -1,0 +1,9 @@
+C:\Users\DCoreyDuke Developer\source\repos\FTL\FortyThreeLime.Logging\bin\Debug\netcoreapp3.1\FortyThreeLime.Logging.deps.json
+C:\Users\DCoreyDuke Developer\source\repos\FTL\FortyThreeLime.Logging\bin\Debug\netcoreapp3.1\FortyThreeLime.Logging.dll
+C:\Users\DCoreyDuke Developer\source\repos\FTL\FortyThreeLime.Logging\bin\Debug\netcoreapp3.1\FortyThreeLime.Logging.pdb
+C:\Users\DCoreyDuke Developer\source\repos\FTL\FortyThreeLime.Logging\obj\Debug\netcoreapp3.1\FortyThreeLime.Logging.csprojAssemblyReference.cache
+C:\Users\DCoreyDuke Developer\source\repos\FTL\FortyThreeLime.Logging\obj\Debug\netcoreapp3.1\FortyThreeLime.Logging.AssemblyInfoInputs.cache
+C:\Users\DCoreyDuke Developer\source\repos\FTL\FortyThreeLime.Logging\obj\Debug\netcoreapp3.1\FortyThreeLime.Logging.AssemblyInfo.cs
+C:\Users\DCoreyDuke Developer\source\repos\FTL\FortyThreeLime.Logging\obj\Debug\netcoreapp3.1\FortyThreeLime.Logging.csproj.CoreCompileInputs.cache
+C:\Users\DCoreyDuke Developer\source\repos\FTL\FortyThreeLime.Logging\obj\Debug\netcoreapp3.1\FortyThreeLime.Logging.dll
+C:\Users\DCoreyDuke Developer\source\repos\FTL\FortyThreeLime.Logging\obj\Debug\netcoreapp3.1\FortyThreeLime.Logging.pdb

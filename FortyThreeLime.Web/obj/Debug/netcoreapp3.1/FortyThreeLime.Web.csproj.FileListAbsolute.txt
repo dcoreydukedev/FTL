@@ -83,5 +83,11 @@ C:\Users\DCoreyDuke Developer\source\repos\FTL\FortyThreeLime.Web\bin\Debug\netc
 C:\Users\DCoreyDuke Developer\source\repos\FTL\FortyThreeLime.Web\bin\Debug\netcoreapp3.1\Microsoft.CodeAnalysis.dll
 C:\Users\DCoreyDuke Developer\source\repos\FTL\FortyThreeLime.Web\bin\Debug\netcoreapp3.1\Microsoft.CodeAnalysis.CSharp.dll
 C:\Users\DCoreyDuke Developer\source\repos\FTL\FortyThreeLime.Web\bin\Debug\netcoreapp3.1\Microsoft.CodeAnalysis.Razor.dll
+C:\Users\DCoreyDuke Developer\source\repos\FTL\FortyThreeLime.Web\bin\Debug\netcoreapp3.1\FortyThreeLime.Logging.dll
+C:\Users\DCoreyDuke Developer\source\repos\FTL\FortyThreeLime.Web\bin\Debug\netcoreapp3.1\FortyThreeLime.Repository.dll
+C:\Users\DCoreyDuke Developer\source\repos\FTL\FortyThreeLime.Web\bin\Debug\netcoreapp3.1\FortyThreeLime.Logging.pdb
+C:\Users\DCoreyDuke Developer\source\repos\FTL\FortyThreeLime.Web\bin\Debug\netcoreapp3.1\FortyThreeLime.Repository.pdb
+C:\Users\DCoreyDuke Developer\source\repos\FTL\FortyThreeLime.Web\bin\Debug\netcoreapp3.1\System.Net.Http.Formatting.dll
+C:\Users\DCoreyDuke Developer\source\repos\FTL\FortyThreeLime.Web\bin\Debug\netcoreapp3.1\System.Web.Http.dll
 C:\Users\DCoreyDuke Developer\source\repos\FTL\FortyThreeLime.Web\obj\Debug\netcoreapp3.1\FortyThreeLime.Web.csproj.CoreCompileInputs.cache
 C:\Users\DCoreyDuke Developer\source\repos\FTL\FortyThreeLime.Web\obj\Debug\netcoreapp3.1\FortyThreeLime.Web.MvcApplicationPartsAssemblyInfo.cache

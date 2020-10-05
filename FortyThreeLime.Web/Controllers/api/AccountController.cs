@@ -7,9 +7,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FortyThreeLime.Web.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/Account")]
     [ApiController]
-    public class AccountController : ControllerBase
+    public class AccountController : ApiControllerBase
     {
     }
 }
