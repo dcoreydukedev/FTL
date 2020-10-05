@@ -16,6 +16,62 @@ namespace FortyThreeLime.Data.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.8");
 
+            modelBuilder.Entity("FortyThreeLime.Models.Entities.Application", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("AppName")
+                        .HasColumnType("TEXT")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("AppToken")
+                        .HasColumnType("TEXT")
+                        .HasMaxLength(512);
+
+                    b.Property<int>("AppType")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("TEXT")
+                        .HasMaxLength(250);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppName");
+
+                    b.HasIndex("AppToken");
+
+                    b.ToTable("Applications");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AppName = "FortyThreeLime.Web",
+                            AppToken = "a4Y0281F95Gth40GJe9q09swk3XK",
+                            AppType = 1,
+                            Description = "Web Portal for Solution"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            AppName = "FortyThreeLime.API",
+                            AppToken = "GeC34y742m6oC9wBcs634hM3V8R1",
+                            AppType = 0,
+                            Description = "Web API for Solution"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            AppName = "FortyThreeLime.Mobile.Android",
+                            AppToken = "C4LX502J3b6ioqJ7Es86ulm5X3p9",
+                            AppType = 2,
+                            Description = "Android Application for Solution"
+                        });
+                });
+
             modelBuilder.Entity("FortyThreeLime.Models.Entities.ButtonCommand", b =>
                 {
                     b.Property<int>("Id")

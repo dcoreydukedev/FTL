@@ -8,7 +8,7 @@ C:\Users\DCoreyDuke Developer\source\repos\FTL\FortyThreeLime.Repository\bin\Deb
 C:\Users\DCoreyDuke Developer\source\repos\FTL\FortyThreeLime.Repository\obj\Debug\netcoreapp3.1\FortyThreeLime.Repository.csprojAssemblyReference.cache
 C:\Users\DCoreyDuke Developer\source\repos\FTL\FortyThreeLime.Repository\obj\Debug\netcoreapp3.1\FortyThreeLime.Repository.AssemblyInfoInputs.cache
 C:\Users\DCoreyDuke Developer\source\repos\FTL\FortyThreeLime.Repository\obj\Debug\netcoreapp3.1\FortyThreeLime.Repository.AssemblyInfo.cs
-C:\Users\DCoreyDuke Developer\source\repos\FTL\FortyThreeLime.Repository\obj\Debug\netcoreapp3.1\FortyThreeLime.Repository.csproj.CoreCompileInputs.cache
 C:\Users\DCoreyDuke Developer\source\repos\FTL\FortyThreeLime.Repository\obj\Debug\netcoreapp3.1\FortyThreeLime.Repository.csproj.CopyComplete
 C:\Users\DCoreyDuke Developer\source\repos\FTL\FortyThreeLime.Repository\obj\Debug\netcoreapp3.1\FortyThreeLime.Repository.dll
 C:\Users\DCoreyDuke Developer\source\repos\FTL\FortyThreeLime.Repository\obj\Debug\netcoreapp3.1\FortyThreeLime.Repository.pdb
+C:\Users\DCoreyDuke Developer\source\repos\FTL\FortyThreeLime.Repository\obj\Debug\netcoreapp3.1\FortyThreeLime.Repository.csproj.CoreCompileInputs.cache

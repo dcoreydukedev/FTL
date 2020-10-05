@@ -6,7 +6,7 @@
 
 using Microsoft.AspNetCore.Mvc.Filters;
 
-namespace FortyThreeLime
+namespace FortyThreeLime.Web
 {
 
     /// <summary>

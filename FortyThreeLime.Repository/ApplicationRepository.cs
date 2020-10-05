@@ -1,4 +1,7 @@
-﻿using FortyThreeLime.Data;
+﻿/*************************************************************************
+ * Author: DCoreyDuke
+ ************************************************************************/
+using FortyThreeLime.Data;
 using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
@@ -35,6 +38,11 @@ namespace FortyThreeLime.Repository
             return table.Find(id);
         }
 
+        public int GetCount()
+        {
+            return table.Count();
+        }
+
         public IEnumerable<TEntity> GetAll()
         {
             return table.ToList();
@@ -51,6 +59,8 @@ namespace FortyThreeLime.Repository
             TEntity existing = table.Find(id);
             table.Remove(existing);
         }
+
+        #region Dispose
 
         protected virtual void Dispose(bool disposing)
         {
@@ -76,6 +86,8 @@ namespace FortyThreeLime.Repository
             Dispose(disposing: true);
             GC.SuppressFinalize(this);
         }
+
+        #endregion
     }
     
 

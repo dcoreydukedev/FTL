@@ -6,7 +6,7 @@ using FortyThreeLime.Logging;
 using System;
 using Microsoft.AspNetCore.Mvc.Filters;
 
-namespace FortyThreeLime
+namespace FortyThreeLime.Web
 {
     public class FortyThreeLimeErrorHandler : ExceptionFilterAttribute
     {

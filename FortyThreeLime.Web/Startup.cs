@@ -1,17 +1,18 @@
+/*************************************************************************
+ * Author: DCoreyDuke
+ ************************************************************************/
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using FortyThreeLime.Data;
-using FortyThreeLime.Models.Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Formatters;
+using FortyThreeLime.Repository;
+using FortyThreeLime.Web.Services;
+using FortyThreeLime.Web.Services.Data;
 
 namespace FortyThreeLime.Web
 {
@@ -29,7 +30,7 @@ namespace FortyThreeLime.Web
         {
             // Add DB Context
             services.AddDbContext<ApplicationDbContext>(
-                    opt => opt.EnableDetailedErrors().UseSqlite(@"Data Source=C:\FortyTrheeLime\DB\43LimeMobileApp.db", options =>
+                    opt => opt.EnableDetailedErrors().UseSqlite(@"Data Source=C:\FortyThreeLime\DB\43LimeMobileApp.db", options =>
                     {
                         options.MigrationsAssembly(System.Reflection.Assembly.GetExecutingAssembly().FullName);
                     })
@@ -45,14 +46,18 @@ namespace FortyThreeLime.Web
 
             services.AddSession(opts => { opts.Cookie.HttpOnly = true; opts.Cookie.IsEssential = true; opts.IdleTimeout = TimeSpan.FromSeconds(1800); });
 
-            services.AddControllersWithViews(options => {
-                    options.OutputFormatters.RemoveType<XmlSerializerOutputFormatter>();
-                    options.OutputFormatters.RemoveType<StringOutputFormatter>();
-                    options.OutputFormatters.RemoveType<HttpNoContentOutputFormatter>();
-                })
-                .AddNewtonsoftJson(options =>{});
+            services.AddControllersWithViews();
 
             services.AddWebEncoders();
+
+            // Add Repository
+            services.AddScoped(typeof(IRepository<>), typeof(ApplicationRepository<>));
+        
+            // Add Custom Data Services
+            services.AddTransient<IDataService, AddressService>();
+            services.AddTransient<IDataService, LatLngService>();
+
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -63,7 +68,11 @@ namespace FortyThreeLime.Web
                 app.UseDeveloperExceptionPage();
 
             }
-
+            else
+            {
+                app.UseExceptionHandler("/Error");
+                app.UseHsts();
+            }
 
             app.UseStatusCodePages();
 
@@ -85,11 +94,13 @@ namespace FortyThreeLime.Web
 
             app.UseResponseCaching();
 
+            //  MapControllers is called inside UseEndpoints to map attribute routed controllers.
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                //endpoints.MapControllerRoute(
+                //    name: "default",
+                //    pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapControllers();
             });
         }
     }

@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿/*************************************************************************
+ * Author: DCoreyDuke
+ ************************************************************************/
+using System.Collections.Generic;
 
 namespace FortyThreeLime.Repository
 {
@@ -7,6 +10,7 @@ namespace FortyThreeLime.Repository
         void Add(TEntity obj);
         TEntity GetById(int id);
         IEnumerable<TEntity> GetAll();
+        int GetCount();
         void Update(TEntity obj);
         void Remove(int id);
     }

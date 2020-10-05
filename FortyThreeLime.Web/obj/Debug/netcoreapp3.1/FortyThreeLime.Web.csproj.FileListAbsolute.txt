@@ -87,7 +87,7 @@ C:\Users\DCoreyDuke Developer\source\repos\FTL\FortyThreeLime.Web\bin\Debug\netc
 C:\Users\DCoreyDuke Developer\source\repos\FTL\FortyThreeLime.Web\bin\Debug\netcoreapp3.1\FortyThreeLime.Repository.dll
 C:\Users\DCoreyDuke Developer\source\repos\FTL\FortyThreeLime.Web\bin\Debug\netcoreapp3.1\FortyThreeLime.Logging.pdb
 C:\Users\DCoreyDuke Developer\source\repos\FTL\FortyThreeLime.Web\bin\Debug\netcoreapp3.1\FortyThreeLime.Repository.pdb
-C:\Users\DCoreyDuke Developer\source\repos\FTL\FortyThreeLime.Web\bin\Debug\netcoreapp3.1\System.Net.Http.Formatting.dll
-C:\Users\DCoreyDuke Developer\source\repos\FTL\FortyThreeLime.Web\bin\Debug\netcoreapp3.1\System.Web.Http.dll
+C:\Users\DCoreyDuke Developer\source\repos\FTL\FortyThreeLime.Web\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Error.cshtml.g.cs
+C:\Users\DCoreyDuke Developer\source\repos\FTL\FortyThreeLime.Web\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Design.dll
 C:\Users\DCoreyDuke Developer\source\repos\FTL\FortyThreeLime.Web\obj\Debug\netcoreapp3.1\FortyThreeLime.Web.csproj.CoreCompileInputs.cache
 C:\Users\DCoreyDuke Developer\source\repos\FTL\FortyThreeLime.Web\obj\Debug\netcoreapp3.1\FortyThreeLime.Web.MvcApplicationPartsAssemblyInfo.cache

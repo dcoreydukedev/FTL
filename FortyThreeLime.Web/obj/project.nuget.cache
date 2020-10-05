@@ -1,11 +1,9 @@
 {
   "version": 2,
-  "dgSpecHash": "knvXzVgISTXJ1n7E23N3+/YDCAghO8RXqyxtoWwnC0m5Z7X+e+FUb8nUAlMSN8/v8n0MuwtA0mPdxsZnMiNzOw==",
+  "dgSpecHash": "+rip+i2MSMUysQKJMO+jdr/fSb87QkRgB+gEcLdx7CiPZSvPplhe2//O4SL9WLH6ixKOR5ALzXbU/fmJtMUYlw==",
   "success": true,
   "projectFilePath": "C:\\Users\\DCoreyDuke Developer\\source\\repos\\FTL\\FortyThreeLime.Web\\FortyThreeLime.Web.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\DCoreyDuke Developer\\.nuget\\packages\\microsoft.aspnet.webapi.client\\5.2.7\\microsoft.aspnet.webapi.client.5.2.7.nupkg.sha512",
-    "C:\\Users\\DCoreyDuke Developer\\.nuget\\packages\\microsoft.aspnet.webapi.core\\5.2.7\\microsoft.aspnet.webapi.core.5.2.7.nupkg.sha512",
     "C:\\Users\\DCoreyDuke Developer\\.nuget\\packages\\microsoft.aspnetcore.antiforgery\\2.2.0\\microsoft.aspnetcore.antiforgery.2.2.0.nupkg.sha512",
     "C:\\Users\\DCoreyDuke Developer\\.nuget\\packages\\microsoft.aspnetcore.authentication.abstractions\\2.2.0\\microsoft.aspnetcore.authentication.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\DCoreyDuke Developer\\.nuget\\packages\\microsoft.aspnetcore.authentication.core\\2.2.0\\microsoft.aspnetcore.authentication.core.2.2.0.nupkg.sha512",
@@ -60,9 +58,11 @@
     "C:\\Users\\DCoreyDuke Developer\\.nuget\\packages\\microsoft.entityframeworkcore\\3.1.8\\microsoft.entityframeworkcore.3.1.8.nupkg.sha512",
     "C:\\Users\\DCoreyDuke Developer\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\3.1.8\\microsoft.entityframeworkcore.abstractions.3.1.8.nupkg.sha512",
     "C:\\Users\\DCoreyDuke Developer\\.nuget\\packages\\microsoft.entityframeworkcore.analyzers\\3.1.8\\microsoft.entityframeworkcore.analyzers.3.1.8.nupkg.sha512",
+    "C:\\Users\\DCoreyDuke Developer\\.nuget\\packages\\microsoft.entityframeworkcore.design\\3.1.8\\microsoft.entityframeworkcore.design.3.1.8.nupkg.sha512",
     "C:\\Users\\DCoreyDuke Developer\\.nuget\\packages\\microsoft.entityframeworkcore.relational\\3.1.8\\microsoft.entityframeworkcore.relational.3.1.8.nupkg.sha512",
     "C:\\Users\\DCoreyDuke Developer\\.nuget\\packages\\microsoft.entityframeworkcore.sqlite\\3.1.8\\microsoft.entityframeworkcore.sqlite.3.1.8.nupkg.sha512",
     "C:\\Users\\DCoreyDuke Developer\\.nuget\\packages\\microsoft.entityframeworkcore.sqlite.core\\3.1.8\\microsoft.entityframeworkcore.sqlite.core.3.1.8.nupkg.sha512",
+    "C:\\Users\\DCoreyDuke Developer\\.nuget\\packages\\microsoft.entityframeworkcore.tools\\3.1.8\\microsoft.entityframeworkcore.tools.3.1.8.nupkg.sha512",
     "C:\\Users\\DCoreyDuke Developer\\.nuget\\packages\\microsoft.extensions.caching.abstractions\\3.1.8\\microsoft.extensions.caching.abstractions.3.1.8.nupkg.sha512",
     "C:\\Users\\DCoreyDuke Developer\\.nuget\\packages\\microsoft.extensions.caching.memory\\3.1.8\\microsoft.extensions.caching.memory.3.1.8.nupkg.sha512",
     "C:\\Users\\DCoreyDuke Developer\\.nuget\\packages\\microsoft.extensions.configuration\\3.1.8\\microsoft.extensions.configuration.3.1.8.nupkg.sha512",
@@ -177,16 +177,5 @@
     "C:\\Users\\DCoreyDuke Developer\\.nuget\\packages\\system.xml.xpath\\4.3.0\\system.xml.xpath.4.3.0.nupkg.sha512",
     "C:\\Users\\DCoreyDuke Developer\\.nuget\\packages\\system.xml.xpath.xdocument\\4.3.0\\system.xml.xpath.xdocument.4.3.0.nupkg.sha512"
   ],
-  "logs": [
-    {
-      "code": "NU1701",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Package 'Microsoft.AspNet.WebApi.Core 5.2.7' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework '.NETCoreApp,Version=v3.1'. This package may not be fully compatible with your project.",
-      "libraryId": "Microsoft.AspNet.WebApi.Core",
-      "targetGraphs": [
-        ".NETCoreApp,Version=v3.1"
-      ]
-    }
-  ]
+  "logs": []
 }

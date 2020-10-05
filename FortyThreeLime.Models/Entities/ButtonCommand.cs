@@ -5,6 +5,7 @@
  *              Represents a command sent from mobile device when
  *              the user clicks a button.
  ************************************************************************/
+using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -131,5 +132,5 @@ namespace FortyThreeLime.Models.Entities
         public virtual ButtonCommandCategory Category { get; set; }
 
         public virtual List<CommandLogRecord> CommandLogs { get; set; }
-    }
+    }   
 }

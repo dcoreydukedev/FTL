@@ -11,6 +11,9 @@ namespace FortyThreeLime.Data
 {
     public class ApplicationDbContext : DbContext
     {
+
+        #region Constructors
+
         /// <summary>
         /// Default Constructor
         /// </summary>
@@ -46,11 +49,18 @@ namespace FortyThreeLime.Data
             return new ApplicationDbContext(opts);
         }
 
+        #endregion
+
+        #region DB Sets
+
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<ButtonCommand> ButtonCommands { get; set; }
         public virtual DbSet<ButtonCommandCategory> ButtonCommandCategories { get; set; }
         public virtual DbSet<CommandLogRecord> CommandLog { get; set; }
+        public virtual DbSet<Application> Applications { get; set; }
+
+        #endregion
 
         /// <summary>
         /// OnModelCreating
@@ -133,6 +143,21 @@ namespace FortyThreeLime.Data
                     .HasForeignKey("UserId1");
             });
 
+            // Applications
+            modelBuilder.Entity<Application>().ToTable("Applications");
+            modelBuilder.Entity<Application>().Property(a => a.AppType).HasConversion<int>();
+            modelBuilder.Entity<Application>(app => {
+                app.Property<int>("Id").ValueGeneratedOnAdd().HasColumnType("INTEGER");
+                app.Property<string>("AppName").HasColumnType("TEXT");
+                app.Property<int>("AppType").HasColumnType("INTEGER");
+                app.Property<string>("Description").HasColumnType("TEXT");
+                app.Property<string>("AppToken").HasColumnType("TEXT");
+                app.HasKey("Id");
+                app.HasIndex("AppName");
+                app.HasIndex("AppToken");                
+            });
+            
+
             #endregion
             /* -- End Configure Tables -- */
 
@@ -140,11 +165,14 @@ namespace FortyThreeLime.Data
             #region Seed Data
 
             // Roles
+            #region Roles
             modelBuilder.Entity<Role>().HasData(new Role { Id = 1, RoleName = "Administrator" });
             modelBuilder.Entity<Role>().HasData(new Role { Id = 2, RoleName = "ReportUser" });
             modelBuilder.Entity<Role>().HasData(new Role { Id = 3, RoleName = "User" });
+            #endregion
 
             // Test Users
+            #region Test Users
             modelBuilder.Entity<User>().HasData(new User { Id = 1, UserId = "0001", Username = "Administrator 1", RoleId = 1, IsActive = true, IsOnline = false });
             modelBuilder.Entity<User>().HasData(new User { Id = 2, UserId = "1001", Username = "Administrator 2", RoleId = 1, IsActive = true, IsOnline = false });
             modelBuilder.Entity<User>().HasData(new User { Id = 3, UserId = "0002", Username = "Report User 1", RoleId = 2, IsActive = true, IsOnline = false });
@@ -161,16 +189,20 @@ namespace FortyThreeLime.Data
             modelBuilder.Entity<User>().HasData(new User { Id = 14, UserId = "5551", Username = "Subject 2", RoleId = 3, IsActive = true, IsOnline = false });
             modelBuilder.Entity<User>().HasData(new User { Id = 15, UserId = "5552", Username = "Subject 3", RoleId = 3, IsActive = true, IsOnline = false });
             modelBuilder.Entity<User>().HasData(new User { Id = 16, UserId = "5553", Username = "Subject 4", RoleId = 3, IsActive = true, IsOnline = false });
+            #endregion
 
             // Button Command Categories
+            #region Button Command Categories
             modelBuilder.Entity<ButtonCommandCategory>().HasData(
                 new ButtonCommandCategory{ Id = 1, Category = "WorkDay", Description = "Buttons pertaining to the work day as a whole." });
             modelBuilder.Entity<ButtonCommandCategory>().HasData(
                 new ButtonCommandCategory { Id = 2, Category = "MainTask", Description = "Buttons non the main screen pertaining to the main tasks performed during the workday." });
             modelBuilder.Entity<ButtonCommandCategory>().HasData(
                 new ButtonCommandCategory { Id = 3, Category = "SubTask", Description = "Buttons accessed by clicking a main function button. Pertains to the main task" });
+            #endregion
 
             // Button Commands
+            #region Button Commands
             modelBuilder.Entity<ButtonCommand>().HasData(new ButtonCommand { Id = 1,CommandId = 1, Command = "Start Day", ParentId = null, CategoryId = 1 });
             modelBuilder.Entity<ButtonCommand>().HasData(new ButtonCommand { Id = 2,CommandId = 2, Command = "End Day", ParentId = null, CategoryId = 1 });
             modelBuilder.Entity<ButtonCommand>().HasData(new ButtonCommand { Id = 3,CommandId = 3, Command = "Start Lunch", ParentId = null, CategoryId = 1 });
@@ -193,6 +225,38 @@ namespace FortyThreeLime.Data
             modelBuilder.Entity<ButtonCommand>().HasData(new ButtonCommand { Id = 20,CommandId = 32, Command = "Clean Up", ParentId = 30, CategoryId = 3 });
             modelBuilder.Entity<ButtonCommand>().HasData(new ButtonCommand { Id = 21,CommandId = 33, Command = "Fork Work", ParentId = 30, CategoryId = 3 });
             modelBuilder.Entity<ButtonCommand>().HasData(new ButtonCommand { Id = 22, CommandId = 34, Command = "Equipment Issue", ParentId = 30, CategoryId = 3 });
+            #endregion
+
+            // Applications
+            #region Applications
+
+            modelBuilder.Entity<Application>().HasData(new Application {
+                Id = 1, 
+                AppName = "FortyThreeLime.Web", 
+                AppType = 1, 
+                Description = "Web Portal for Solution", 
+                AppToken = "a4Y0281F95Gth40GJe9q09swk3XK"
+            });
+
+            modelBuilder.Entity<Application>().HasData(new Application
+            {
+                Id = 2,
+                AppName = "FortyThreeLime.API",
+                AppType = 0,
+                Description = "Web API for Solution",
+                AppToken = "GeC34y742m6oC9wBcs634hM3V8R1"
+            });
+
+            modelBuilder.Entity<Application>().HasData(new Application
+            {
+                Id = 3,
+                AppName = "FortyThreeLime.Mobile.Android",
+                AppType = 2,
+                Description = "Android Application for Solution",
+                AppToken = "C4LX502J3b6ioqJ7Es86ulm5X3p9"
+            });
+
+            #endregion
 
             #endregion
             /* -- End Seed Data -- */
@@ -205,10 +269,10 @@ namespace FortyThreeLime.Data
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             // Moved to Webb App strtup.cs
-            //optionsBuilder.UseSqlite(@"Data Source=C:\DB\43LimeMobileApp.db", options =>
-            //{
-            //    options.MigrationsAssembly(Assembly.GetExecutingAssembly().FullName);
-            //});
+            optionsBuilder.UseSqlite(@"Data Source=C:\FortyThreeLime\DB\43LimeMobileApp.db", options =>
+            {
+                options.MigrationsAssembly(Assembly.GetExecutingAssembly().FullName);
+            });
             base.OnConfiguring(optionsBuilder);
         }
 

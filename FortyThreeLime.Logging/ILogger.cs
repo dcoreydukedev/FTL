@@ -28,7 +28,7 @@ namespace FortyThreeLime.Logging
     {
         public string Timestamp { get; }
 
-        public string LogsDirectory { get; } = @"C:\Logs";
+        public string LogsDirectory { get; } = @"C:\FortyThreeLime\Logs";
 
         public string LogFilePath { get; }
 
