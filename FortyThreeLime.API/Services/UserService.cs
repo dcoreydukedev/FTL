@@ -5,36 +5,40 @@
 using FortyThreeLime.Data;
 using FortyThreeLime.Models.Entities;
 using FortyThreeLime.Repository;
-using FortyThreeLime.API.Controllers;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace FortyThreeLime.API.Services
 {
+    public interface IUserService : IAPIService
+    {
+        User CreateUser(User u);
+        void DeleteUser(string userId);
+        User GetUser(int id);
+        User GetUser(string userId);
+        List<User> GetUsers();
+        bool IsUserInRole(string userId, string roleName);
+        User LoginUser(string userId);
+        User LogoutUser(string userId);
+        void UpdateUser(User u);
+        bool UserExists(string userId);
+    }
+
     /// <summary>
     /// Provides User Data
     /// </summary>
-    internal sealed class UserService : IAPIService
+    public sealed class UserService : IUserService
     {
         private ApplicationDbContext _context;
         private ApplicationRepository<User> _repo;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="UserService"/> class.
-        /// </summary>
-        public UserService()
-        {
-            this._context = new ApplicationDbContext();
-            this._repo = new ApplicationRepository<User>();
-        }
-
+      
         /// <summary>
         /// Initializes a new instance of the <see cref="UserService"/> class.
         /// </summary>
         /// <param name="repo">The User Repository.</param>
-        public UserService(ApplicationRepository<User> repo)
+        public UserService(ApplicationDbContext context, ApplicationRepository<User> repo)
         {
-            this._context = new ApplicationDbContext();
+            this._context = context;
             this._repo = repo;
         }
 
@@ -105,7 +109,7 @@ namespace FortyThreeLime.API.Services
         public void DeleteUser(string userId)
         {
             User user = _context.Users.Where(u => u.UserId == userId).SingleOrDefault();
-            if(user != null)
+            if (user != null)
             {
                 DeleteUser(user.Id);
             }
@@ -119,7 +123,7 @@ namespace FortyThreeLime.API.Services
         public User LoginUser(string userId)
         {
             User user = _context.Users.Where(u => u.UserId == userId).SingleOrDefault();
-            if(user != null)
+            if (user != null)
             {
                 user.IsOnline = true;
                 UpdateUser(user);
@@ -141,7 +145,7 @@ namespace FortyThreeLime.API.Services
             if (user != null)
             {
                 user.IsOnline = false;
-                user.IsActive  = true;
+                user.IsActive = true;
                 UpdateUser(user);
                 return user;
             }
@@ -163,7 +167,7 @@ namespace FortyThreeLime.API.Services
         {
             User user = _context.Users.Where(u => u.UserId == userId).SingleOrDefault();
             Role role = _context.Roles.Where(r => r.RoleName == roleName).SingleOrDefault();
-            if(user != null && role != null)
+            if (user != null && role != null)
             {
                 return role.RoleName == roleName;
             }

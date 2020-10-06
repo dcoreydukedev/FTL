@@ -4,6 +4,7 @@
  * Description: Application Entity. 
  *              Represents an application in the solution
  ************************************************************************/
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace FortyThreeLime.Models.Entities
@@ -20,6 +21,7 @@ namespace FortyThreeLime.Models.Entities
     /// <summary>
     /// Application Type Enumeration
     /// </summary>
+    [Serializable]
     public enum ApplicationType
     {
         API = 0,
@@ -35,6 +37,7 @@ namespace FortyThreeLime.Models.Entities
     /// </summary>
     /// <seealso cref="FortyThreeLime.Models.Entities.IEntity{FortyThreeLime.Models.Entities.Application}" />
     /// <seealso cref="FortyThreeLime.Models.Entities.IApplication" />
+    [Serializable]
     public class Application : IEntity<Application>, IApplication
     {
 

@@ -4,6 +4,7 @@
  * Description: Role Entity
  ************************************************************************/
 
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace FortyThreeLime.Models.Entities
@@ -19,6 +20,7 @@ namespace FortyThreeLime.Models.Entities
     /// </summary>
     /// <seealso cref="FortyThreeLime.Models.Entities.IEntity{FortyThreeLime.Models.Entities.Role}" />
     /// <seealso cref="FortyThreeLime.Models.Entities.IRole" />
+    [Serializable]
     public class Role : IEntity<Role>, IRole
     {
         /// <summary>

@@ -12,6 +12,10 @@ using FortyThreeLime.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using System;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using System.Linq;
 
 namespace FortyThreeLime.API
 {
@@ -36,29 +40,35 @@ namespace FortyThreeLime.API
                     })
                 );
 
+            // Add Repository
+            services.AddTransient(typeof(IRepository<>), typeof(ApplicationRepository<>));
+
             services.AddDistributedMemoryCache();
 
             services.AddCors();
 
             services.AddEntityFrameworkSqlite();
 
-            services.AddSession(opts => { opts.Cookie.HttpOnly = true; opts.Cookie.IsEssential = true; opts.IdleTimeout = TimeSpan.FromSeconds(1800); });
+            // Session State 
+            services.AddSession(opts => { opts.Cookie.HttpOnly = true; opts.Cookie.IsEssential = true; opts.IdleTimeout = TimeSpan.FromDays(1); });
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
 
             services.AddControllers(options => {
+                options.InputFormatters.Insert(0, GetJsonPatchInputFormatter());
                 options.OutputFormatters.RemoveType<XmlSerializerOutputFormatter>();
                 options.OutputFormatters.RemoveType<StringOutputFormatter>();
                 options.OutputFormatters.RemoveType<HttpNoContentOutputFormatter>();
             })
-                .AddNewtonsoftJson(options => { });
-
-            // Add Repository
-            services.AddScoped(typeof(IRepository<>), typeof(ApplicationRepository<>));
+                .AddNewtonsoftJson(options => { });            
 
             // Add Custom API Services
-            services.AddTransient<IAPIService, ButtonCommandService>();
-            services.AddTransient<IAPIService, CommandLogService>();
-            services.AddTransient<IAPIService, RoleService>();
-            services.AddTransient<IAPIService, UserService>();
+            services.AddTransient<IButtonCommandService, ButtonCommandService>();
+            services.AddTransient<ICommandLogService, CommandLogService>();
+            services.AddTransient<IRoleService, RoleService>();
+            services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IApplicationService, ApplicationService>();
+            services.AddTransient<IAppAuthService, AppAuthService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -75,10 +85,29 @@ namespace FortyThreeLime.API
 
             app.UseAuthorization();
 
+            app.UseCookiePolicy();
+
+            app.UseSession();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
+        }
+        private static NewtonsoftJsonPatchInputFormatter GetJsonPatchInputFormatter()
+        {
+            var builder = new ServiceCollection()
+                .AddLogging()
+                .AddMvc()
+                .AddNewtonsoftJson()
+                .Services.BuildServiceProvider();
+
+            return builder
+                .GetRequiredService<IOptions<MvcOptions>>()
+                .Value
+                .InputFormatters
+                .OfType<NewtonsoftJsonPatchInputFormatter>()
+                .First();
         }
     }
 }

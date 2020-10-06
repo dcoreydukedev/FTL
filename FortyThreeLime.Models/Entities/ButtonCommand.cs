@@ -6,6 +6,7 @@
  *              the user clicks a button.
  ************************************************************************/
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -25,6 +26,7 @@ namespace FortyThreeLime.Models.Entities
     /// </summary>
     /// <seealso cref="FortyThreeLime.Models.Entities.IEntity{FortyThreeLime.Models.Entities.ButtonCommand}" />
     /// <seealso cref="FortyThreeLime.Models.Entities.IButtonCommand" />
+    [Serializable]
     public class ButtonCommand : IEntity<ButtonCommand>, IButtonCommand
     {
 

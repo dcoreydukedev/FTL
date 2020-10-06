@@ -9,59 +9,8 @@ using FortyThreeLime.Models.Entities;
 
 namespace FortyThreeLime.Data
 {
-    public class ApplicationDbContext : DbContext
+    public partial class ApplicationDbContext : DbContext
     {
-
-        #region Constructors
-
-        /// <summary>
-        /// Default Constructor
-        /// </summary>
-        public ApplicationDbContext() : base()
-        {
-
-        }
-
-        /// <summary>
-        /// Constructor Accepting Options from Startup
-        /// </summary>
-        /// <param name="opts"></param>
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> opts) : base(opts)
-        {
-
-        }
-
-        /// <summary>
-        /// Create Method
-        /// </summary>
-        /// <returns>new ApplicationDbContext()</returns>
-        public static ApplicationDbContext Create()
-        {
-            return new ApplicationDbContext();
-        }
-
-        /// <summary>
-        /// Create Method
-        /// </summary>
-        /// <returns>new ApplicationDbContext(opts)</returns>
-        public static ApplicationDbContext Create(DbContextOptions<ApplicationDbContext> opts)
-        {
-            return new ApplicationDbContext(opts);
-        }
-
-        #endregion
-
-        #region DB Sets
-
-        public virtual DbSet<User> Users { get; set; }
-        public virtual DbSet<Role> Roles { get; set; }
-        public virtual DbSet<ButtonCommand> ButtonCommands { get; set; }
-        public virtual DbSet<ButtonCommandCategory> ButtonCommandCategories { get; set; }
-        public virtual DbSet<CommandLogRecord> CommandLog { get; set; }
-        public virtual DbSet<Application> Applications { get; set; }
-
-        #endregion
-
         /// <summary>
         /// OnModelCreating
         /// </summary>
@@ -154,9 +103,24 @@ namespace FortyThreeLime.Data
                 app.Property<string>("AppToken").HasColumnType("TEXT");
                 app.HasKey("Id");
                 app.HasIndex("AppName");
-                app.HasIndex("AppToken");                
+                app.HasIndex("AppToken");
             });
-            
+
+            // AppAuth
+            modelBuilder.Entity<AppAuth>().ToTable("AppAuth");
+            modelBuilder.Entity<AppAuth>(app => {
+                app.Property<int>("Id").ValueGeneratedOnAdd().HasColumnType("INTEGER");
+                app.Property<string>("LoginToken").HasColumnType("TEXT");
+                app.Property<bool>("LoginTokenActive").HasColumnType("INTEGER");
+                app.Property<int>("ApplicationId").HasColumnType("INTEGER");
+                app.Property<string>("UserId").HasColumnType("TEXT");
+                app.Property<int>("RoleId").HasColumnType("INTEGER");
+                app.Property<string>("LoginTime").HasColumnType("TEXT");
+                app.Property<string>("LoginExpires").HasColumnType("TEXT");
+                app.Property<string>("LogoutTime").HasColumnType("TEXT");
+                app.HasKey("Id");
+            });
+
 
             #endregion
             /* -- End Configure Tables -- */
@@ -194,7 +158,7 @@ namespace FortyThreeLime.Data
             // Button Command Categories
             #region Button Command Categories
             modelBuilder.Entity<ButtonCommandCategory>().HasData(
-                new ButtonCommandCategory{ Id = 1, Category = "WorkDay", Description = "Buttons pertaining to the work day as a whole." });
+                new ButtonCommandCategory { Id = 1, Category = "WorkDay", Description = "Buttons pertaining to the work day as a whole." });
             modelBuilder.Entity<ButtonCommandCategory>().HasData(
                 new ButtonCommandCategory { Id = 2, Category = "MainTask", Description = "Buttons non the main screen pertaining to the main tasks performed during the workday." });
             modelBuilder.Entity<ButtonCommandCategory>().HasData(
@@ -203,38 +167,39 @@ namespace FortyThreeLime.Data
 
             // Button Commands
             #region Button Commands
-            modelBuilder.Entity<ButtonCommand>().HasData(new ButtonCommand { Id = 1,CommandId = 1, Command = "Start Day", ParentId = null, CategoryId = 1 });
-            modelBuilder.Entity<ButtonCommand>().HasData(new ButtonCommand { Id = 2,CommandId = 2, Command = "End Day", ParentId = null, CategoryId = 1 });
-            modelBuilder.Entity<ButtonCommand>().HasData(new ButtonCommand { Id = 3,CommandId = 3, Command = "Start Lunch", ParentId = null, CategoryId = 1 });
-            modelBuilder.Entity<ButtonCommand>().HasData(new ButtonCommand { Id = 4,CommandId = 4, Command = "End Lunch", ParentId = null, CategoryId = 1 });
-            modelBuilder.Entity<ButtonCommand>().HasData(new ButtonCommand { Id = 5,CommandId = 5, Command = "Start Break", ParentId = null, CategoryId = 1 });
-            modelBuilder.Entity<ButtonCommand>().HasData(new ButtonCommand { Id = 6,CommandId = 6, Command = "End Break", ParentId = null, CategoryId = 1 });
-            modelBuilder.Entity<ButtonCommand>().HasData(new ButtonCommand { Id = 7,CommandId = 9, Command = "Off Duty", ParentId = null, CategoryId = 1 });
-            modelBuilder.Entity<ButtonCommand>().HasData(new ButtonCommand { Id = 8,CommandId = 10, Command = "Select Loader", ParentId = null, CategoryId = 2 });
-            modelBuilder.Entity<ButtonCommand>().HasData(new ButtonCommand { Id = 9,CommandId = 11, Command = "Load Scalper", ParentId = 10, CategoryId = 3 });
-            modelBuilder.Entity<ButtonCommand>().HasData(new ButtonCommand { Id = 10,CommandId = 12, Command = "Load Truck", ParentId = 10, CategoryId = 3 });
-            modelBuilder.Entity<ButtonCommand>().HasData(new ButtonCommand { Id = 11,CommandId = 13, Command = "Move Material", ParentId = 10, CategoryId = 3 });
-            modelBuilder.Entity<ButtonCommand>().HasData(new ButtonCommand { Id = 12,CommandId = 14, Command = "Fork Work", ParentId = 10, CategoryId = 3 });
-            modelBuilder.Entity<ButtonCommand>().HasData(new ButtonCommand { Id = 13,CommandId = 15, Command = "Equipment Issue", ParentId = 10, CategoryId = 3 });
-            modelBuilder.Entity<ButtonCommand>().HasData(new ButtonCommand { Id = 14,CommandId = 20, Command = "Select Water Truck", ParentId = null, CategoryId = 2 });
-            modelBuilder.Entity<ButtonCommand>().HasData(new ButtonCommand { Id = 15,CommandId = 21, Command = "Fill Truck", ParentId = 20, CategoryId = 3 });
-            modelBuilder.Entity<ButtonCommand>().HasData(new ButtonCommand { Id = 16,CommandId = 22, Command = "Water Road", ParentId = 20, CategoryId = 3 });
-            modelBuilder.Entity<ButtonCommand>().HasData(new ButtonCommand { Id = 17,CommandId = 23, Command = "Equipment Issue", ParentId = 20, CategoryId = 3 });
-            modelBuilder.Entity<ButtonCommand>().HasData(new ButtonCommand { Id = 18,CommandId = 30, Command = "Select Tractor", ParentId = null, CategoryId = 2 });
-            modelBuilder.Entity<ButtonCommand>().HasData(new ButtonCommand { Id = 19,CommandId = 31, Command = "Road Work", ParentId = 30, CategoryId = 3 });
-            modelBuilder.Entity<ButtonCommand>().HasData(new ButtonCommand { Id = 20,CommandId = 32, Command = "Clean Up", ParentId = 30, CategoryId = 3 });
-            modelBuilder.Entity<ButtonCommand>().HasData(new ButtonCommand { Id = 21,CommandId = 33, Command = "Fork Work", ParentId = 30, CategoryId = 3 });
+            modelBuilder.Entity<ButtonCommand>().HasData(new ButtonCommand { Id = 1, CommandId = 1, Command = "Start Day", ParentId = null, CategoryId = 1 });
+            modelBuilder.Entity<ButtonCommand>().HasData(new ButtonCommand { Id = 2, CommandId = 2, Command = "End Day", ParentId = null, CategoryId = 1 });
+            modelBuilder.Entity<ButtonCommand>().HasData(new ButtonCommand { Id = 3, CommandId = 3, Command = "Start Lunch", ParentId = null, CategoryId = 1 });
+            modelBuilder.Entity<ButtonCommand>().HasData(new ButtonCommand { Id = 4, CommandId = 4, Command = "End Lunch", ParentId = null, CategoryId = 1 });
+            modelBuilder.Entity<ButtonCommand>().HasData(new ButtonCommand { Id = 5, CommandId = 5, Command = "Start Break", ParentId = null, CategoryId = 1 });
+            modelBuilder.Entity<ButtonCommand>().HasData(new ButtonCommand { Id = 6, CommandId = 6, Command = "End Break", ParentId = null, CategoryId = 1 });
+            modelBuilder.Entity<ButtonCommand>().HasData(new ButtonCommand { Id = 7, CommandId = 9, Command = "Off Duty", ParentId = null, CategoryId = 1 });
+            modelBuilder.Entity<ButtonCommand>().HasData(new ButtonCommand { Id = 8, CommandId = 10, Command = "Select Loader", ParentId = null, CategoryId = 2 });
+            modelBuilder.Entity<ButtonCommand>().HasData(new ButtonCommand { Id = 9, CommandId = 11, Command = "Load Scalper", ParentId = 10, CategoryId = 3 });
+            modelBuilder.Entity<ButtonCommand>().HasData(new ButtonCommand { Id = 10, CommandId = 12, Command = "Load Truck", ParentId = 10, CategoryId = 3 });
+            modelBuilder.Entity<ButtonCommand>().HasData(new ButtonCommand { Id = 11, CommandId = 13, Command = "Move Material", ParentId = 10, CategoryId = 3 });
+            modelBuilder.Entity<ButtonCommand>().HasData(new ButtonCommand { Id = 12, CommandId = 14, Command = "Fork Work", ParentId = 10, CategoryId = 3 });
+            modelBuilder.Entity<ButtonCommand>().HasData(new ButtonCommand { Id = 13, CommandId = 15, Command = "Equipment Issue", ParentId = 10, CategoryId = 3 });
+            modelBuilder.Entity<ButtonCommand>().HasData(new ButtonCommand { Id = 14, CommandId = 20, Command = "Select Water Truck", ParentId = null, CategoryId = 2 });
+            modelBuilder.Entity<ButtonCommand>().HasData(new ButtonCommand { Id = 15, CommandId = 21, Command = "Fill Truck", ParentId = 20, CategoryId = 3 });
+            modelBuilder.Entity<ButtonCommand>().HasData(new ButtonCommand { Id = 16, CommandId = 22, Command = "Water Road", ParentId = 20, CategoryId = 3 });
+            modelBuilder.Entity<ButtonCommand>().HasData(new ButtonCommand { Id = 17, CommandId = 23, Command = "Equipment Issue", ParentId = 20, CategoryId = 3 });
+            modelBuilder.Entity<ButtonCommand>().HasData(new ButtonCommand { Id = 18, CommandId = 30, Command = "Select Tractor", ParentId = null, CategoryId = 2 });
+            modelBuilder.Entity<ButtonCommand>().HasData(new ButtonCommand { Id = 19, CommandId = 31, Command = "Road Work", ParentId = 30, CategoryId = 3 });
+            modelBuilder.Entity<ButtonCommand>().HasData(new ButtonCommand { Id = 20, CommandId = 32, Command = "Clean Up", ParentId = 30, CategoryId = 3 });
+            modelBuilder.Entity<ButtonCommand>().HasData(new ButtonCommand { Id = 21, CommandId = 33, Command = "Fork Work", ParentId = 30, CategoryId = 3 });
             modelBuilder.Entity<ButtonCommand>().HasData(new ButtonCommand { Id = 22, CommandId = 34, Command = "Equipment Issue", ParentId = 30, CategoryId = 3 });
             #endregion
 
             // Applications
             #region Applications
 
-            modelBuilder.Entity<Application>().HasData(new Application {
-                Id = 1, 
-                AppName = "FortyThreeLime.Web", 
-                AppType = 1, 
-                Description = "Web Portal for Solution", 
+            modelBuilder.Entity<Application>().HasData(new Application
+            {
+                Id = 1,
+                AppName = "FortyThreeLime.Web",
+                AppType = 1,
+                Description = "Web Portal for Solution",
                 AppToken = "a4Y0281F95Gth40GJe9q09swk3XK"
             });
 
@@ -262,19 +227,5 @@ namespace FortyThreeLime.Data
             /* -- End Seed Data -- */
             base.OnModelCreating(modelBuilder);
         }
-
-        /// <summary>
-        /// Supply Connection String Here
-        /// </summary>
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            // Moved to Webb App strtup.cs
-            optionsBuilder.UseSqlite(@"Data Source=C:\FortyThreeLime\DB\43LimeMobileApp.db", options =>
-            {
-                options.MigrationsAssembly(Assembly.GetExecutingAssembly().FullName);
-            });
-            base.OnConfiguring(optionsBuilder);
-        }
-
     }
 }

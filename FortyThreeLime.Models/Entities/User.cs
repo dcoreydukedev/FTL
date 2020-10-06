@@ -3,6 +3,7 @@
  * Version: 1.0.0.0
  * Description: User Entity
  ************************************************************************/
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -23,6 +24,7 @@ namespace FortyThreeLime.Models.Entities
     /// </summary>
     /// <seealso cref="FortyThreeLime.Models.Entities.IEntity{FortyThreeLime.Models.Entities.User}" />
     /// <seealso cref="FortyThreeLime.Models.Entities.IUser" />
+    [Serializable]
     public class User : IEntity<User>, IUser
     {
         /// <summary>

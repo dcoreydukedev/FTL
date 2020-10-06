@@ -10,10 +10,19 @@ using System.Linq;
 
 namespace FortyThreeLime.API.Services
 {
+    public interface IRoleService : IAPIService
+    {
+        Role CreateRole(string roleName);
+        void DeleteRole(string roleName);
+        List<Role> GetAllRoles();
+        Role GetRole(int roleId);
+        Role GetRole(string roleName);
+    }
+
     /// <summary>
     /// Provides Role Data
     /// </summary>
-    internal sealed class RoleService : IAPIService
+    public sealed class RoleService : IRoleService
     {
 
         private ApplicationRepository<Role> _repo;
@@ -22,20 +31,11 @@ namespace FortyThreeLime.API.Services
         /// <summary>
         /// Initializes a new instance of the <see cref="RoleService"/> class.
         /// </summary>
-        public RoleService()
-        {
-            _repo = new ApplicationRepository<Role>();
-            this._context = new ApplicationDbContext();
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="RoleService"/> class.
-        /// </summary>
         /// <param name="repo">The Role Repository.</param>
-        public RoleService(ApplicationRepository<Role> repo)
+        public RoleService(ApplicationDbContext context, ApplicationRepository<Role> repo)
         {
             _repo = repo;
-            this._context = new ApplicationDbContext();
+            this._context = context;
         }
 
         /// <summary>

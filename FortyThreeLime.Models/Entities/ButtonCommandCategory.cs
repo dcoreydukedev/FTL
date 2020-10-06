@@ -4,6 +4,7 @@
  * Description: Button Command Category Entity. 
  *              Represents a logical grouping for Button Commands
  ************************************************************************/
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -21,6 +22,7 @@ namespace FortyThreeLime.Models.Entities
     /// </summary>
     /// <seealso cref="FortyThreeLime.Models.Entities.IEntity{FortyThreeLime.Models.Entities.ButtonCommandCategory}" />
     /// <seealso cref="FortyThreeLime.Models.Entities.IButtonCommandCategory" />
+    [Serializable]
     public class ButtonCommandCategory : IEntity<ButtonCommandCategory>, IButtonCommandCategory
     {
         /// <summary>

@@ -1,15 +1,12 @@
 ﻿/*************************************************************************
  * Author: DCoreyDuke
- * Provides Common Controller Logging Functionality 
+ * Provides Common Controller Functionality 
  ************************************************************************/
 
 using System;
 using System.Collections.Generic;
 using FortyThreeLime.Logging;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.WebUtilities;
-
 
 namespace FortyThreeLime.API.Controllers
 {
@@ -36,7 +33,7 @@ namespace FortyThreeLime.API.Controllers
         /// <summary>
         /// Initializes a new instance of the <see cref="ApiControllerBase"/> class.
         /// </summary>
-        public ApiControllerBase()
+        public ApiControllerBase() : base()
         {
             _adminLogger = new AdminLogger();
             _errorLogger = new ErrorLogger();
@@ -90,6 +87,29 @@ namespace FortyThreeLime.API.Controllers
             HandleErrorInfo info = new HandleErrorInfo(ex, controllerName, actionName);
             _errorLogger.Log(info);
         }
+
+
+        /* -- Return Messages -- */
+       
+        internal static readonly string LOGIN_TOKEN_NULL = "Login Token Must Be Provided!";
+        internal static readonly string LOGIN_TOKEN_INVALID = "The Value Provided for the Login Token is Invalid or Cannot Be Found!";
+        internal static readonly string LOGIN_REQUIRED = "You Must Login and Provide a Valid Login Token to Access This Data";
+
+        internal static readonly string SUCCESS_DATA = "Data Retrieval Successful";
+        internal static readonly string SUCCESS_ACTION = "Action Executed Successfully";
+
+        internal static readonly string FAILURE_DATA = "Data Retrieval Failed!";
+        internal static readonly string FAILURE_ACTION = "Action Execution Failure";
+
+        internal static readonly string UNAUTHORIZED_DATA = "You Do Not Have Permission To Access That Data";
+        internal static readonly string UNAUTHORIZED_ACTION = "You Do Not Have Permission To Perform That Action";
+
+        internal static readonly string USERID_NULL = "UserId Must Be Provided!";
+        internal static readonly string USERID_INVALID = "The Value Provided for the User Id is Invalid or Cannot Be Found!";
+
+        internal static readonly string ID_NULL = "An Identifier Must Be Provided!";
+        internal static readonly string ID_INVALID = "A Valid Identifier Must Be Provided!";
     }
 
+   
 }

@@ -2,7 +2,6 @@
  * Author: DCoreyDuke
  ************************************************************************/
 
-using FortyThreeLime.API.Controllers;
 using FortyThreeLime.Data;
 using FortyThreeLime.Models.Entities;
 using FortyThreeLime.Repository;
@@ -11,10 +10,17 @@ using System.Linq;
 
 namespace FortyThreeLime.API.Services
 {
+    public interface IButtonCommandService : IAPIService
+    {
+        ButtonCommand GetCommand(int commandId);
+        ButtonCommand GetCommand(string command);
+        List<ButtonCommand> GetCommands();
+    }
+
     /// <summary>
     /// Service to Provide ButtonCommand Data to An API Controller
     /// </summary>
-    internal sealed class ButtonCommandService : IAPIService
+    public sealed class ButtonCommandService : IButtonCommandService
     {
 
         private ApplicationDbContext _context;
@@ -23,19 +29,9 @@ namespace FortyThreeLime.API.Services
         /// <summary>
         /// Initializes a new instance of the <see cref="ButtonCommandService"/> class.
         /// </summary>
-        public ButtonCommandService()
+        public ButtonCommandService(ApplicationDbContext context, ApplicationRepository<ButtonCommand> repo)
         {
-            this._context = new ApplicationDbContext();
-            this._repo = new ApplicationRepository<ButtonCommand>();
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ButtonCommandService"/> class.
-        /// </summary>
-        /// <param name="repo">The ButtonCommand Repository.</param>
-        public ButtonCommandService(ApplicationRepository<ButtonCommand> repo)
-        {
-            this._context = new ApplicationDbContext();
+            this._context = context;
             this._repo = repo;
         }
 

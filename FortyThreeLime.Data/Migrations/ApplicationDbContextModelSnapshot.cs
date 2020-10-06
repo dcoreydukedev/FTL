@@ -16,6 +16,50 @@ namespace FortyThreeLime.Data.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.8");
 
+            modelBuilder.Entity("FortyThreeLime.Models.Entities.AppAuth", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("ApplicationId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("LoginExpires")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("LoginTime")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("LoginToken")
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("LoginTokenActive")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("LogoutTime")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("RoleId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int?>("UserId1")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApplicationId");
+
+                    b.HasIndex("RoleId");
+
+                    b.HasIndex("UserId1");
+
+                    b.ToTable("AppAuth");
+                });
+
             modelBuilder.Entity("FortyThreeLime.Models.Entities.Application", b =>
                 {
                     b.Property<int>("Id")
@@ -549,6 +593,25 @@ namespace FortyThreeLime.Data.Migrations
                             UserId = "5553",
                             Username = "Subject 4"
                         });
+                });
+
+            modelBuilder.Entity("FortyThreeLime.Models.Entities.AppAuth", b =>
+                {
+                    b.HasOne("FortyThreeLime.Models.Entities.Application", "Application")
+                        .WithMany()
+                        .HasForeignKey("ApplicationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("FortyThreeLime.Models.Entities.Role", "Role")
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("FortyThreeLime.Models.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId1");
                 });
 
             modelBuilder.Entity("FortyThreeLime.Models.Entities.ButtonCommand", b =>

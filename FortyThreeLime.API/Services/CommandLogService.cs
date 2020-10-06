@@ -10,31 +10,39 @@ using System.Linq;
 
 namespace FortyThreeLime.API.Services
 {
+    public interface ICommandLogService : IAPIService
+    {
+        void AddCommandLog(CommandLogRecord log);
+        void DeleteCommandLog(int id);
+        void DeleteCommandLogs(string userId);
+        void DeleteCommandLogs(string userId, int commandId);
+        void DeleteCommandLogs(string userId, int commandId, long timestamp);
+        CommandLogRecord GetCommandLog(int id);
+        List<CommandLogRecord> GetCommandLogs();
+        List<CommandLogRecord> GetCommandLogs(string userId);
+        List<CommandLogRecord> GetCommandLogs(string userId, int commandId);
+        List<CommandLogRecord> GetCommandLogs(string userId, int commandId, long timestamp);
+        void UpdateCommandLog(CommandLogRecord u);
+    }
+
     /// <summary>
     /// Data Service For Command Log
     /// </summary>
-    internal sealed class CommandLogService : IAPIService
+    public sealed class CommandLogService : ICommandLogService
     {
 
         private ApplicationDbContext _context;
         private ApplicationRepository<CommandLogRecord> _repo;
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="CommandLogService"/> class.
-        /// </summary>
-        public CommandLogService()
-        {
-            this._context = new ApplicationDbContext();
-            this._repo = new ApplicationRepository<CommandLogRecord>();
-        }
+        
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CommandLogService"/> class.
         /// </summary>
         /// <param name="repo">The CommandLog Repository</param>
-        public CommandLogService(ApplicationRepository<CommandLogRecord> repo)
+        public CommandLogService(ApplicationDbContext context, ApplicationRepository<CommandLogRecord> repo)
         {
-            this._context = new ApplicationDbContext();
+            this._context = context;
             this._repo = repo;
         }
 
@@ -93,7 +101,7 @@ namespace FortyThreeLime.API.Services
             return _context.CommandLog.Where(u => u.UserId == userId && u.CommandId == commandId && u.Timestamp == timestamp).ToList();
 
         }
-      
+
         /// <summary>
         /// Adds the command log.
         /// </summary>
@@ -103,7 +111,7 @@ namespace FortyThreeLime.API.Services
             _repo.Add(log);
             //Add new log
             _context.CommandLog.Add(log);
-            _context.SaveChanges();  
+            _context.SaveChanges();
         }
 
         /// <summary>
@@ -130,8 +138,8 @@ namespace FortyThreeLime.API.Services
         /// <param name="userId">The user identifier.</param>
         public void DeleteCommandLogs(string userId)
         {
-            List<CommandLogRecord> CommandLogList = _context.CommandLog.Where(u => u.UserId == userId).ToList(); 
-            
+            List<CommandLogRecord> CommandLogList = _context.CommandLog.Where(u => u.UserId == userId).ToList();
+
             if (CommandLogList.Count > 0)
             {
                 foreach (CommandLogRecord commandLog in CommandLogList)

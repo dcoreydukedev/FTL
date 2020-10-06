@@ -18,6 +18,7 @@ namespace FortyThreeLime.Models.Entities
     /// Command Log Entity. Represents an Entry into the Command Log. These records are sent from the mobile device to the API
     /// </summary>
     /// <seealso cref="FortyThreeLime.Models.Entities.IEntity{FortyThreeLime.Models.Entities.CommandLogRecord}" />
+    [Serializable]
     public class CommandLogRecord : IEntity<CommandLogRecord>
     {
         /// <summary>
