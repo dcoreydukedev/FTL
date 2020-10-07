@@ -40,14 +40,6 @@ namespace FortyThreeLime.API.Controllers
             _apiLogger = new APIResponseLogger();
         }
 
-        /// <summary>
-        /// Logs the API response.
-        /// </summary>
-        /// <param name="message">The message.</param>
-        //internal void LogApiResponse(HttpResponseMessage message)
-        //{
-        //    _apiLogger.Log(message);
-        //}
 
         /// <summary>
         /// Logs the admin.

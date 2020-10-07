@@ -17,10 +17,10 @@ namespace FortyThreeLime.API.Controllers
     {
 
         private readonly IConfiguration _Configuration;
-        private readonly IUserService _UserService;
-        private readonly IRoleService _RoleService;
-        private readonly IApplicationService _AppService;
-        private readonly IAppAuthService _AppAuthService;
+        private readonly UserService _UserService;
+        private readonly RoleService _RoleService;
+        private readonly ApplicationService _AppService;
+        private readonly AppAuthService _AppAuthService;
 
         private User _User = null;
         private Role _Role = null;
@@ -28,23 +28,22 @@ namespace FortyThreeLime.API.Controllers
 
         private string _Token = string.Empty;
 
-
-
         /// <summary>
         /// Initializes a new instance of the <see cref="AccountController"/> class.
         /// </summary>
-        public AccountController(IConfiguration configuration, IUserService userService, IRoleService roleService, IApplicationService appService, IAppAuthService appAuthService)
+        public AccountController(IConfiguration configuration)
         {
             this._Configuration = configuration;
-            this._UserService = userService;
-            this._RoleService = roleService;
-            this._AppService = appService;
+            this._UserService = new UserService();
+            this._RoleService = new RoleService();
+            this._AppService = new ApplicationService();
             this._App = _AppService.GetApplication(_Configuration["ApplicationName"].ToString());
-            this._AppAuthService = appAuthService;
+            this._AppAuthService = new AppAuthService();
         }
 
+
         /// <summary>
-        /// Login API for Authenticate user
+        /// Login API for Authenticating Users
         /// </summary>
         /// <param name="userId">
         /// The 4 Character User Id
@@ -55,8 +54,8 @@ namespace FortyThreeLime.API.Controllers
         /// Login Failure on Error: Status Code 500 and Exception
         /// </returns>
         [HttpGet]
-        [Route("Login")]       
-        public IActionResult Login([FromQuery]string userId)
+        [Route("Login")]
+        public IActionResult Login([FromQuery] string userId)
         {
             try
             {
@@ -71,10 +70,7 @@ namespace FortyThreeLime.API.Controllers
                 this._Role = _RoleService.GetRole(_User.RoleId);
 
                 // Create a Login Token
-                this._Token = GetLoginToken();
-
-                // Add Login Token To Session
-                HttpContext.Session.SetString("LoginToken", this._Token);
+                this._Token = GetLoginToken();               
 
                 // Create Return Data Object
                 LoginData loginData = new LoginData(this._Token, true, this._App, this._User, this._Role, DateTime.Now, DateTime.Now.AddDays(1), null);
@@ -94,10 +90,16 @@ namespace FortyThreeLime.API.Controllers
         }
 
         /// <summary>
-        /// Logout API for Authenticate user
+        /// Login API for Authenticating Users
         /// </summary>
-        /// <param name="userId"></param>
-        /// <returns></returns>
+        /// <param name="loginToken">
+        /// The login Token created when the user logged in
+        /// </param>
+        /// <returns>
+        /// Successful Login: Status Code 202 and Login Data Object
+        /// Bad Requests: User Not Found, UserId is Null or Empty
+        /// Login Failure on Error: Status Code 500 and Exception
+        /// </returns>
         [HttpGet]
         [Route("Logout")]
         public IActionResult Logout([FromQuery] string loginToken)
@@ -122,37 +124,22 @@ namespace FortyThreeLime.API.Controllers
                 // Create a Login Token
                 this._Token = appAuth.LoginToken;
 
-                // Add Login Token To Session
-                string testToken = HttpContext.Session.GetString("LoginToken");
+                // Create Return Data Object
+                loginData = new LoginData
+                (
+                    this._Token,
+                    false,
+                    this._App,
+                    this._User,
+                    this._Role,
+                    DateTime.Parse(appAuth.LoginTime),
+                    DateTime.Parse(appAuth.LoginExpires),
+                    DateTime.Now
+                );
 
-                // Check if Session Value matches Stored Value
-                if (this._Token == testToken)
-                {
-                    // Remove Login Token From Session
-                    HttpContext.Session.Remove("LoginToken");
-
-                    // Create Return Data Object
-                    loginData = new LoginData
-                    (
-                        this._Token,
-                        false,
-                        this._App,
-                        this._User,
-                        this._Role,
-                        DateTime.Parse(appAuth.LoginTime),
-                        DateTime.Parse(appAuth.LoginExpires),
-                        DateTime.Now
-                    );
-
-                    // Delete AppAuth Record
-                    _AppAuthService.DeleteAppAuth(appAuth.Id);
-                    return Ok(loginData);
-                }
-                else
-                {
-                   var ex = new Exception("The Values for the Login Tokens Do Not Match");
-                   return StatusCode(StatusCodes.Status500InternalServerError, ex);
-                }
+                // Delete AppAuth Record
+                _AppAuthService.DeleteAppAuth(appAuth.Id);
+                return Ok(loginData);
 
             }
             catch (Exception ex)
@@ -169,7 +156,7 @@ namespace FortyThreeLime.API.Controllers
         /// </summary>
         private string GetLoginToken()
         {
-            StringKeyGeneratorOptions opts = new StringKeyGeneratorOptions() { Length = 28, IncludeCaps = true, IncludeDigits = true, IncludeSpecialChars= false };
+            StringKeyGeneratorOptions opts = new StringKeyGeneratorOptions() { Length = 28, IncludeCaps = true, IncludeDigits = true, IncludeSpecialChars = false };
             StringKeyGenerator gen = new StringKeyGenerator(opts);
             return gen.Generate().Trim();
         }

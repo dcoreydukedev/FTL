@@ -30,10 +30,19 @@ namespace FortyThreeLime.API.Services
         private ApplicationDbContext _context;
         private ApplicationRepository<AppAuth> _repo;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AppAuthService"/> class.
+        /// </summary>
+        public AppAuthService()
+        {
+            this._context = ApplicationDbContext.Create();
+            this._repo = new ApplicationRepository<AppAuth>();
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AppAuthService"/> class.
         /// </summary>
+        /// <param name="context">The Application DB Context</param>
         /// <param name="repo">The AppAuth Repository.</param>
         public AppAuthService(ApplicationDbContext context, ApplicationRepository<AppAuth> repo)
         {
@@ -74,14 +83,13 @@ namespace FortyThreeLime.API.Services
         /// <summary>
         /// Creates the AppAuth.
         /// </summary>
-        /// <param name="u">The AppAuth to create</param>
+        /// <param name="a">The AppAuth to create</param>
         /// <returns>The Newly Created AppAuth</returns>
         public AppAuth CreateAppAuth(AppAuth a)
         {
             _repo.Add(a);
             return GetAppAuth(a.Id);
         }
-
 
         /// <summary>
         /// Updates the AppAuth.
@@ -98,7 +106,7 @@ namespace FortyThreeLime.API.Services
         /// <param name="id">The id of the AppAuth</param>
         public void DeleteAppAuth(int id)
         {
-            _repo.Remove(id);
+            _repo.Delete(id);
         }
 
         /// <summary>
@@ -107,7 +115,7 @@ namespace FortyThreeLime.API.Services
         public bool IaValidAppAuth(string loginToken)
         {
             AppAuth a = GetAppAuth(loginToken);
-            return a == null;
+            return a != null;
         }
 
         /// <summary>

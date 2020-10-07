@@ -34,12 +34,18 @@ namespace FortyThreeLime.API.Services
         private ApplicationDbContext _context;
         private ApplicationRepository<CommandLogRecord> _repo;
 
-        
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CommandLogService"/> class.
+        /// </summary>
+        public CommandLogService()
+        {
+            this._context = ApplicationDbContext.Create();
+            this._repo = new ApplicationRepository<CommandLogRecord>();
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CommandLogService"/> class.
         /// </summary>
-        /// <param name="repo">The CommandLog Repository</param>
         public CommandLogService(ApplicationDbContext context, ApplicationRepository<CommandLogRecord> repo)
         {
             this._context = context;
@@ -129,7 +135,7 @@ namespace FortyThreeLime.API.Services
         /// <param name="id">The id of the CommandLog</param>
         public void DeleteCommandLog(int id)
         {
-            _repo.Remove(id);
+            _repo.Delete(id);
         }
 
         /// <summary>

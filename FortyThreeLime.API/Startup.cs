@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using FortyThreeLime.API.Services;
 using FortyThreeLime.Repository;
 using FortyThreeLime.Data;
 using Microsoft.EntityFrameworkCore;
@@ -41,7 +40,7 @@ namespace FortyThreeLime.API
                 );
 
             // Add Repository
-            services.AddTransient(typeof(IRepository<>), typeof(ApplicationRepository<>));
+            services.AddScoped(typeof(IRepository<>), typeof(ApplicationRepository<>));
 
             services.AddDistributedMemoryCache();
 
@@ -62,13 +61,7 @@ namespace FortyThreeLime.API
             })
                 .AddNewtonsoftJson(options => { });            
 
-            // Add Custom API Services
-            services.AddTransient<IButtonCommandService, ButtonCommandService>();
-            services.AddTransient<ICommandLogService, CommandLogService>();
-            services.AddTransient<IRoleService, RoleService>();
-            services.AddTransient<IUserService, UserService>();
-            services.AddTransient<IApplicationService, ApplicationService>();
-            services.AddTransient<IAppAuthService, AppAuthService>();
+           
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

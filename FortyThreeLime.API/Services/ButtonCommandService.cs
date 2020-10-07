@@ -29,6 +29,15 @@ namespace FortyThreeLime.API.Services
         /// <summary>
         /// Initializes a new instance of the <see cref="ButtonCommandService"/> class.
         /// </summary>
+        public ButtonCommandService()
+        {
+            this._context = ApplicationDbContext.Create();
+            this._repo = new ApplicationRepository<ButtonCommand>();
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ButtonCommandService"/> class.
+        /// </summary>
         public ButtonCommandService(ApplicationDbContext context, ApplicationRepository<ButtonCommand> repo)
         {
             this._context = context;

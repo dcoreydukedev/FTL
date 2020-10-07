@@ -13,13 +13,13 @@ namespace FortyThreeLime.API.Controllers
     public class RolesController : ApiControllerBase
     {
 
-        private readonly IRoleService _RoleService;
-        private readonly IAppAuthService _AppAuthService;
+        private readonly RoleService _RoleService;
+        private readonly AppAuthService _AppAuthService;
 
-        public RolesController(IRoleService roleService, IAppAuthService appAuthService)
+        public RolesController()
         {
-            this._RoleService = roleService;
-            this._AppAuthService = appAuthService;
+            this._RoleService = new RoleService();
+            this._AppAuthService = new AppAuthService();
         }
 
 
@@ -28,6 +28,7 @@ namespace FortyThreeLime.API.Controllers
         /// </summary>
         /// <param name="loginToken">Token Given to User Upon Successful Login</param>
         [HttpGet]
+        [Route("Get")]
         public IActionResult Get([FromQuery] string loginToken)
         {
             try
@@ -79,7 +80,8 @@ namespace FortyThreeLime.API.Controllers
         /// </summary>
         /// <param name="roleName">Name of the role.</param>
         /// <param name="loginToken">Token Given to User Upon Successful Login</param>
-        [HttpGet("{roleName}")]
+        [HttpGet]
+        [Route("Get/{roleName}")]
         public IActionResult Get(string roleName, [FromQuery] string loginToken)
         {
             try
@@ -146,9 +148,9 @@ namespace FortyThreeLime.API.Controllers
         /// </summary>
         /// <param name="roleName">The Name of the Role to Create</param>
         /// <param name="loginToken">Token Given to User Upon Successful Login</param>
-        [Route("Create")]
         [HttpPost]
-        public IActionResult Create([FromBody] string roleName, [FromBody] string loginToken)
+        [Route("Create")]     
+        public IActionResult Create([FromBody] string roleName, string loginToken)
         {
             try
             {
@@ -199,7 +201,8 @@ namespace FortyThreeLime.API.Controllers
         /// </summary>
         /// <param name="roleName">The Name of the Role to Delete</param>
         /// <param name="loginToken">Token Given to User Upon Successful Login</param>
-        [HttpDelete("{roleName}")]
+        [HttpDelete]
+        [Route("Delete/{roleName}")]
         public IActionResult Delete(string roleName, [FromQuery] string loginToken)
         {
             try

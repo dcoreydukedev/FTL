@@ -31,12 +31,13 @@ namespace FortyThreeLime.Repository
         public void Add(TEntity obj)
         {
             table.Add(obj);
+            context.SaveChanges();
         }
        
         public TEntity GetById(int id)
         {           
             return table.Find(id);
-        }
+        }        
 
         public int GetCount()
         {
@@ -52,12 +53,19 @@ namespace FortyThreeLime.Repository
         {
             table.Attach(obj);
             context.Entry(obj).State = EntityState.Modified;
+            context.SaveChanges();
         }
 
-        public void Remove(int id)
+        private void Remove(int id)
         {
             TEntity existing = table.Find(id);
             table.Remove(existing);
+            context.SaveChanges();
+        }
+
+        public void Delete(int id)
+        {
+            Remove(id);
         }
 
         #region Dispose

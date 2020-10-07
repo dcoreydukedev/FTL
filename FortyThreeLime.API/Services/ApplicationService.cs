@@ -10,6 +10,9 @@ using System.Linq;
 
 namespace FortyThreeLime.API.Services
 {
+    /// <summary>
+    /// Provides Application Data
+    /// </summary>
     public interface IApplicationService : IAPIService
     {
         Application CreateApplication(Application a);
@@ -27,10 +30,19 @@ namespace FortyThreeLime.API.Services
         private ApplicationDbContext _context;
         private ApplicationRepository<Application> _repo;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ApplicationService"/> class.
+        /// </summary>
+        public ApplicationService()
+        {
+            _context = ApplicationDbContext.Create();
+            _repo = new ApplicationRepository<Application>();
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ApplicationService"/> class.
         /// </summary>
+        /// <param name="context">The Application DB Context</param>
         /// <param name="repo">The Application Repository.</param>
         public ApplicationService(ApplicationDbContext context, ApplicationRepository<Application> repo)
         {
@@ -72,7 +84,7 @@ namespace FortyThreeLime.API.Services
         /// <summary>
         /// Creates the Application.
         /// </summary>
-        /// <param name="u">The Application to create</param>
+        /// <param name="a">The Application to create</param>
         /// <returns>The Newly Created Application</returns>
         public Application CreateApplication(Application a)
         {
@@ -94,9 +106,9 @@ namespace FortyThreeLime.API.Services
         /// Deletes the Application.
         /// </summary>
         /// <param name="id">The id of the Application</param>
-        private void DeleteApplication(int id)
+        public void DeleteApplication(int id)
         {
-            _repo.Remove(id);
+            _repo.Delete(id);
         }
 
     }

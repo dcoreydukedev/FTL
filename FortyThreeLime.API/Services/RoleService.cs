@@ -31,6 +31,16 @@ namespace FortyThreeLime.API.Services
         /// <summary>
         /// Initializes a new instance of the <see cref="RoleService"/> class.
         /// </summary>
+        public RoleService()
+        {
+            _repo = new ApplicationRepository<Role>();
+            _context = ApplicationDbContext.Create();
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="RoleService"/> class.
+        /// </summary>
+        /// <param name="context">The Application DB Context</param>
         /// <param name="repo">The Role Repository.</param>
         public RoleService(ApplicationDbContext context, ApplicationRepository<Role> repo)
         {
@@ -85,7 +95,7 @@ namespace FortyThreeLime.API.Services
         public void DeleteRole(string roleName)
         {
             Role role = _context.Roles.Single(x => x.RoleName == roleName);
-            _repo.Remove(role.Id);
+            _repo.Delete(role.Id);
         }
     }
 }

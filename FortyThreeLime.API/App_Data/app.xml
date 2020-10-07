@@ -1,0 +1,593 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>FortyThreeLime.API</name>
+    </assembly>
+    <members>
+        <member name="M:FortyThreeLime.API.Controllers.AccountController.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FortyThreeLime.API.Controllers.AccountController"/> class.
+            </summary>
+        </member>
+        <member name="M:FortyThreeLime.API.Controllers.AccountController.Login(System.String)">
+            <summary>
+            Login API for Authenticating Users
+            </summary>
+            <param name="userId">
+            The 4 Character User Id
+            </param>
+            <returns>
+            Successful Login: Status Code 202 and Login Data Object
+            Bad Requests: User Not Found, UserId is Null or Empty
+            Login Failure on Error: Status Code 500 and Exception
+            </returns>
+        </member>
+        <member name="M:FortyThreeLime.API.Controllers.AccountController.Logout(System.String)">
+            <summary>
+            Login API for Authenticating Users
+            </summary>
+            <param name="loginToken">
+            The login Token created when the user logged in
+            </param>
+            <returns>
+            Successful Login: Status Code 202 and Login Data Object
+            Bad Requests: User Not Found, UserId is Null or Empty
+            Login Failure on Error: Status Code 500 and Exception
+            </returns>
+        </member>
+        <member name="M:FortyThreeLime.API.Controllers.AccountController.GetLoginToken">
+            <summary>
+            Create a Custom Login String Key
+            </summary>
+        </member>
+        <member name="T:FortyThreeLime.API.Controllers.ApiControllerBase">
+            <summary>
+            Base Class For Api Controllers, Provides Logging Functionality
+            </summary>
+        </member>
+        <member name="F:FortyThreeLime.API.Controllers.ApiControllerBase._adminLogger">
+            <summary>
+            Private Instance of Admin Logger
+            </summary>
+        </member>
+        <member name="F:FortyThreeLime.API.Controllers.ApiControllerBase._errorLogger">
+            <summary>
+            Private Instance of ErrorLogger
+            </summary>
+        </member>
+        <member name="F:FortyThreeLime.API.Controllers.ApiControllerBase._apiLogger">
+            <summary>
+            Private Instance of ApiRequestLogger
+            </summary>
+        </member>
+        <member name="M:FortyThreeLime.API.Controllers.ApiControllerBase.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:FortyThreeLime.API.Controllers.ApiControllerBase"/> class.
+            </summary>
+        </member>
+        <member name="M:FortyThreeLime.API.Controllers.ApiControllerBase.LogAdmin(System.String,System.String,System.String)">
+            <summary>
+            Logs the admin.
+            </summary>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="message">The message.</param>
+        </member>
+        <member name="M:FortyThreeLime.API.Controllers.ApiControllerBase.LogAdmin(System.String,System.String,System.String,System.Collections.Generic.IDictionary{System.String,System.String})">
+            <summary>
+            Logs the admin.
+            </summary>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="message">The message.</param>
+            <param name="data">The data.</param>
+        </member>
+        <member name="M:FortyThreeLime.API.Controllers.ApiControllerBase.LogError(System.String,System.String,System.Exception)">
+            <summary>
+            Logs the error.
+            </summary>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="ex">The ex.</param>
+        </member>
+        <member name="M:FortyThreeLime.API.Controllers.ButtonCommandsController.Get(System.String)">
+            <summary>
+            Gets the button command list.
+            </summary>
+            <returns>List of ButtonCommand Objects</returns>
+        </member>
+        <member name="M:FortyThreeLime.API.Controllers.ButtonCommandsController.Get(System.Int32,System.String)">
+            <summary>
+            Gets the button command;
+            </summary>
+            <returns>ButtonCommand Object</returns>
+        </member>
+        <member name="M:FortyThreeLime.API.Controllers.CommandLogController.Create(FortyThreeLime.Models.Entities.CommandLogRecord,System.String)">
+            <summary>
+            Creates the Specified Command Log Record
+            </summary>        
+        </member>
+        <member name="M:FortyThreeLime.API.Controllers.RolesController.Get(System.String)">
+            <summary>
+            Gets All Roles 
+            </summary>
+            <param name="loginToken">Token Given to User Upon Successful Login</param>
+        </member>
+        <member name="M:FortyThreeLime.API.Controllers.RolesController.Get(System.String,System.String)">
+            <summary>
+            Gets the Specified Role
+            </summary>
+            <param name="roleName">Name of the role.</param>
+            <param name="loginToken">Token Given to User Upon Successful Login</param>
+        </member>
+        <member name="M:FortyThreeLime.API.Controllers.RolesController.Create(System.String,System.String)">
+            <summary>
+            Create the Specified Role
+            </summary>
+            <param name="roleName">The Name of the Role to Create</param>
+            <param name="loginToken">Token Given to User Upon Successful Login</param>
+        </member>
+        <member name="M:FortyThreeLime.API.Controllers.RolesController.Delete(System.String,System.String)">
+            <summary>
+            Delete the Specified Role
+            </summary>
+            <param name="roleName">The Name of the Role to Delete</param>
+            <param name="loginToken">Token Given to User Upon Successful Login</param>
+        </member>
+        <member name="M:FortyThreeLime.API.Controllers.UsersController.Get(System.String)">
+            <summary>
+            Gets All Users 
+            </summary>
+            <param name="loginToken">Token Given to User Upon Successful Login</param>
+        </member>
+        <member name="M:FortyThreeLime.API.Controllers.UsersController.Get(System.String,System.String)">
+            <summary>
+            Gets the Specified User
+            </summary>
+            <param name="userId">Id of the User.</param>
+            <param name="loginToken">Token Given to User Upon Successful Login</param>
+        </member>
+        <member name="M:FortyThreeLime.API.Controllers.UsersController.Create(System.String,System.String,System.Int32,System.String)">
+            <summary>
+            Create the Specified User
+            </summary>
+        </member>
+        <member name="T:FortyThreeLime.API.Services.AppAuthService">
+            <summary>
+            Provides AppAuth Data
+            </summary>
+        </member>
+        <member name="M:FortyThreeLime.API.Services.AppAuthService.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:FortyThreeLime.API.Services.AppAuthService"/> class.
+            </summary>
+        </member>
+        <member name="M:FortyThreeLime.API.Services.AppAuthService.#ctor(FortyThreeLime.Data.ApplicationDbContext,FortyThreeLime.Repository.ApplicationRepository{FortyThreeLime.Models.Entities.AppAuth})">
+            <summary>
+            Initializes a new instance of the <see cref="T:FortyThreeLime.API.Services.AppAuthService"/> class.
+            </summary>
+            <param name="context">The Application DB Context</param>
+            <param name="repo">The AppAuth Repository.</param>
+        </member>
+        <member name="M:FortyThreeLime.API.Services.AppAuthService.GetAppAuths">
+            <summary>
+            Gets the AppAuths.
+            </summary>
+            <returns>List of AppAuths</returns>
+        </member>
+        <member name="M:FortyThreeLime.API.Services.AppAuthService.GetAppAuth(System.Int32)">
+            <summary>
+            Gets the AppAuth.
+            </summary>
+            <param name="id">The identifier.</param>
+            <returns>The Specified AppAuth</returns>
+        </member>
+        <member name="M:FortyThreeLime.API.Services.AppAuthService.GetAppAuth(System.String)">
+            <summary>
+            Gets the AppAuth.
+            </summary>
+            <returns>The Specified AppAuth</returns>
+        </member>
+        <member name="M:FortyThreeLime.API.Services.AppAuthService.CreateAppAuth(FortyThreeLime.Models.Entities.AppAuth)">
+            <summary>
+            Creates the AppAuth.
+            </summary>
+            <param name="a">The AppAuth to create</param>
+            <returns>The Newly Created AppAuth</returns>
+        </member>
+        <member name="M:FortyThreeLime.API.Services.AppAuthService.UpdateAppAuth(FortyThreeLime.Models.Entities.AppAuth)">
+            <summary>
+            Updates the AppAuth.
+            </summary>
+            <param name="u">The AppAuth</param>
+        </member>
+        <member name="M:FortyThreeLime.API.Services.AppAuthService.DeleteAppAuth(System.Int32)">
+            <summary>
+            Deletes the AppAuth.
+            </summary>
+            <param name="id">The id of the AppAuth</param>
+        </member>
+        <member name="M:FortyThreeLime.API.Services.AppAuthService.IaValidAppAuth(System.String)">
+            <summary>
+            Is the AppAuth Record Valid
+            </summary>
+        </member>
+        <member name="M:FortyThreeLime.API.Services.AppAuthService.IsActiveAppAuth(System.String)">
+            <summary>
+            Is The AppAuth Record Active?
+            </summary>
+        </member>
+        <member name="T:FortyThreeLime.API.Services.IApplicationService">
+            <summary>
+            Provides Application Data
+            </summary>
+        </member>
+        <member name="T:FortyThreeLime.API.Services.ApplicationService">
+            <summary>
+            Provides Application Data
+            </summary>
+        </member>
+        <member name="M:FortyThreeLime.API.Services.ApplicationService.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:FortyThreeLime.API.Services.ApplicationService"/> class.
+            </summary>
+        </member>
+        <member name="M:FortyThreeLime.API.Services.ApplicationService.#ctor(FortyThreeLime.Data.ApplicationDbContext,FortyThreeLime.Repository.ApplicationRepository{FortyThreeLime.Models.Entities.Application})">
+            <summary>
+            Initializes a new instance of the <see cref="T:FortyThreeLime.API.Services.ApplicationService"/> class.
+            </summary>
+            <param name="context">The Application DB Context</param>
+            <param name="repo">The Application Repository.</param>
+        </member>
+        <member name="M:FortyThreeLime.API.Services.ApplicationService.GetApplications">
+            <summary>
+            Gets the Applications.
+            </summary>
+            <returns>List of Applications</returns>
+        </member>
+        <member name="M:FortyThreeLime.API.Services.ApplicationService.GetApplication(System.Int32)">
+            <summary>
+            Gets the Application.
+            </summary>
+            <param name="id">The identifier.</param>
+            <returns>The Specified Application</returns>
+        </member>
+        <member name="M:FortyThreeLime.API.Services.ApplicationService.GetApplication(System.String)">
+            <summary>
+            Gets the Application.
+            </summary>
+            <param name="applicationName">The name of the application</param>
+            <returns>The Specified Application</returns>
+        </member>
+        <member name="M:FortyThreeLime.API.Services.ApplicationService.CreateApplication(FortyThreeLime.Models.Entities.Application)">
+            <summary>
+            Creates the Application.
+            </summary>
+            <param name="a">The Application to create</param>
+            <returns>The Newly Created Application</returns>
+        </member>
+        <member name="M:FortyThreeLime.API.Services.ApplicationService.UpdateApplication(FortyThreeLime.Models.Entities.Application)">
+            <summary>
+            Updates the Application.
+            </summary>
+            <param name="u">The Application</param>
+        </member>
+        <member name="M:FortyThreeLime.API.Services.ApplicationService.DeleteApplication(System.Int32)">
+            <summary>
+            Deletes the Application.
+            </summary>
+            <param name="id">The id of the Application</param>
+        </member>
+        <member name="T:FortyThreeLime.API.Services.ButtonCommandService">
+            <summary>
+            Service to Provide ButtonCommand Data to An API Controller
+            </summary>
+        </member>
+        <member name="M:FortyThreeLime.API.Services.ButtonCommandService.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:FortyThreeLime.API.Services.ButtonCommandService"/> class.
+            </summary>
+        </member>
+        <member name="M:FortyThreeLime.API.Services.ButtonCommandService.#ctor(FortyThreeLime.Data.ApplicationDbContext,FortyThreeLime.Repository.ApplicationRepository{FortyThreeLime.Models.Entities.ButtonCommand})">
+            <summary>
+            Initializes a new instance of the <see cref="T:FortyThreeLime.API.Services.ButtonCommandService"/> class.
+            </summary>
+        </member>
+        <member name="M:FortyThreeLime.API.Services.ButtonCommandService.GetCommands">
+            <summary>
+            Gets the commands.
+            </summary>
+        </member>
+        <member name="M:FortyThreeLime.API.Services.ButtonCommandService.GetCommand(System.Int32)">
+            <summary>
+            Gets the command.
+            </summary>
+            <param name="commandId">The command identifier.</param>
+        </member>
+        <member name="M:FortyThreeLime.API.Services.ButtonCommandService.GetCommand(System.String)">
+            <summary>
+            Gets the command.
+            </summary>
+            <param name="command">The command.</param>
+        </member>
+        <member name="T:FortyThreeLime.API.Services.CommandLogService">
+            <summary>
+            Data Service For Command Log
+            </summary>
+        </member>
+        <member name="M:FortyThreeLime.API.Services.CommandLogService.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:FortyThreeLime.API.Services.CommandLogService"/> class.
+            </summary>
+        </member>
+        <member name="M:FortyThreeLime.API.Services.CommandLogService.#ctor(FortyThreeLime.Data.ApplicationDbContext,FortyThreeLime.Repository.ApplicationRepository{FortyThreeLime.Models.Entities.CommandLogRecord})">
+            <summary>
+            Initializes a new instance of the <see cref="T:FortyThreeLime.API.Services.CommandLogService"/> class.
+            </summary>
+        </member>
+        <member name="M:FortyThreeLime.API.Services.CommandLogService.GetCommandLogs">
+            <summary>
+            Gets the CommandLogs.
+            </summary>
+            <returns>List of CommandLogs</returns>
+        </member>
+        <member name="M:FortyThreeLime.API.Services.CommandLogService.GetCommandLog(System.Int32)">
+            <summary>
+            Gets the CommandLog.
+            </summary>
+            <param name="id">The identifier.</param>
+            <returns>The Specified CommandLog</returns>
+        </member>
+        <member name="M:FortyThreeLime.API.Services.CommandLogService.GetCommandLogs(System.String)">
+            <summary>
+            Gets the command log records.
+            </summary>
+            <param name="userId">The user identifier.</param>
+            <returns></returns>
+        </member>
+        <member name="M:FortyThreeLime.API.Services.CommandLogService.GetCommandLogs(System.String,System.Int32)">
+            <summary>
+            Gets the command log.
+            </summary>
+            <param name="userId">The user identifier.</param>
+            <param name="commandId">The command identifier.</param>
+            <returns></returns>
+        </member>
+        <member name="M:FortyThreeLime.API.Services.CommandLogService.GetCommandLogs(System.String,System.Int32,System.Int64)">
+            <summary>
+            Gets the command log.
+            </summary>
+            <param name="userId">The user identifier.</param>
+            <param name="commandId">The command identifier.</param>
+            <param name="timestamp">The timestamp.</param>
+            <returns></returns>
+        </member>
+        <member name="M:FortyThreeLime.API.Services.CommandLogService.AddCommandLog(FortyThreeLime.Models.Entities.CommandLogRecord)">
+            <summary>
+            Adds the command log.
+            </summary>
+            <param name="log">The log.</param>
+        </member>
+        <member name="M:FortyThreeLime.API.Services.CommandLogService.UpdateCommandLog(FortyThreeLime.Models.Entities.CommandLogRecord)">
+            <summary>
+            Updates the CommandLog.
+            </summary>
+            <param name="u">The CommandLog</param>
+        </member>
+        <member name="M:FortyThreeLime.API.Services.CommandLogService.DeleteCommandLog(System.Int32)">
+            <summary>
+            Deletes the CommandLog.
+            </summary>
+            <param name="id">The id of the CommandLog</param>
+        </member>
+        <member name="M:FortyThreeLime.API.Services.CommandLogService.DeleteCommandLogs(System.String)">
+            <summary>
+            Deletes the command logs.
+            </summary>
+            <param name="userId">The user identifier.</param>
+        </member>
+        <member name="M:FortyThreeLime.API.Services.CommandLogService.DeleteCommandLogs(System.String,System.Int32)">
+            <summary>
+            Deletes the command logs.
+            </summary>
+            <param name="userId">The user identifier.</param>
+            <param name="commandId">The command identifier.</param>
+        </member>
+        <member name="M:FortyThreeLime.API.Services.CommandLogService.DeleteCommandLogs(System.String,System.Int32,System.Int64)">
+            <summary>
+            Deletes the command logs.
+            </summary>
+            <param name="userId">The user identifier.</param>
+            <param name="commandId">The command identifier.</param>
+            <param name="timestamp">The timestamp.</param>
+        </member>
+        <member name="T:FortyThreeLime.API.Services.IService">
+            <summary>
+            Implemented by Service Classes
+            </summary>
+        </member>
+        <member name="T:FortyThreeLime.API.Services.IDataService">
+            <summary>
+            Inherited by classes that provide or manipulate some piece of application data
+            </summary>
+        </member>
+        <member name="T:FortyThreeLime.API.Services.IAPIService">
+            <summary>
+            Inherited by classes that provide or manipulate data for an api controller
+            </summary>
+        </member>
+        <member name="T:FortyThreeLime.API.Services.IControllerService`1">
+            <summary>
+             Implemented by controller services
+            </summary>
+        </member>
+        <member name="T:FortyThreeLime.API.Services.RoleService">
+            <summary>
+            Provides Role Data
+            </summary>
+        </member>
+        <member name="M:FortyThreeLime.API.Services.RoleService.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:FortyThreeLime.API.Services.RoleService"/> class.
+            </summary>
+        </member>
+        <member name="M:FortyThreeLime.API.Services.RoleService.#ctor(FortyThreeLime.Data.ApplicationDbContext,FortyThreeLime.Repository.ApplicationRepository{FortyThreeLime.Models.Entities.Role})">
+            <summary>
+            Initializes a new instance of the <see cref="T:FortyThreeLime.API.Services.RoleService"/> class.
+            </summary>
+            <param name="context">The Application DB Context</param>
+            <param name="repo">The Role Repository.</param>
+        </member>
+        <member name="M:FortyThreeLime.API.Services.RoleService.GetAllRoles">
+            <summary>
+            Gets all roles.
+            </summary>
+            <returns>List of Role Objects</returns>
+        </member>
+        <member name="M:FortyThreeLime.API.Services.RoleService.GetRole(System.Int32)">
+            <summary>
+            Gets the role.
+            </summary>
+            <param name="roleId">The role identifier.</param>
+            <returns>The specified Role</returns>
+        </member>
+        <member name="M:FortyThreeLime.API.Services.RoleService.GetRole(System.String)">
+            <summary>
+            Gets the role.
+            </summary>
+            <param name="roleName">The role name.</param>
+            <returns>The specified Role Object</returns>
+        </member>
+        <member name="M:FortyThreeLime.API.Services.RoleService.CreateRole(System.String)">
+            <summary>
+            Creates the role.
+            </summary>
+            <param name="roleName">Name of the role.</param>
+        </member>
+        <member name="M:FortyThreeLime.API.Services.RoleService.DeleteRole(System.String)">
+            <summary>
+            Deletes the role.
+            </summary>
+            <param name="roleName">Name of the role.</param>
+        </member>
+        <member name="T:FortyThreeLime.API.Services.UserService">
+            <summary>
+            Provides User Data
+            </summary>
+        </member>
+        <member name="M:FortyThreeLime.API.Services.UserService.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:FortyThreeLime.API.Services.UserService"/> class.
+            </summary>
+        </member>
+        <member name="M:FortyThreeLime.API.Services.UserService.#ctor(FortyThreeLime.Data.ApplicationDbContext,FortyThreeLime.Repository.ApplicationRepository{FortyThreeLime.Models.Entities.User})">
+            <summary>
+            Initializes a new instance of the <see cref="T:FortyThreeLime.API.Services.UserService"/> class.
+            </summary>
+            <param name="context">The Application DB Context</param>
+            <param name="repo">The User Repository.</param>
+        </member>
+        <member name="M:FortyThreeLime.API.Services.UserService.GetUsers">
+            <summary>
+            Gets the users.
+            </summary>
+            <returns>List of Users</returns>
+        </member>
+        <member name="M:FortyThreeLime.API.Services.UserService.GetUser(System.Int32)">
+            <summary>
+            Gets the user.
+            </summary>
+            <param name="id">The identifier.</param>
+            <returns>The Specified User</returns>
+        </member>
+        <member name="M:FortyThreeLime.API.Services.UserService.CreateUser(FortyThreeLime.Models.Entities.User)">
+            <summary>
+            Creates the user.
+            </summary>
+            <param name="u">The user to create</param>
+            <returns>The Newly Created User</returns>
+        </member>
+        <member name="M:FortyThreeLime.API.Services.UserService.GetUser(System.String)">
+            <summary>
+            Gets the user.
+            </summary>
+            <param name="userId">The user identifier.</param>
+            <returns></returns>
+        </member>
+        <member name="M:FortyThreeLime.API.Services.UserService.UpdateUser(FortyThreeLime.Models.Entities.User)">
+            <summary>
+            Updates the user.
+            </summary>
+            <param name="u">The user</param>
+        </member>
+        <member name="M:FortyThreeLime.API.Services.UserService.DeleteUser(System.Int32)">
+            <summary>
+            Deletes the user.
+            </summary>
+            <param name="id">The id of the user</param>
+        </member>
+        <member name="M:FortyThreeLime.API.Services.UserService.DeleteUser(System.String)">
+            <summary>
+            Deletes the user.
+            </summary>
+            <param name="userId">The Id of the user</param>
+        </member>
+        <member name="M:FortyThreeLime.API.Services.UserService.LoginUser(System.String)">
+            <summary>
+            Logs in the user.
+            </summary>
+            <param name="userId">The user identifier.</param>
+        </member>
+        <member name="M:FortyThreeLime.API.Services.UserService.LogoutUser(System.String)">
+            <summary>
+            Logs out the user.
+            </summary>
+            <param name="userId">The user identifier.</param>
+        </member>
+        <member name="M:FortyThreeLime.API.Services.UserService.IsUserInRole(System.String,System.String)">
+            <summary>
+            Determines whether is user in role
+            </summary>
+            <param name="userId">The user identifier.</param>
+            <param name="roleName">Name of the role.</param>
+            <returns>
+              <c>true</c> if [is user in role] otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:FortyThreeLime.API.Services.UserService.UserExists(System.String)">
+            <summary>
+            Does The User Exist
+            </summary>
+            <param name="userId">The user identifier.</param>
+        </member>
+        <member name="M:FortyThreeLime.API.Services.UserService.GetCount">
+            <summary>
+            Get A Count Of Users
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:FortyThreeLime.API.ViewModels.IViewModel">
+            <summary>
+            A View Model Class          
+            </summary>
+        </member>
+        <member name="T:FortyThreeLime.API.ViewModels.IViewModel`1">
+            <summary>
+            A View Model Class for the specific model
+            </summary>
+            <typeparam name="TModel">The type of the model.</typeparam>
+        </member>
+        <member name="T:FortyThreeLime.API.ViewModels.IControllerViewModel">
+            <summary>
+            A View Model Class for use in controller ops
+            </summary>
+            <seealso cref="T:FortyThreeLime.API.ViewModels.IViewModel" />
+        </member>
+        <member name="T:FortyThreeLime.API.ViewModels.IControllerViewModel`1">
+            <summary>
+            A View Model Class for use in controller ops
+            </summary>
+            <seealso cref="T:FortyThreeLime.API.ViewModels.IViewModel" />
+        </member>
+    </members>
+</doc>

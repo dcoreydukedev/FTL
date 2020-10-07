@@ -12,29 +12,22 @@ namespace FortyThreeLime.API.Controllers
     public class CommandLogController : ApiControllerBase
     {
 
-        private readonly ICommandLogService _CommandLogService;
-        private readonly IAppAuthService _AppAuthService;
+        private readonly CommandLogService _CommandLogService;
+        private readonly AppAuthService _AppAuthService;
 
-        public CommandLogController(ICommandLogService commandLogService, IAppAuthService appAuthService)
+        public CommandLogController()
         {
-            this._CommandLogService = commandLogService;
-            this._AppAuthService = appAuthService;
+            this._CommandLogService = new CommandLogService();
+            this._AppAuthService = new AppAuthService();
         }
 
 
         /// <summary>
         /// Creates the Specified Command Log Record
-        /// </summary>
-        /// <param name="UserId">The user identifier.</param>
-        /// <param name="CommandId">The command identifier.</param>
-        /// <param name="Timestamp">The timestamp.</param>
-        /// <param name="Lattitude">The latitude.</param>
-        /// <param name="Longitude">The longitude.</param>
-        /// <returns></returns>
+        /// </summary>        
         [Route("Create")]
         [HttpPost]
-        public IActionResult Create([FromBody] string UserId, [FromBody] int CommandId, [FromBody] long Timestamp, 
-                                    [FromBody] string Lattitude, [FromBody] string Longitude, [FromBody] string loginToken)
+        public IActionResult Create([FromBody] CommandLogRecord commandLogRecord, string loginToken)
         {
             try
             {
@@ -44,7 +37,7 @@ namespace FortyThreeLime.API.Controllers
 
                 if (_AppAuthService.IsActiveAppAuth(loginToken) == true)
                 {
-                    CommandLogRecord clr = new CommandLogRecord(UserId, CommandId, Timestamp, Lattitude, Longitude);
+                    CommandLogRecord clr = new CommandLogRecord(commandLogRecord.UserId, commandLogRecord.CommandId, commandLogRecord.Timestamp, commandLogRecord.Latitude, commandLogRecord.Longitude);
                     _CommandLogService.AddCommandLog(clr);
 
                     var ret = new

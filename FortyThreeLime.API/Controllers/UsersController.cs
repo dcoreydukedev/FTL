@@ -13,21 +13,21 @@ namespace FortyThreeLime.API.Controllers
     public class UsersController : ApiControllerBase
     {
 
-        private readonly IUserService _UserService;
-        private readonly IAppAuthService _AppAuthService;
+        private readonly UserService _UserService;
+        private readonly AppAuthService _AppAuthService;
 
-        public UsersController(IUserService UserService, IAppAuthService appAuthService)
+        public UsersController()
         {
-            this._UserService = UserService;
-            this._AppAuthService = appAuthService;
+            this._UserService = new UserService();
+            this._AppAuthService = new AppAuthService();
         }
-
 
         /// <summary>
         /// Gets All Users 
         /// </summary>
         /// <param name="loginToken">Token Given to User Upon Successful Login</param>
         [HttpGet]
+        [Route("Get")]
         public IActionResult Get([FromQuery] string loginToken)
         {
             try
@@ -79,7 +79,8 @@ namespace FortyThreeLime.API.Controllers
         /// </summary>
         /// <param name="userId">Id of the User.</param>
         /// <param name="loginToken">Token Given to User Upon Successful Login</param>
-        [HttpGet("{UserName}")]
+        [HttpGet]
+        [Route("Get/{userId}")]
         public IActionResult Get(string userId, [FromQuery] string loginToken)
         {
             try
@@ -144,11 +145,9 @@ namespace FortyThreeLime.API.Controllers
         /// <summary>
         /// Create the Specified User
         /// </summary>
-        /// <param name="username">The Name of the User to Create</param>
-        /// <param name="loginToken">Token Given to User Upon Successful Login</param>
-        [Route("Create")]
         [HttpPost]
-        public IActionResult Create([FromBody] string userId, [FromBody] string username, [FromBody] int roleId, [FromBody] string loginToken)
+        [Route("Create")]        
+        public IActionResult Create([FromBody] string userId, string username, int roleId, string loginToken)
         {
             try
             {
@@ -196,7 +195,8 @@ namespace FortyThreeLime.API.Controllers
         }
 
       
-        [HttpDelete("{userId}")]
+        [HttpDelete]
+        [Route("Delete/{userId}")]
         public IActionResult Delete(string userId, [FromQuery] string loginToken)
         {
             try

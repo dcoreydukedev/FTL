@@ -31,10 +31,20 @@ namespace FortyThreeLime.API.Services
     {
         private ApplicationDbContext _context;
         private ApplicationRepository<User> _repo;
-      
+
         /// <summary>
         /// Initializes a new instance of the <see cref="UserService"/> class.
         /// </summary>
+        public UserService()
+        {
+            this._context = ApplicationDbContext.Create();
+            this._repo = new ApplicationRepository<User>();
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UserService"/> class.
+        /// </summary>
+        /// <param name="context">The Application DB Context</param>
         /// <param name="repo">The User Repository.</param>
         public UserService(ApplicationDbContext context, ApplicationRepository<User> repo)
         {
@@ -99,7 +109,7 @@ namespace FortyThreeLime.API.Services
         /// <param name="id">The id of the user</param>
         private void DeleteUser(int id)
         {
-            _repo.Remove(id);
+            _repo.Delete(id);
         }
 
         /// <summary>
@@ -115,7 +125,6 @@ namespace FortyThreeLime.API.Services
             }
         }
 
-
         /// <summary>
         /// Logs in the user.
         /// </summary>
@@ -126,6 +135,7 @@ namespace FortyThreeLime.API.Services
             if (user != null)
             {
                 user.IsOnline = true;
+                user.IsActive = true;
                 UpdateUser(user);
                 return user;
             }
@@ -184,7 +194,16 @@ namespace FortyThreeLime.API.Services
         public bool UserExists(string userId)
         {
             User user = _context.Users.Where(u => u.UserId == userId).SingleOrDefault();
-            return user == null;
+            return user != null;
+        }
+
+        /// <summary>
+        /// Get A Count Of Users
+        /// </summary>
+        /// <returns></returns>
+        public int GetCount()
+        {
+            return GetUsers().Count();
         }
     }
 }

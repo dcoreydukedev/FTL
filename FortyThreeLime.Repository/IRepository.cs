@@ -12,7 +12,7 @@ namespace FortyThreeLime.Repository
         IEnumerable<TEntity> GetAll();
         int GetCount();
         void Update(TEntity obj);
-        void Remove(int id);
+        void Delete(int id);
     }
     
 

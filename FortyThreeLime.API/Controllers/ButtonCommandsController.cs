@@ -16,13 +16,13 @@ namespace FortyThreeLime.API.Controllers
     public class ButtonCommandsController : ApiControllerBase
     {
 
-        private readonly IButtonCommandService _ButtonCommandService;
-        private readonly IAppAuthService _AppAuthService;
+        private readonly ButtonCommandService _ButtonCommandService;
+        private readonly AppAuthService _AppAuthService;
 
-        public ButtonCommandsController(IButtonCommandService buttonCommandService, IAppAuthService appAuthService)
+        public ButtonCommandsController()
         {
-            this._ButtonCommandService = buttonCommandService;
-            this._AppAuthService = appAuthService;
+            this._ButtonCommandService = new ButtonCommandService();
+            this._AppAuthService = new AppAuthService();
         }
 
 
@@ -31,6 +31,7 @@ namespace FortyThreeLime.API.Controllers
         /// </summary>
         /// <returns>List of ButtonCommand Objects</returns>
         [HttpGet]
+        [Route("Get")]
         public IActionResult Get([FromQuery] string loginToken)
         {
             try
@@ -81,7 +82,8 @@ namespace FortyThreeLime.API.Controllers
         /// Gets the button command;
         /// </summary>
         /// <returns>ButtonCommand Object</returns>
-        [HttpGet("{commandId}")]
+        [HttpGet]
+        [Route("Get/{commandId}")]
         public IActionResult Get(int commandId, [FromQuery] string loginToken)
         {
             try
