@@ -17,7 +17,7 @@ namespace FortyThreeLime.Models.Entities
 
         }
 
-        public AppAuth(LoginData data)
+        public AppAuth(AppAuthDTO data)
         {
             this.LoginToken = data.LoginToken;
             this.LoginTokenActive = data.LoginTokenActive;

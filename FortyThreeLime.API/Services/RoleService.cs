@@ -7,16 +7,24 @@ using FortyThreeLime.Repository;
 using System.Collections.Generic;
 using FortyThreeLime.Data;
 using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace FortyThreeLime.API.Services
 {
-    public interface IRoleService : IAPIService
+
+    public interface IRoleService : IAPIService, IDataService
     {
         Role CreateRole(string roleName);
+        Task<Role> CreateRoleAsync(string roleName);
         void DeleteRole(string roleName);
-        List<Role> GetAllRoles();
+        Task DeleteRoleAsync(string roleName);
         Role GetRole(int roleId);
         Role GetRole(string roleName);
+        Task<Role> GetRoleAsync(int roleId);
+        Task<Role> GetRoleAsync(string roleName);
+        List<Role> GetRoles();
+        Task<List<Role>> GetRolesAsync();
     }
 
     /// <summary>
@@ -25,7 +33,7 @@ namespace FortyThreeLime.API.Services
     public sealed class RoleService : IRoleService
     {
 
-        private ApplicationRepository<Role> _repo;
+        private Repository<Role> _repo;
         private ApplicationDbContext _context;
 
         /// <summary>
@@ -33,7 +41,7 @@ namespace FortyThreeLime.API.Services
         /// </summary>
         public RoleService()
         {
-            _repo = new ApplicationRepository<Role>();
+            _repo = new Repository<Role>();
             _context = ApplicationDbContext.Create();
         }
 
@@ -42,7 +50,7 @@ namespace FortyThreeLime.API.Services
         /// </summary>
         /// <param name="context">The Application DB Context</param>
         /// <param name="repo">The Role Repository.</param>
-        public RoleService(ApplicationDbContext context, ApplicationRepository<Role> repo)
+        public RoleService(ApplicationDbContext context, Repository<Role> repo)
         {
             _repo = repo;
             this._context = context;
@@ -51,10 +59,19 @@ namespace FortyThreeLime.API.Services
         /// <summary>
         /// Gets all roles.
         /// </summary>
-        /// <returns>List of Role Objects</returns>
-        public List<Role> GetAllRoles()
+        /// <returns>List of Roles</returns>
+        public List<Role> GetRoles()
         {
             return (List<Role>)_repo.GetAll();
+        }
+
+        /// <summary>
+        /// Gets all roles asynchronously.
+        /// </summary>
+        /// <returns>List of Roles</returns>
+        public async Task<List<Role>> GetRolesAsync()
+        {
+            return (List<Role>)await _repo.GetAllAsync();
         }
 
         /// <summary>
@@ -68,6 +85,16 @@ namespace FortyThreeLime.API.Services
         }
 
         /// <summary>
+        /// Gets the role asynchronously.
+        /// </summary>
+        /// <param name="roleId">The role identifier.</param>
+        /// <returns>The specified Role</returns>
+        public async Task<Role> GetRoleAsync(int roleId)
+        {
+            return await _repo.GetByIdAsync(roleId);
+        }
+
+        /// <summary>
         /// Gets the role.
         /// </summary>
         /// <param name="roleName">The role name.</param>
@@ -75,6 +102,16 @@ namespace FortyThreeLime.API.Services
         public Role GetRole(string roleName)
         {
             return _context.Roles.Single(x => x.RoleName == roleName);
+        }
+
+        /// <summary>
+        /// Gets the role asynchronously.
+        /// </summary>
+        /// <param name="roleName">The role name.</param>
+        /// <returns>The specified Role Object</returns>
+        public async Task<Role> GetRoleAsync(string roleName)
+        {
+            return await _context.Roles.SingleAsync(x => x.RoleName == roleName);
         }
 
         /// <summary>
@@ -89,6 +126,17 @@ namespace FortyThreeLime.API.Services
         }
 
         /// <summary>
+        /// Creates the role asynchronously.
+        /// </summary>
+        /// <param name="roleName">Name of the role.</param>
+        public async Task<Role> CreateRoleAsync(string roleName)
+        {
+            Role r = new Role(roleName);
+            await _repo.AddAsync(r);
+            return r;
+        }
+
+        /// <summary>
         /// Deletes the role.
         /// </summary>
         /// <param name="roleName">Name of the role.</param>
@@ -96,6 +144,16 @@ namespace FortyThreeLime.API.Services
         {
             Role role = _context.Roles.Single(x => x.RoleName == roleName);
             _repo.Delete(role.Id);
+        }
+
+        /// <summary>
+        /// Deletes the role asynchronously.
+        /// </summary>
+        /// <param name="roleName">Name of the role.</param>
+        public async Task DeleteRoleAsync(string roleName)
+        {
+            Role role = await _context.Roles.SingleAsync(x => x.RoleName == roleName);
+            await _repo.DeleteAsync(role.Id);
         }
     }
 }

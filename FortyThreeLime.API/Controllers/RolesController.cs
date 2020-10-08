@@ -35,11 +35,11 @@ namespace FortyThreeLime.API.Controllers
             {
                 if (string.IsNullOrEmpty(loginToken)) { return BadRequest(LOGIN_TOKEN_NULL); }
 
-                if (!_AppAuthService.IaValidAppAuth(loginToken)) { return BadRequest(LOGIN_TOKEN_INVALID); }
+                if (!_AppAuthService.IsValidAppAuth(loginToken).Result) { return BadRequest(LOGIN_TOKEN_INVALID); }
 
-                if (_AppAuthService.IsActiveAppAuth(loginToken) == true)
+                if (_AppAuthService.IsActiveAppAuthAsync(loginToken).Result == true)
                 {
-                    List<Role> roles = _RoleService.GetAllRoles();
+                    List<Role> roles = _RoleService.GetRoles();
 
                     var ret = new
                     {
@@ -88,9 +88,9 @@ namespace FortyThreeLime.API.Controllers
             {
                 if (string.IsNullOrEmpty(loginToken)) { return BadRequest(LOGIN_TOKEN_NULL); }
 
-                if (!_AppAuthService.IaValidAppAuth(loginToken)) { return BadRequest(LOGIN_TOKEN_INVALID); }
+                if (!_AppAuthService.IsValidAppAuth(loginToken).Result) { return BadRequest(LOGIN_TOKEN_INVALID); }
 
-                if (_AppAuthService.IsActiveAppAuth(loginToken) == true)
+                if (_AppAuthService.IsActiveAppAuthAsync(loginToken).Result == true)
                 {
                     Role role = _RoleService.GetRole(roleName);
 
@@ -156,9 +156,9 @@ namespace FortyThreeLime.API.Controllers
             {
                 if (string.IsNullOrEmpty(loginToken)) { return BadRequest(LOGIN_TOKEN_NULL); }
 
-                if (!_AppAuthService.IaValidAppAuth(loginToken)) { return BadRequest(LOGIN_TOKEN_INVALID); }
+                if (!_AppAuthService.IsValidAppAuth(loginToken).Result) { return BadRequest(LOGIN_TOKEN_INVALID); }
 
-                if (_AppAuthService.IsActiveAppAuth(loginToken) == true)
+                if (_AppAuthService.IsActiveAppAuthAsync(loginToken).Result == true)
                 {
                     Role role = _RoleService.CreateRole(roleName);
 
@@ -209,9 +209,9 @@ namespace FortyThreeLime.API.Controllers
             {
                 if (string.IsNullOrEmpty(loginToken)) { return BadRequest(LOGIN_TOKEN_NULL); }
 
-                if (!_AppAuthService.IaValidAppAuth(loginToken)) { return BadRequest(LOGIN_TOKEN_INVALID); }
+                if (!_AppAuthService.IsValidAppAuth(loginToken).Result) { return BadRequest(LOGIN_TOKEN_INVALID); }
 
-                if (_AppAuthService.IsActiveAppAuth(loginToken) == true)
+                if (_AppAuthService.IsActiveAppAuthAsync(loginToken).Result == true)
                 {
                     _RoleService.DeleteRole(roleName);
 

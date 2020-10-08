@@ -3,24 +3,31 @@
  ************************************************************************/
 
 using FortyThreeLime.Data;
+using FortyThreeLime.Models.Domain;
 using FortyThreeLime.Models.Entities;
 using FortyThreeLime.Repository;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace FortyThreeLime.API.Services
 {
-    public interface IAppAuthService : IAPIService
+    public interface IAppAuthService : IAPIService, IDataService
     {
-        AppAuth CreateAppAuth(AppAuth a);
-        AppAuth GetAppAuth(int id);
-        AppAuth GetAppAuth(string loginToken);
-        List<AppAuth> GetAppAuths();
-        void UpdateAppAuth(AppAuth u);
-        void DeleteAppAuth(int id);
-        bool IaValidAppAuth(string loginToken);
-        bool IsActiveAppAuth(string loginToken);
+        Task<AppAuth> CreateAppAuth(AppAuth a);
+        AppAuthDTO CreateAppAuthDTOFromAppAuthEntity(AppAuth appAuth);
+        Task DeleteAppAuth(int id);
+        Task<AppAuth> GetAppAuth(int id);
+        Task<AppAuth> GetAppAuth(string loginToken);
+        Task<List<AppAuth>> GetAppAuths();
+        Task<AppAuthService> Init();
+        Task<bool> IsActiveAppAuthAsync(string loginToken);
+        Task<bool> IsValidAppAuth(string loginToken);
+        Task UpdateAppAuth(AppAuth u);
     }
+
 
     /// <summary>
     /// Provides AppAuth Data
@@ -28,7 +35,8 @@ namespace FortyThreeLime.API.Services
     public sealed class AppAuthService : IAppAuthService
     {
         private ApplicationDbContext _context;
-        private ApplicationRepository<AppAuth> _repo;
+        private Repository<AppAuth> _repo;
+        private UserService _userService;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AppAuthService"/> class.
@@ -36,7 +44,8 @@ namespace FortyThreeLime.API.Services
         public AppAuthService()
         {
             this._context = ApplicationDbContext.Create();
-            this._repo = new ApplicationRepository<AppAuth>();
+            this._repo = new Repository<AppAuth>();
+            this._userService = new UserService();
         }
 
         /// <summary>
@@ -44,20 +53,29 @@ namespace FortyThreeLime.API.Services
         /// </summary>
         /// <param name="context">The Application DB Context</param>
         /// <param name="repo">The AppAuth Repository.</param>
-        public AppAuthService(ApplicationDbContext context, ApplicationRepository<AppAuth> repo)
+        public AppAuthService(ApplicationDbContext context, Repository<AppAuth> repo)
         {
             this._context = context;
             this._repo = repo;
+            this._userService = new UserService();
         }
 
+        /// <summary>
+        /// Initializes this instance.
+        /// </summary>
+        public async Task<AppAuthService> Init()
+        {
+            await CleanupAppAuths();
+            return this;
+        }
 
         /// <summary>
         /// Gets the AppAuths.
         /// </summary>
         /// <returns>List of AppAuths</returns>
-        public List<AppAuth> GetAppAuths()
+        public async Task<List<AppAuth>> GetAppAuths()
         {
-            return (List<AppAuth>)_repo.GetAll();
+            return (List<AppAuth>)await _repo.GetAllAsync();
         }
 
         /// <summary>
@@ -65,19 +83,18 @@ namespace FortyThreeLime.API.Services
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <returns>The Specified AppAuth</returns>
-        public AppAuth GetAppAuth(int id)
+        public async Task<AppAuth> GetAppAuth(int id)
         {
-            return _repo.GetById(id);
+            return await _repo.GetByIdAsync(id);
         }
-
 
         /// <summary>
         /// Gets the AppAuth.
         /// </summary>
         /// <returns>The Specified AppAuth</returns>
-        public AppAuth GetAppAuth(string loginToken)
+        public async Task<AppAuth> GetAppAuth(string loginToken)
         {
-            return _context.AppAuth.Where(a => a.LoginToken == loginToken).SingleOrDefault();
+            return await _context.AppAuth.SingleAsync(a => a.LoginToken == loginToken);
         }
 
         /// <summary>
@@ -85,46 +102,92 @@ namespace FortyThreeLime.API.Services
         /// </summary>
         /// <param name="a">The AppAuth to create</param>
         /// <returns>The Newly Created AppAuth</returns>
-        public AppAuth CreateAppAuth(AppAuth a)
+        public async Task<AppAuth> CreateAppAuth(AppAuth a)
         {
-            _repo.Add(a);
-            return GetAppAuth(a.Id);
+            await _repo.AddAsync(a);
+            return await GetAppAuth(a.Id);
         }
 
         /// <summary>
         /// Updates the AppAuth.
         /// </summary>
         /// <param name="u">The AppAuth</param>
-        public void UpdateAppAuth(AppAuth u)
+        public async Task UpdateAppAuth(AppAuth u)
         {
-            _repo.Update(u);
+            await _repo.UpdateAsync(u);
         }
 
         /// <summary>
         /// Deletes the AppAuth.
         /// </summary>
         /// <param name="id">The id of the AppAuth</param>
-        public void DeleteAppAuth(int id)
+        public async Task DeleteAppAuth(int id)
         {
-            _repo.Delete(id);
+            await _repo.DeleteAsync(id);
         }
 
         /// <summary>
         /// Is the AppAuth Record Valid
         /// </summary>
-        public bool IaValidAppAuth(string loginToken)
+        public async Task<bool> IsValidAppAuth(string loginToken)
         {
-            AppAuth a = GetAppAuth(loginToken);
+            AppAuth a = await _context.AppAuth.SingleAsync(a => a.LoginToken == loginToken);
             return a != null;
         }
 
         /// <summary>
         /// Is The AppAuth Record Active?
         /// </summary>
-        public bool IsActiveAppAuth(string loginToken)
+        public async Task<bool> IsActiveAppAuthAsync(string loginToken)
         {
-            AppAuth a = GetAppAuth(loginToken);
+            AppAuth a = await GetAppAuth(loginToken);
             return ((a != null) && (a.LoginTokenActive == true));
+        }
+
+        /// <summary>
+        /// Creates the application authentication DTO from application authentication entity.
+        /// </summary>
+        /// <param name="appAuth">The application authentication entity</param>
+        /// <returns></returns>
+        public AppAuthDTO CreateAppAuthDTOFromAppAuthEntity(AppAuth appAuth)
+        {
+            DateTime? logoutTime = string.IsNullOrEmpty(appAuth.LogoutTime) ? null : (DateTime?)DateTime.Parse(appAuth.LogoutTime);
+
+            AppAuthDTO aa = new AppAuthDTO
+            (
+                appAuth.LoginToken,
+                appAuth.LoginTokenActive,
+                (Application)_context.Applications.Single(app => app.Id == appAuth.ApplicationId),
+                (User)_context.Users.Single(u => u.UserId == appAuth.UserId),
+                (Role)_context.Roles.Single(r => r.Id == appAuth.RoleId),
+                DateTime.Parse(appAuth.LoginTime),
+                DateTime.Parse(appAuth.LoginExpires),
+                logoutTime
+            );
+            return aa;
+
+        }
+
+        /// <summary>
+        /// Cleanup Expired AppAuths; Logout The User and Delete the Record
+        /// </summary>
+        private async Task CleanupAppAuths()
+        {
+            await Task.Run(async () =>
+            {
+                List<AppAuth> _l = await GetAppAuths();
+                foreach (AppAuth a in _l)
+                {
+                    if (DateTime.Parse(a.LoginExpires) <= DateTime.Now)
+                    {
+                        AppAuthDTO appAuthDTO = CreateAppAuthDTOFromAppAuthEntity(a);
+                        User u = appAuthDTO.User;
+                        await _userService.LogoutUserAsync(u.UserId);
+                        await DeleteAppAuth(a.Id);
+                    }
+                }
+            });
+
         }
 
     }

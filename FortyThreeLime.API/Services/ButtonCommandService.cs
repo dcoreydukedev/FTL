@@ -5,17 +5,22 @@
 using FortyThreeLime.Data;
 using FortyThreeLime.Models.Entities;
 using FortyThreeLime.Repository;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
-using System.Linq;
+using System.Threading.Tasks;
 
 namespace FortyThreeLime.API.Services
 {
-    public interface IButtonCommandService : IAPIService
+    public interface IButtonCommandService : IAPIService, IDataService
     {
-        ButtonCommand GetCommand(int commandId);
-        ButtonCommand GetCommand(string command);
-        List<ButtonCommand> GetCommands();
+        Task CreateButtonCommand(ButtonCommand cmd);
+        Task DeleteButtonCommand(int id);
+        Task<ButtonCommand> GetButtonCommand(int commandId);
+        Task<ButtonCommand> GetButtonCommandAsync(string command);
+        Task<List<ButtonCommandCategory>> GetButtonCommandCategories();
+        Task<List<ButtonCommand>> GetButtonCommands();
     }
+
 
     /// <summary>
     /// Service to Provide ButtonCommand Data to An API Controller
@@ -24,7 +29,8 @@ namespace FortyThreeLime.API.Services
     {
 
         private ApplicationDbContext _context;
-        private ApplicationRepository<ButtonCommand> _repo;
+        private Repository<ButtonCommand> _buttonCommandRepo;
+        private Repository<ButtonCommandCategory> _buttonCommandCategoryRepo;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ButtonCommandService"/> class.
@@ -32,45 +38,70 @@ namespace FortyThreeLime.API.Services
         public ButtonCommandService()
         {
             this._context = ApplicationDbContext.Create();
-            this._repo = new ApplicationRepository<ButtonCommand>();
+            this._buttonCommandRepo = new Repository<ButtonCommand>();
+            this._buttonCommandCategoryRepo = new Repository<ButtonCommandCategory>();
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ButtonCommandService"/> class.
         /// </summary>
-        public ButtonCommandService(ApplicationDbContext context, ApplicationRepository<ButtonCommand> repo)
+        public ButtonCommandService(ApplicationDbContext context, Repository<ButtonCommand> repo, Repository<ButtonCommandCategory> repo2)
         {
             this._context = context;
-            this._repo = repo;
+            this._buttonCommandRepo = repo;
+            this._buttonCommandCategoryRepo = repo2;
         }
 
-
         /// <summary>
-        /// Gets the commands.
+        /// Gets the button commands asynchronously.
         /// </summary>
-        public List<ButtonCommand> GetCommands()
+        public async Task<List<ButtonCommand>> GetButtonCommands()
         {
-            return (List<ButtonCommand>)_repo.GetAll();
+            return (List<ButtonCommand>)await _buttonCommandRepo.GetAllAsync();
         }
 
         /// <summary>
-        /// Gets the command.
+        /// Gets the button command asynchronously.
         /// </summary>
         /// <param name="commandId">The command identifier.</param>
-        public ButtonCommand GetCommand(int commandId)
+        public async Task<ButtonCommand> GetButtonCommand(int commandId)
         {
-            return _context.ButtonCommands.Where(x => x.CommandId == commandId).SingleOrDefault();
+            return await _context.ButtonCommands.SingleAsync(x => x.CommandId == commandId);
         }
 
         /// <summary>
-        /// Gets the command.
+        /// Gets the button command asynchronously.
         /// </summary>
-        /// <param name="command">The command.</param>
-        public ButtonCommand GetCommand(string command)
+        /// <param name="command">The Command</param>
+        public async Task<ButtonCommand> GetButtonCommandAsync(string command)
         {
-            return _context.ButtonCommands.Where(x => x.Command == command).SingleOrDefault();
+            return await _context.ButtonCommands.SingleAsync(x => x.Command == command);
         }
 
-        //TODO: Add Create, CreateMany, Delete, and Update Methods
+        /// <summary>
+        /// Gets the button command categories.
+        /// </summary>
+        /// <returns></returns>
+        public async Task<List<ButtonCommandCategory>> GetButtonCommandCategories()
+        {
+            return (List<ButtonCommandCategory>)await _buttonCommandCategoryRepo.GetAllAsync();
+        }
+
+        /// <summary>
+        /// Creates a button command.
+        /// </summary>
+        public async Task CreateButtonCommand(ButtonCommand cmd)
+        {
+            await _buttonCommandRepo.AddAsync(cmd);
+        }
+
+        /// <summary>
+        /// Deletes the button command.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        public async Task DeleteButtonCommand(int id)
+        {
+            await _buttonCommandRepo.DeleteAsync(id);
+        }
     }
 }

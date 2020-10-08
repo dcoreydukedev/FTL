@@ -28,7 +28,7 @@ namespace FortyThreeLime.API.Services
     public sealed class ApplicationService : IApplicationService
     {
         private ApplicationDbContext _context;
-        private ApplicationRepository<Application> _repo;
+        private Repository<Application> _repo;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ApplicationService"/> class.
@@ -36,7 +36,7 @@ namespace FortyThreeLime.API.Services
         public ApplicationService()
         {
             _context = ApplicationDbContext.Create();
-            _repo = new ApplicationRepository<Application>();
+            _repo = new Repository<Application>();
         }
 
         /// <summary>
@@ -44,7 +44,7 @@ namespace FortyThreeLime.API.Services
         /// </summary>
         /// <param name="context">The Application DB Context</param>
         /// <param name="repo">The Application Repository.</param>
-        public ApplicationService(ApplicationDbContext context, ApplicationRepository<Application> repo)
+        public ApplicationService(ApplicationDbContext context, Repository<Application> repo)
         {
             this._context = context;
             this._repo = repo;

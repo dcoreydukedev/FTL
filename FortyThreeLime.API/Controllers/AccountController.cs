@@ -8,6 +8,7 @@ using FortyThreeLime.Models.Entities;
 using FortyThreeLime.Models.Domain;
 using FortyThreeLime.API.Services;
 using Microsoft.Extensions.Configuration;
+using System.Threading.Tasks;
 
 namespace FortyThreeLime.API.Controllers
 {
@@ -55,42 +56,43 @@ namespace FortyThreeLime.API.Controllers
         /// </returns>
         [HttpGet]
         [Route("Login")]
-        public IActionResult Login([FromQuery] string userId)
+        public async Task<IActionResult> Login([FromQuery] string userId)
         {
             try
             {
                 if (string.IsNullOrEmpty(userId)) { return BadRequest(USERID_NULL); }
 
-                if (!_UserService.UserExists(userId)) { return BadRequest(USERID_INVALID); }
+                if (!_UserService.UserExists(userId)) { return BadRequest(USERID_INVALID); }               
 
                 // Login User
-                this._User = _UserService.LoginUser(userId);
+                this._User = await _UserService.LoginUserAsync(userId);
 
                 // Get Role For User
-                this._Role = _RoleService.GetRole(_User.RoleId);
+                this._Role = await _RoleService.GetRoleAsync(_User.RoleId);
 
                 // Create a Login Token
-                this._Token = GetLoginToken();               
+                this._Token = GetLoginToken();
 
-                // Create Return Data Object
-                LoginData loginData = new LoginData(this._Token, true, this._App, this._User, this._Role, DateTime.Now, DateTime.Now.AddDays(1), null);
+                // Create Application Authentication DTO
+                // Login Expires 12 hours from creation
+                AppAuthDTO appAuthDTO = new AppAuthDTO(this._Token, true, this._App, this._User, this._Role, DateTime.Now, DateTime.Now.AddHours(12), null);
 
                 // Create AppAuth Record
-                AppAuth appAuth = new AppAuth(loginData);
-                _AppAuthService.CreateAppAuth(appAuth);
+                AppAuth appAuth = new AppAuth(appAuthDTO);
+                await _AppAuthService.CreateAppAuth(appAuth);
 
                 // Log the Action
                 string logmsg = String.Format("User {0} | {1} has logged in", _User.UserId, _User.Username);
-                LogAction("Account", "Login", logmsg);
+                await LogAction("Account", "Login", logmsg);
 
-                // Return Status code 200 Success + LoginData
-                return Ok(loginData);
+                // Return Status code 200 Success + AppAuthDTO
+                return Ok(appAuthDTO);
 
             }
             catch (Exception ex)
             {
                 // Log the Exception
-                LogError("Account", "Login", ex);
+                await LogError("Account", "Login", ex);
 
                 // Return Status Code 500 + exception
                 return StatusCode(StatusCodes.Status500InternalServerError, ex);
@@ -110,30 +112,30 @@ namespace FortyThreeLime.API.Controllers
         /// </returns>
         [HttpGet]
         [Route("Logout")]
-        public IActionResult Logout([FromQuery] string loginToken)
+        public async Task<IActionResult> Logout([FromQuery] string loginToken)
         {
 
             try
             {
                 if (string.IsNullOrEmpty(loginToken)) { return BadRequest(LOGIN_TOKEN_NULL); }
 
-                if (!_AppAuthService.IaValidAppAuth(loginToken)) { return BadRequest(LOGIN_TOKEN_INVALID); }
+                if (!_AppAuthService.IsValidAppAuth(loginToken).Result) { return BadRequest(LOGIN_TOKEN_INVALID); }
 
-                LoginData loginData = null;
+                AppAuthDTO appAuthDTO = null;
 
-                AppAuth appAuth = _AppAuthService.GetAppAuth(loginToken);
+                AppAuth appAuth = await _AppAuthService.GetAppAuth(loginToken);
 
                 // Logout User
-                this._User = _UserService.LogoutUser(appAuth.UserId);
+                this._User = await _UserService.LogoutUserAsync(appAuth.UserId);
 
                 // Get Role For User
-                this._Role = _RoleService.GetRole(appAuth.RoleId);
+                this._Role = await _RoleService.GetRoleAsync(appAuth.RoleId);
 
                 // Create a Login Token
                 this._Token = appAuth.LoginToken;
 
                 // Create Return Data Object
-                loginData = new LoginData
+                appAuthDTO = new AppAuthDTO
                 (
                     this._Token,
                     false,
@@ -146,18 +148,21 @@ namespace FortyThreeLime.API.Controllers
                 );
 
                 // Delete AppAuth Record
-                _AppAuthService.DeleteAppAuth(appAuth.Id);
+                await _AppAuthService.DeleteAppAuth(appAuth.Id);
 
                 // Log the Action
                 string logmsg = String.Format("User {0} | {1} has logged out", _User.UserId, _User.Username);
-                LogAction("Account", "Logout", logmsg);
+                await LogAction("Account", "Logout", logmsg);
 
                 // Return Status code 200 Success + LoginData
-                return Ok(loginData);
+                return Ok(appAuthDTO);
 
             }
             catch (Exception ex)
             {
+                // Log the Exception
+                await LogError("Account", "Logout", ex);
+
                 // Return Status Code 500 + exception
                 return StatusCode(StatusCodes.Status500InternalServerError, ex);
             }

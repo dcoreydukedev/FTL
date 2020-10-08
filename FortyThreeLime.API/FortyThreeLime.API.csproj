@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <StartupObject>FortyThreeLime.API.Program</StartupObject>
+    <UserSecretsId>3e48eaad-e4b3-4a27-9dee-8522b1a5001e</UserSecretsId>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

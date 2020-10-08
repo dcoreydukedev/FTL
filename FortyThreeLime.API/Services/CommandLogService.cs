@@ -5,34 +5,23 @@
 using FortyThreeLime.Data;
 using FortyThreeLime.Models.Entities;
 using FortyThreeLime.Repository;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace FortyThreeLime.API.Services
 {
-    public interface ICommandLogService : IAPIService
-    {
-        void AddCommandLog(CommandLogRecord log);
-        void DeleteCommandLog(int id);
-        void DeleteCommandLogs(string userId);
-        void DeleteCommandLogs(string userId, int commandId);
-        void DeleteCommandLogs(string userId, int commandId, long timestamp);
-        CommandLogRecord GetCommandLog(int id);
-        List<CommandLogRecord> GetCommandLogs();
-        List<CommandLogRecord> GetCommandLogs(string userId);
-        List<CommandLogRecord> GetCommandLogs(string userId, int commandId);
-        List<CommandLogRecord> GetCommandLogs(string userId, int commandId, long timestamp);
-        void UpdateCommandLog(CommandLogRecord u);
-    }
+    
 
     /// <summary>
     /// Data Service For Command Log
     /// </summary>
-    public sealed class CommandLogService : ICommandLogService
+    public sealed class CommandLogService 
     {
 
         private ApplicationDbContext _context;
-        private ApplicationRepository<CommandLogRecord> _repo;
+        private Repository<CommandLogRecord> _repo;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CommandLogService"/> class.
@@ -40,13 +29,13 @@ namespace FortyThreeLime.API.Services
         public CommandLogService()
         {
             this._context = ApplicationDbContext.Create();
-            this._repo = new ApplicationRepository<CommandLogRecord>();
+            this._repo = new Repository<CommandLogRecord>();
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CommandLogService"/> class.
         /// </summary>
-        public CommandLogService(ApplicationDbContext context, ApplicationRepository<CommandLogRecord> repo)
+        public CommandLogService(ApplicationDbContext context, Repository<CommandLogRecord> repo)
         {
             this._context = context;
             this._repo = repo;
@@ -57,9 +46,9 @@ namespace FortyThreeLime.API.Services
         /// Gets the CommandLogs.
         /// </summary>
         /// <returns>List of CommandLogs</returns>
-        public List<CommandLogRecord> GetCommandLogs()
+        public async Task<List<CommandLogRecord>> GetCommandLogs()
         {
-            return (List<CommandLogRecord>)_repo.GetAll();
+            return (List<CommandLogRecord>) await _repo.GetAllAsync();
         }
 
         /// <summary>
@@ -67,9 +56,9 @@ namespace FortyThreeLime.API.Services
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <returns>The Specified CommandLog</returns>
-        public CommandLogRecord GetCommandLog(int id)
+        public async Task<CommandLogRecord> GetCommandLog(int id)
         {
-            return _repo.GetById(id);
+            return await _repo.GetByIdAsync(id);
         }
 
         /// <summary>
@@ -77,9 +66,9 @@ namespace FortyThreeLime.API.Services
         /// </summary>
         /// <param name="userId">The user identifier.</param>
         /// <returns></returns>
-        public List<CommandLogRecord> GetCommandLogs(string userId)
+        public async Task<List<CommandLogRecord>> GetCommandLogs(string userId)
         {
-            return _context.CommandLog.Where(u => u.UserId == userId).ToList();
+            return await _context.CommandLog.Where(u => u.UserId == userId).ToListAsync();
 
         }
 
@@ -89,9 +78,9 @@ namespace FortyThreeLime.API.Services
         /// <param name="userId">The user identifier.</param>
         /// <param name="commandId">The command identifier.</param>
         /// <returns></returns>
-        public List<CommandLogRecord> GetCommandLogs(string userId, int commandId)
+        public async Task<List<CommandLogRecord>> GetCommandLogs(string userId, int commandId)
         {
-            return _context.CommandLog.Where(u => u.UserId == userId && u.CommandId == commandId).ToList();
+            return await _context.CommandLog.Where(u => u.UserId == userId && u.CommandId == commandId).ToListAsync();
 
         }
 
@@ -102,9 +91,9 @@ namespace FortyThreeLime.API.Services
         /// <param name="commandId">The command identifier.</param>
         /// <param name="timestamp">The timestamp.</param>
         /// <returns></returns>
-        public List<CommandLogRecord> GetCommandLogs(string userId, int commandId, long timestamp)
+        public async Task<List<CommandLogRecord>> GetCommandLogs(string userId, int commandId, long timestamp)
         {
-            return _context.CommandLog.Where(u => u.UserId == userId && u.CommandId == commandId && u.Timestamp == timestamp).ToList();
+            return await _context.CommandLog.Where(u => u.UserId == userId && u.CommandId == commandId && u.Timestamp == timestamp).ToListAsync();
 
         }
 
@@ -112,84 +101,28 @@ namespace FortyThreeLime.API.Services
         /// Adds the command log.
         /// </summary>
         /// <param name="log">The log.</param>
-        public void AddCommandLog(CommandLogRecord log)
+        public async Task AddCommandLog(CommandLogRecord log)
         {
-            _repo.Add(log);
-            //Add new log
-            _context.CommandLog.Add(log);
-            _context.SaveChanges();
+           await _repo.AddAsync(log);
+           
         }
 
         /// <summary>
         /// Updates the CommandLog.
         /// </summary>
         /// <param name="u">The CommandLog</param>
-        public void UpdateCommandLog(CommandLogRecord u)
+        public async Task UpdateCommandLog(CommandLogRecord u)
         {
-            _repo.Update(u);
+            await _repo.UpdateAsync(u);
         }
 
         /// <summary>
         /// Deletes the CommandLog.
         /// </summary>
         /// <param name="id">The id of the CommandLog</param>
-        public void DeleteCommandLog(int id)
+        public async Task DeleteCommandLog(int id)
         {
-            _repo.Delete(id);
-        }
-
-        /// <summary>
-        /// Deletes the command logs.
-        /// </summary>
-        /// <param name="userId">The user identifier.</param>
-        public void DeleteCommandLogs(string userId)
-        {
-            List<CommandLogRecord> CommandLogList = _context.CommandLog.Where(u => u.UserId == userId).ToList();
-
-            if (CommandLogList.Count > 0)
-            {
-                foreach (CommandLogRecord commandLog in CommandLogList)
-                {
-                    DeleteCommandLog(commandLog.Id);
-                }
-            }
-        }
-
-        /// <summary>
-        /// Deletes the command logs.
-        /// </summary>
-        /// <param name="userId">The user identifier.</param>
-        /// <param name="commandId">The command identifier.</param>
-        public void DeleteCommandLogs(string userId, int commandId)
-        {
-            List<CommandLogRecord> CommandLogList = _context.CommandLog.Where(u => u.UserId == userId && u.CommandId == commandId).ToList();
-
-            if (CommandLogList.Count > 0)
-            {
-                foreach (CommandLogRecord commandLog in CommandLogList)
-                {
-                    DeleteCommandLog(commandLog.Id);
-                }
-            }
-        }
-
-        /// <summary>
-        /// Deletes the command logs.
-        /// </summary>
-        /// <param name="userId">The user identifier.</param>
-        /// <param name="commandId">The command identifier.</param>
-        /// <param name="timestamp">The timestamp.</param>
-        public void DeleteCommandLogs(string userId, int commandId, long timestamp)
-        {
-            List<CommandLogRecord> CommandLogList = _context.CommandLog.Where(u => u.UserId == userId && u.CommandId == commandId && u.Timestamp == timestamp).ToList();
-
-            if (CommandLogList.Count > 0)
-            {
-                foreach (CommandLogRecord commandLog in CommandLogList)
-                {
-                    DeleteCommandLog(commandLog.Id);
-                }
-            }
+            await _repo.DeleteAsync(id);
         }
 
     }

@@ -40,7 +40,7 @@ namespace FortyThreeLime.API
                 );
 
             // Add Repository
-            services.AddScoped(typeof(IRepository<>), typeof(ApplicationRepository<>));
+            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
             services.AddDistributedMemoryCache();
 

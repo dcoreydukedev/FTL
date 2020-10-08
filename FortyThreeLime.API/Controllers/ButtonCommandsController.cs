@@ -8,6 +8,7 @@ using FortyThreeLime.Models.Entities;
 using FortyThreeLime.Models.Domain;
 using FortyThreeLime.API.Services;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace FortyThreeLime.API.Controllers
 {
@@ -32,17 +33,17 @@ namespace FortyThreeLime.API.Controllers
         /// <returns>List of ButtonCommand Objects</returns>
         [HttpGet]
         [Route("Get")]
-        public IActionResult Get([FromQuery] string loginToken)
+        public async Task<IActionResult> Get([FromQuery] string loginToken)
         {
             try
             {
                 if (string.IsNullOrEmpty(loginToken)) { return BadRequest(LOGIN_TOKEN_NULL); }               
 
-                if (!_AppAuthService.IaValidAppAuth(loginToken)) { return BadRequest(LOGIN_TOKEN_INVALID); }
+                if (!_AppAuthService.IsValidAppAuth(loginToken).Result) { return BadRequest(LOGIN_TOKEN_INVALID); }
 
-                if(_AppAuthService.IsActiveAppAuth(loginToken) == true)
+                if(_AppAuthService.IsActiveAppAuthAsync(loginToken).Result == true)
                 {
-                    List<ButtonCommand> buttonCommands = _ButtonCommandService.GetCommands();
+                    List<ButtonCommand> buttonCommands = await _ButtonCommandService.GetButtonCommands();
    
                     var ret = new
                     {
@@ -75,7 +76,7 @@ namespace FortyThreeLime.API.Controllers
             catch (Exception ex)
             {
                 // Log the Exception
-                LogError("ButtonCommands", "Get", ex);
+                await LogError("ButtonCommands", "Get", ex);
 
                 return StatusCode(StatusCodes.Status500InternalServerError, ex);
             }
@@ -87,17 +88,17 @@ namespace FortyThreeLime.API.Controllers
         /// <returns>ButtonCommand Object</returns>
         [HttpGet]
         [Route("Get/{commandId}")]
-        public IActionResult Get(int commandId, [FromQuery] string loginToken)
+        public async Task<IActionResult> Get(int commandId, [FromQuery] string loginToken)
         {
             try
             {
                 if (string.IsNullOrEmpty(loginToken)) { return BadRequest(LOGIN_TOKEN_NULL); }
 
-                if (!_AppAuthService.IaValidAppAuth(loginToken)) { return BadRequest(LOGIN_TOKEN_INVALID); }
+                if (!_AppAuthService.IsValidAppAuth(loginToken).Result) { return BadRequest(LOGIN_TOKEN_INVALID); }
 
-                if (_AppAuthService.IsActiveAppAuth(loginToken) == true)
+                if (_AppAuthService.IsActiveAppAuthAsync(loginToken).Result == true)
                 {
-                    ButtonCommand buttonCommand = _ButtonCommandService.GetCommand(commandId);
+                    ButtonCommand buttonCommand = await _ButtonCommandService.GetButtonCommand(commandId);
                     if(buttonCommand != null)
                     {
                         var ret = new
@@ -144,7 +145,7 @@ namespace FortyThreeLime.API.Controllers
             catch (Exception ex)
             {
                 // Log the Exception
-                LogError("ButtonCommands", "Get", ex);
+                await LogError("ButtonCommands", "Get", ex);
 
                 return StatusCode(StatusCodes.Status500InternalServerError, ex);
             }

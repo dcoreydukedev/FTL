@@ -4,6 +4,7 @@
  ************************************************************************/
 
 using System;
+using System.Threading.Tasks;
 using FortyThreeLime.Logging;
 using Microsoft.AspNetCore.Mvc;
 
@@ -41,10 +42,13 @@ namespace FortyThreeLime.API.Controllers
         /// <param name="controllerName">Name of the controller.</param>
         /// <param name="actionName">Name of the action.</param>
         /// <param name="ex">The ex.</param>
-        internal void LogError(string controllerName, string actionName, Exception ex)
+        internal async Task LogError(string controllerName, string actionName, Exception ex)
         {
-            HandleErrorInfo info = new HandleErrorInfo(ex, controllerName, actionName);
-            _errorLogger.Log(info);
+            await Task.Run(() =>
+            {
+                HandleErrorInfo info = new HandleErrorInfo(ex, controllerName, actionName);
+                _errorLogger.Log(info);
+            });
         }
 
         /// <summary>
@@ -53,10 +57,13 @@ namespace FortyThreeLime.API.Controllers
         /// <param name="controllerName">Name of the controller.</param>
         /// <param name="actionName">Name of the action.</param>
         /// <param name="message">The message</param>
-        internal void LogAction(string controllerName, string actionName, string message)
+        internal async Task LogAction(string controllerName, string actionName, string message)
         {
-            LogInfo info = new LogInfo(controllerName, actionName, message);
-            _actionLogger.Log(info);
+            await Task.Run(() =>
+            {
+                LogInfo info = new LogInfo(controllerName, actionName, message);
+                _actionLogger.Log(info);
+            });
         }
 
         /* -- Return Messages -- */

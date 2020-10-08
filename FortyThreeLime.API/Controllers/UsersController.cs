@@ -34,9 +34,9 @@ namespace FortyThreeLime.API.Controllers
             {
                 if (string.IsNullOrEmpty(loginToken)) { return BadRequest(LOGIN_TOKEN_NULL); }
 
-                if (!_AppAuthService.IaValidAppAuth(loginToken)) { return BadRequest(LOGIN_TOKEN_INVALID); }
+                if (!_AppAuthService.IsValidAppAuth(loginToken).Result) { return BadRequest(LOGIN_TOKEN_INVALID); }
 
-                if (_AppAuthService.IsActiveAppAuth(loginToken) == true)
+                if (_AppAuthService.IsActiveAppAuthAsync(loginToken).Result == true)
                 {
                     List<User> users = _UserService.GetUsers();
 
@@ -81,15 +81,15 @@ namespace FortyThreeLime.API.Controllers
         /// <param name="loginToken">Token Given to User Upon Successful Login</param>
         [HttpGet]
         [Route("Get/{userId}")]
-        public IActionResult Get(string userId, [FromQuery] string loginToken)
+        public IActionResult Get([FromQuery]string userId, [FromQuery] string loginToken)
         {
             try
             {
                 if (string.IsNullOrEmpty(loginToken)) { return BadRequest(LOGIN_TOKEN_NULL); }
 
-                if (!_AppAuthService.IaValidAppAuth(loginToken)) { return BadRequest(LOGIN_TOKEN_INVALID); }
+                if (!_AppAuthService.IsValidAppAuth(loginToken).Result) { return BadRequest(LOGIN_TOKEN_INVALID); }
 
-                if (_AppAuthService.IsActiveAppAuth(loginToken) == true)
+                if (_AppAuthService.IsActiveAppAuthAsync(loginToken).Result == true)
                 {
                     User user = _UserService.GetUser(userId);
 
@@ -145,17 +145,17 @@ namespace FortyThreeLime.API.Controllers
         /// <summary>
         /// Create the Specified User
         /// </summary>
-        [HttpPost]
+        [HttpGet]
         [Route("Create")]        
-        public IActionResult Create([FromBody] string userId, string username, int roleId, string loginToken)
+        public IActionResult Create([FromQuery] string userId, [FromQuery] string username, [FromQuery] int roleId, [FromQuery] string loginToken)
         {
             try
             {
                 if (string.IsNullOrEmpty(loginToken)) { return BadRequest(LOGIN_TOKEN_NULL); }
 
-                if (!_AppAuthService.IaValidAppAuth(loginToken)) { return BadRequest(LOGIN_TOKEN_INVALID); }
+                if (!_AppAuthService.IsValidAppAuth(loginToken).Result) { return BadRequest(LOGIN_TOKEN_INVALID); }
 
-                if (_AppAuthService.IsActiveAppAuth(loginToken) == true)
+                if (_AppAuthService.IsActiveAppAuthAsync(loginToken).Result == true)
                 {
                     User user = new User(userId, username, roleId, true, false);
                     user = _UserService.CreateUser(user);
@@ -197,15 +197,15 @@ namespace FortyThreeLime.API.Controllers
       
         [HttpDelete]
         [Route("Delete/{userId}")]
-        public IActionResult Delete(string userId, [FromQuery] string loginToken)
+        public IActionResult Delete([FromQuery] string userId, [FromQuery] string loginToken)
         {
             try
             {
                 if (string.IsNullOrEmpty(loginToken)) { return BadRequest(LOGIN_TOKEN_NULL); }
 
-                if (!_AppAuthService.IaValidAppAuth(loginToken)) { return BadRequest(LOGIN_TOKEN_INVALID); }
+                if (!_AppAuthService.IsValidAppAuth(loginToken).Result) { return BadRequest(LOGIN_TOKEN_INVALID); }
 
-                if (_AppAuthService.IsActiveAppAuth(loginToken) == true)
+                if (_AppAuthService.IsActiveAppAuthAsync(loginToken).Result == true)
                 {
                     _UserService.DeleteUser(userId);
 

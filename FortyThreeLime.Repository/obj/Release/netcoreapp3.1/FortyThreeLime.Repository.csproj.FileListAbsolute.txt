@@ -1,0 +1,14 @@
+C:\Users\DCoreyDuke Developer\source\repos\FTL\FortyThreeLime.Repository\bin\Release\netcoreapp3.1\FortyThreeLime.Repository.deps.json
+C:\Users\DCoreyDuke Developer\source\repos\FTL\FortyThreeLime.Repository\bin\Release\netcoreapp3.1\FortyThreeLime.Repository.dll
+C:\Users\DCoreyDuke Developer\source\repos\FTL\FortyThreeLime.Repository\bin\Release\netcoreapp3.1\FortyThreeLime.Repository.pdb
+C:\Users\DCoreyDuke Developer\source\repos\FTL\FortyThreeLime.Repository\bin\Release\netcoreapp3.1\FortyThreeLime.Data.dll
+C:\Users\DCoreyDuke Developer\source\repos\FTL\FortyThreeLime.Repository\bin\Release\netcoreapp3.1\FortyThreeLime.Models.dll
+C:\Users\DCoreyDuke Developer\source\repos\FTL\FortyThreeLime.Repository\bin\Release\netcoreapp3.1\FortyThreeLime.Data.pdb
+C:\Users\DCoreyDuke Developer\source\repos\FTL\FortyThreeLime.Repository\bin\Release\netcoreapp3.1\FortyThreeLime.Models.pdb
+C:\Users\DCoreyDuke Developer\source\repos\FTL\FortyThreeLime.Repository\obj\Release\netcoreapp3.1\FortyThreeLime.Repository.csprojAssemblyReference.cache
+C:\Users\DCoreyDuke Developer\source\repos\FTL\FortyThreeLime.Repository\obj\Release\netcoreapp3.1\FortyThreeLime.Repository.AssemblyInfoInputs.cache
+C:\Users\DCoreyDuke Developer\source\repos\FTL\FortyThreeLime.Repository\obj\Release\netcoreapp3.1\FortyThreeLime.Repository.AssemblyInfo.cs
+C:\Users\DCoreyDuke Developer\source\repos\FTL\FortyThreeLime.Repository\obj\Release\netcoreapp3.1\FortyThreeLime.Repository.csproj.CoreCompileInputs.cache
+C:\Users\DCoreyDuke Developer\source\repos\FTL\FortyThreeLime.Repository\obj\Release\netcoreapp3.1\FortyThreeLime.Repository.csproj.CopyComplete
+C:\Users\DCoreyDuke Developer\source\repos\FTL\FortyThreeLime.Repository\obj\Release\netcoreapp3.1\FortyThreeLime.Repository.dll
+C:\Users\DCoreyDuke Developer\source\repos\FTL\FortyThreeLime.Repository\obj\Release\netcoreapp3.1\FortyThreeLime.Repository.pdb

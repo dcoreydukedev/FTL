@@ -88,11 +88,6 @@
             </summary>
             <returns>ButtonCommand Object</returns>
         </member>
-        <member name="M:FortyThreeLime.API.Controllers.CommandLogController.Create(FortyThreeLime.Models.Entities.CommandLogRecord,System.String)">
-            <summary>
-            Creates the Specified Command Log Record
-            </summary>        
-        </member>
         <member name="M:FortyThreeLime.API.Controllers.RolesController.Get(System.String)">
             <summary>
             Gets All Roles 
@@ -148,12 +143,17 @@
             Initializes a new instance of the <see cref="T:FortyThreeLime.API.Services.AppAuthService"/> class.
             </summary>
         </member>
-        <member name="M:FortyThreeLime.API.Services.AppAuthService.#ctor(FortyThreeLime.Data.ApplicationDbContext,FortyThreeLime.Repository.ApplicationRepository{FortyThreeLime.Models.Entities.AppAuth})">
+        <member name="M:FortyThreeLime.API.Services.AppAuthService.#ctor(FortyThreeLime.Data.ApplicationDbContext,FortyThreeLime.Repository.Repository{FortyThreeLime.Models.Entities.AppAuth})">
             <summary>
             Initializes a new instance of the <see cref="T:FortyThreeLime.API.Services.AppAuthService"/> class.
             </summary>
             <param name="context">The Application DB Context</param>
             <param name="repo">The AppAuth Repository.</param>
+        </member>
+        <member name="M:FortyThreeLime.API.Services.AppAuthService.Init">
+            <summary>
+            Initializes this instance.
+            </summary>
         </member>
         <member name="M:FortyThreeLime.API.Services.AppAuthService.GetAppAuths">
             <summary>
@@ -193,14 +193,26 @@
             </summary>
             <param name="id">The id of the AppAuth</param>
         </member>
-        <member name="M:FortyThreeLime.API.Services.AppAuthService.IaValidAppAuth(System.String)">
+        <member name="M:FortyThreeLime.API.Services.AppAuthService.IsValidAppAuth(System.String)">
             <summary>
             Is the AppAuth Record Valid
             </summary>
         </member>
-        <member name="M:FortyThreeLime.API.Services.AppAuthService.IsActiveAppAuth(System.String)">
+        <member name="M:FortyThreeLime.API.Services.AppAuthService.IsActiveAppAuthAsync(System.String)">
             <summary>
             Is The AppAuth Record Active?
+            </summary>
+        </member>
+        <member name="M:FortyThreeLime.API.Services.AppAuthService.CreateAppAuthDTOFromAppAuthEntity(FortyThreeLime.Models.Entities.AppAuth)">
+            <summary>
+            Creates the application authentication DTO from application authentication entity.
+            </summary>
+            <param name="appAuth">The application authentication entity</param>
+            <returns></returns>
+        </member>
+        <member name="M:FortyThreeLime.API.Services.AppAuthService.CleanupAppAuths">
+            <summary>
+            Cleanup Expired AppAuths; Logout The User and Delete the Record
             </summary>
         </member>
         <member name="T:FortyThreeLime.API.Services.IApplicationService">
@@ -218,7 +230,7 @@
             Initializes a new instance of the <see cref="T:FortyThreeLime.API.Services.ApplicationService"/> class.
             </summary>
         </member>
-        <member name="M:FortyThreeLime.API.Services.ApplicationService.#ctor(FortyThreeLime.Data.ApplicationDbContext,FortyThreeLime.Repository.ApplicationRepository{FortyThreeLime.Models.Entities.Application})">
+        <member name="M:FortyThreeLime.API.Services.ApplicationService.#ctor(FortyThreeLime.Data.ApplicationDbContext,FortyThreeLime.Repository.Repository{FortyThreeLime.Models.Entities.Application})">
             <summary>
             Initializes a new instance of the <see cref="T:FortyThreeLime.API.Services.ApplicationService"/> class.
             </summary>
@@ -274,27 +286,44 @@
             Initializes a new instance of the <see cref="T:FortyThreeLime.API.Services.ButtonCommandService"/> class.
             </summary>
         </member>
-        <member name="M:FortyThreeLime.API.Services.ButtonCommandService.#ctor(FortyThreeLime.Data.ApplicationDbContext,FortyThreeLime.Repository.ApplicationRepository{FortyThreeLime.Models.Entities.ButtonCommand})">
+        <member name="M:FortyThreeLime.API.Services.ButtonCommandService.#ctor(FortyThreeLime.Data.ApplicationDbContext,FortyThreeLime.Repository.Repository{FortyThreeLime.Models.Entities.ButtonCommand},FortyThreeLime.Repository.Repository{FortyThreeLime.Models.Entities.ButtonCommandCategory})">
             <summary>
             Initializes a new instance of the <see cref="T:FortyThreeLime.API.Services.ButtonCommandService"/> class.
             </summary>
         </member>
-        <member name="M:FortyThreeLime.API.Services.ButtonCommandService.GetCommands">
+        <member name="M:FortyThreeLime.API.Services.ButtonCommandService.GetButtonCommands">
             <summary>
-            Gets the commands.
+            Gets the button commands asynchronously.
             </summary>
         </member>
-        <member name="M:FortyThreeLime.API.Services.ButtonCommandService.GetCommand(System.Int32)">
+        <member name="M:FortyThreeLime.API.Services.ButtonCommandService.GetButtonCommand(System.Int32)">
             <summary>
-            Gets the command.
+            Gets the button command asynchronously.
             </summary>
             <param name="commandId">The command identifier.</param>
         </member>
-        <member name="M:FortyThreeLime.API.Services.ButtonCommandService.GetCommand(System.String)">
+        <member name="M:FortyThreeLime.API.Services.ButtonCommandService.GetButtonCommandAsync(System.String)">
             <summary>
-            Gets the command.
+            Gets the button command asynchronously.
             </summary>
-            <param name="command">The command.</param>
+            <param name="command">The Command</param>
+        </member>
+        <member name="M:FortyThreeLime.API.Services.ButtonCommandService.GetButtonCommandCategories">
+            <summary>
+            Gets the button command categories.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FortyThreeLime.API.Services.ButtonCommandService.CreateButtonCommand(FortyThreeLime.Models.Entities.ButtonCommand)">
+            <summary>
+            Creates a button command.
+            </summary>
+        </member>
+        <member name="M:FortyThreeLime.API.Services.ButtonCommandService.DeleteButtonCommand(System.Int32)">
+            <summary>
+            Deletes the button command.
+            </summary>
+            <param name="id">The identifier.</param>
         </member>
         <member name="T:FortyThreeLime.API.Services.CommandLogService">
             <summary>
@@ -306,7 +335,7 @@
             Initializes a new instance of the <see cref="T:FortyThreeLime.API.Services.CommandLogService"/> class.
             </summary>
         </member>
-        <member name="M:FortyThreeLime.API.Services.CommandLogService.#ctor(FortyThreeLime.Data.ApplicationDbContext,FortyThreeLime.Repository.ApplicationRepository{FortyThreeLime.Models.Entities.CommandLogRecord})">
+        <member name="M:FortyThreeLime.API.Services.CommandLogService.#ctor(FortyThreeLime.Data.ApplicationDbContext,FortyThreeLime.Repository.Repository{FortyThreeLime.Models.Entities.CommandLogRecord})">
             <summary>
             Initializes a new instance of the <see cref="T:FortyThreeLime.API.Services.CommandLogService"/> class.
             </summary>
@@ -366,27 +395,6 @@
             </summary>
             <param name="id">The id of the CommandLog</param>
         </member>
-        <member name="M:FortyThreeLime.API.Services.CommandLogService.DeleteCommandLogs(System.String)">
-            <summary>
-            Deletes the command logs.
-            </summary>
-            <param name="userId">The user identifier.</param>
-        </member>
-        <member name="M:FortyThreeLime.API.Services.CommandLogService.DeleteCommandLogs(System.String,System.Int32)">
-            <summary>
-            Deletes the command logs.
-            </summary>
-            <param name="userId">The user identifier.</param>
-            <param name="commandId">The command identifier.</param>
-        </member>
-        <member name="M:FortyThreeLime.API.Services.CommandLogService.DeleteCommandLogs(System.String,System.Int32,System.Int64)">
-            <summary>
-            Deletes the command logs.
-            </summary>
-            <param name="userId">The user identifier.</param>
-            <param name="commandId">The command identifier.</param>
-            <param name="timestamp">The timestamp.</param>
-        </member>
         <member name="T:FortyThreeLime.API.Services.Data.GeocodingService">
             <summary>
             Address Data Service -  gets Address information for the application
@@ -437,22 +445,35 @@
             Initializes a new instance of the <see cref="T:FortyThreeLime.API.Services.RoleService"/> class.
             </summary>
         </member>
-        <member name="M:FortyThreeLime.API.Services.RoleService.#ctor(FortyThreeLime.Data.ApplicationDbContext,FortyThreeLime.Repository.ApplicationRepository{FortyThreeLime.Models.Entities.Role})">
+        <member name="M:FortyThreeLime.API.Services.RoleService.#ctor(FortyThreeLime.Data.ApplicationDbContext,FortyThreeLime.Repository.Repository{FortyThreeLime.Models.Entities.Role})">
             <summary>
             Initializes a new instance of the <see cref="T:FortyThreeLime.API.Services.RoleService"/> class.
             </summary>
             <param name="context">The Application DB Context</param>
             <param name="repo">The Role Repository.</param>
         </member>
-        <member name="M:FortyThreeLime.API.Services.RoleService.GetAllRoles">
+        <member name="M:FortyThreeLime.API.Services.RoleService.GetRoles">
             <summary>
             Gets all roles.
             </summary>
-            <returns>List of Role Objects</returns>
+            <returns>List of Roles</returns>
+        </member>
+        <member name="M:FortyThreeLime.API.Services.RoleService.GetRolesAsync">
+            <summary>
+            Gets all roles asynchronously.
+            </summary>
+            <returns>List of Roles</returns>
         </member>
         <member name="M:FortyThreeLime.API.Services.RoleService.GetRole(System.Int32)">
             <summary>
             Gets the role.
+            </summary>
+            <param name="roleId">The role identifier.</param>
+            <returns>The specified Role</returns>
+        </member>
+        <member name="M:FortyThreeLime.API.Services.RoleService.GetRoleAsync(System.Int32)">
+            <summary>
+            Gets the role asynchronously.
             </summary>
             <param name="roleId">The role identifier.</param>
             <returns>The specified Role</returns>
@@ -464,15 +485,34 @@
             <param name="roleName">The role name.</param>
             <returns>The specified Role Object</returns>
         </member>
+        <member name="M:FortyThreeLime.API.Services.RoleService.GetRoleAsync(System.String)">
+            <summary>
+            Gets the role asynchronously.
+            </summary>
+            <param name="roleName">The role name.</param>
+            <returns>The specified Role Object</returns>
+        </member>
         <member name="M:FortyThreeLime.API.Services.RoleService.CreateRole(System.String)">
             <summary>
             Creates the role.
             </summary>
             <param name="roleName">Name of the role.</param>
         </member>
+        <member name="M:FortyThreeLime.API.Services.RoleService.CreateRoleAsync(System.String)">
+            <summary>
+            Creates the role asynchronously.
+            </summary>
+            <param name="roleName">Name of the role.</param>
+        </member>
         <member name="M:FortyThreeLime.API.Services.RoleService.DeleteRole(System.String)">
             <summary>
             Deletes the role.
+            </summary>
+            <param name="roleName">Name of the role.</param>
+        </member>
+        <member name="M:FortyThreeLime.API.Services.RoleService.DeleteRoleAsync(System.String)">
+            <summary>
+            Deletes the role asynchronously.
             </summary>
             <param name="roleName">Name of the role.</param>
         </member>
@@ -486,7 +526,7 @@
             Initializes a new instance of the <see cref="T:FortyThreeLime.API.Services.UserService"/> class.
             </summary>
         </member>
-        <member name="M:FortyThreeLime.API.Services.UserService.#ctor(FortyThreeLime.Data.ApplicationDbContext,FortyThreeLime.Repository.ApplicationRepository{FortyThreeLime.Models.Entities.User})">
+        <member name="M:FortyThreeLime.API.Services.UserService.#ctor(FortyThreeLime.Data.ApplicationDbContext,FortyThreeLime.Repository.Repository{FortyThreeLime.Models.Entities.User})">
             <summary>
             Initializes a new instance of the <see cref="T:FortyThreeLime.API.Services.UserService"/> class.
             </summary>
@@ -499,11 +539,38 @@
             </summary>
             <returns>List of Users</returns>
         </member>
+        <member name="M:FortyThreeLime.API.Services.UserService.GetUsersAsync">
+            <summary>
+            Gets the users asynchronously.
+            </summary>
+            <returns>List of Users</returns>
+        </member>
         <member name="M:FortyThreeLime.API.Services.UserService.GetUser(System.Int32)">
             <summary>
             Gets the user.
             </summary>
             <param name="id">The identifier.</param>
+            <returns>The Specified User</returns>
+        </member>
+        <member name="M:FortyThreeLime.API.Services.UserService.GetUser(System.String)">
+            <summary>
+            Gets the user
+            </summary>
+            <param name="userId">The 4 character User Id</param>
+            <returns>The Specified User</returns>
+        </member>
+        <member name="M:FortyThreeLime.API.Services.UserService.GetUserAsync(System.Int32)">
+            <summary>
+            Gets the user asynchronously.
+            </summary>
+            <param name="id">The identifier.</param>
+            <returns>The Specified User</returns>
+        </member>
+        <member name="M:FortyThreeLime.API.Services.UserService.GetUserAsync(System.String)">
+            <summary>
+            Gets the user asynchronously.
+            </summary>
+            <param name="userId">The 4 character User Id</param>
             <returns>The Specified User</returns>
         </member>
         <member name="M:FortyThreeLime.API.Services.UserService.CreateUser(FortyThreeLime.Models.Entities.User)">
@@ -513,16 +580,22 @@
             <param name="u">The user to create</param>
             <returns>The Newly Created User</returns>
         </member>
-        <member name="M:FortyThreeLime.API.Services.UserService.GetUser(System.String)">
+        <member name="M:FortyThreeLime.API.Services.UserService.CreateUserAsync(FortyThreeLime.Models.Entities.User)">
             <summary>
-            Gets the user.
+            Creates the user asynchronously.
             </summary>
-            <param name="userId">The user identifier.</param>
-            <returns></returns>
+            <param name="u">The user to create</param>
+            <returns>The Newly Created User</returns>
         </member>
         <member name="M:FortyThreeLime.API.Services.UserService.UpdateUser(FortyThreeLime.Models.Entities.User)">
             <summary>
             Updates the user.
+            </summary>
+            <param name="u">The user</param>
+        </member>
+        <member name="M:FortyThreeLime.API.Services.UserService.UpdateUserAsync(FortyThreeLime.Models.Entities.User)">
+            <summary>
+            Updates the user asynchronously.
             </summary>
             <param name="u">The user</param>
         </member>
@@ -538,15 +611,39 @@
             </summary>
             <param name="userId">The Id of the user</param>
         </member>
+        <member name="M:FortyThreeLime.API.Services.UserService.DeleteUserAsync(System.Int32)">
+            <summary>
+            Deletes the user asynchronously.
+            </summary>
+            <param name="id">The id of the user</param>
+        </member>
+        <member name="M:FortyThreeLime.API.Services.UserService.DeleteUserAsync(System.String)">
+            <summary>
+            Deletes the user asynchronously.
+            </summary>
+            <param name="userId">The Id of the user</param>
+        </member>
         <member name="M:FortyThreeLime.API.Services.UserService.LoginUser(System.String)">
             <summary>
             Logs in the user.
             </summary>
-            <param name="userId">The user identifier.</param>
+            <param name="userId">The 4 character user identifier.</param>
+        </member>
+        <member name="M:FortyThreeLime.API.Services.UserService.LoginUserAsync(System.String)">
+            <summary>
+            Logs in the user asynchronously
+            </summary>
+            <param name="userId">The 4 character user identifier.</param>
         </member>
         <member name="M:FortyThreeLime.API.Services.UserService.LogoutUser(System.String)">
             <summary>
             Logs out the user.
+            </summary>
+            <param name="userId">The user identifier.</param>
+        </member>
+        <member name="M:FortyThreeLime.API.Services.UserService.LogoutUserAsync(System.String)">
+            <summary>
+            Logs out the user asynchronously
             </summary>
             <param name="userId">The user identifier.</param>
         </member>
@@ -560,7 +657,23 @@
               <c>true</c> if [is user in role] otherwise, <c>false</c>.
             </returns>
         </member>
+        <member name="M:FortyThreeLime.API.Services.UserService.IsUserInRoleAsync(System.String,System.String)">
+            <summary>
+            Determines whether is user in role asynchronously
+            </summary>
+            <param name="userId">The user identifier.</param>
+            <param name="roleName">Name of the role.</param>
+            <returns>
+              <c>true</c> if [is user in role] otherwise, <c>false</c>.
+            </returns>
+        </member>
         <member name="M:FortyThreeLime.API.Services.UserService.UserExists(System.String)">
+            <summary>
+            Does The User Exist
+            </summary>
+            <param name="userId">The user identifier.</param>
+        </member>
+        <member name="M:FortyThreeLime.API.Services.UserService.UserExistsAsync(System.String)">
             <summary>
             Does The User Exist
             </summary>
@@ -570,7 +683,13 @@
             <summary>
             Get A Count Of Users
             </summary>
-            <returns></returns>
+            <returns>number of users n db</returns>
+        </member>
+        <member name="M:FortyThreeLime.API.Services.UserService.GetCountAsync">
+            <summary>
+            Gets the count asynchronously.
+            </summary>
+            <returns>number of users in db</returns>
         </member>
         <member name="T:FortyThreeLime.API.ViewModels.IViewModel">
             <summary>
