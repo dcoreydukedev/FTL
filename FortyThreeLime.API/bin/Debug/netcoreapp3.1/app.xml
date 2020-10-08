@@ -45,42 +45,20 @@
             Base Class For Api Controllers, Provides Logging Functionality
             </summary>
         </member>
-        <member name="F:FortyThreeLime.API.Controllers.ApiControllerBase._adminLogger">
-            <summary>
-            Private Instance of Admin Logger
-            </summary>
-        </member>
         <member name="F:FortyThreeLime.API.Controllers.ApiControllerBase._errorLogger">
             <summary>
             Private Instance of ErrorLogger
             </summary>
         </member>
-        <member name="F:FortyThreeLime.API.Controllers.ApiControllerBase._apiLogger">
+        <member name="F:FortyThreeLime.API.Controllers.ApiControllerBase._actionLogger">
             <summary>
-            Private Instance of ApiRequestLogger
+            Private Instance of ActionLogger
             </summary>
         </member>
         <member name="M:FortyThreeLime.API.Controllers.ApiControllerBase.#ctor">
             <summary>
             Initializes a new instance of the <see cref="T:FortyThreeLime.API.Controllers.ApiControllerBase"/> class.
             </summary>
-        </member>
-        <member name="M:FortyThreeLime.API.Controllers.ApiControllerBase.LogAdmin(System.String,System.String,System.String)">
-            <summary>
-            Logs the admin.
-            </summary>
-            <param name="controllerName">Name of the controller.</param>
-            <param name="actionName">Name of the action.</param>
-            <param name="message">The message.</param>
-        </member>
-        <member name="M:FortyThreeLime.API.Controllers.ApiControllerBase.LogAdmin(System.String,System.String,System.String,System.Collections.Generic.IDictionary{System.String,System.String})">
-            <summary>
-            Logs the admin.
-            </summary>
-            <param name="controllerName">Name of the controller.</param>
-            <param name="actionName">Name of the action.</param>
-            <param name="message">The message.</param>
-            <param name="data">The data.</param>
         </member>
         <member name="M:FortyThreeLime.API.Controllers.ApiControllerBase.LogError(System.String,System.String,System.Exception)">
             <summary>
@@ -89,6 +67,14 @@
             <param name="controllerName">Name of the controller.</param>
             <param name="actionName">Name of the action.</param>
             <param name="ex">The ex.</param>
+        </member>
+        <member name="M:FortyThreeLime.API.Controllers.ApiControllerBase.LogAction(System.String,System.String,System.String)">
+            <summary>
+            Logs the action
+            </summary>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="message">The message</param>
         </member>
         <member name="M:FortyThreeLime.API.Controllers.ButtonCommandsController.Get(System.String)">
             <summary>
@@ -400,6 +386,26 @@
             <param name="userId">The user identifier.</param>
             <param name="commandId">The command identifier.</param>
             <param name="timestamp">The timestamp.</param>
+        </member>
+        <member name="T:FortyThreeLime.API.Services.Data.GeocodingService">
+            <summary>
+            Address Data Service -  gets Address information for the application
+            Queries Google Maps Services for certain data ops
+            </summary>
+        </member>
+        <member name="P:FortyThreeLime.API.Services.Data.GeocodingService.Address">
+            <summary>
+            Gets or sets the address.
+            </summary>
+            <value>
+            The address.
+            </value>
+        </member>
+        <member name="M:FortyThreeLime.API.Services.Data.GeocodingService.#ctor(Geocoding.Address)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FortyThreeLime.API.Services.Data.GeocodingService"/> class.
+            </summary>
+            <param name="address">The address.</param>
         </member>
         <member name="T:FortyThreeLime.API.Services.IService">
             <summary>

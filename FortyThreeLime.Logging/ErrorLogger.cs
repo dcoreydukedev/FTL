@@ -1,6 +1,6 @@
 ﻿/*************************************************************************
  * Author: DCoreyDuke
- * Logs Errors to ~/Logs/ErrorLog.log
+ * Logs Errors to ~/Logs/{Application}/Error.log
  ************************************************************************/
 
 namespace FortyThreeLime.Logging
@@ -49,7 +49,10 @@ namespace FortyThreeLime.Logging
     /// </summary>
     public class ErrorLogger : Logger, IErrorLogger
     {
-        public ErrorLogger() : base("ErrorLog.log")
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ErrorLogger"/> class.
+        /// </summary>
+        public ErrorLogger() : base("Error.log")
         {
         }
 
@@ -75,8 +78,8 @@ namespace FortyThreeLime.Logging
         {
             string errorLogRecordId = GetLogRecordId().ToString();
             string timestamp = Timestamp;
-            string controller = CleanString(info.ControllerName);
-            string action = CleanString(info.ActionName);
+            string controller = info.ControllerName;
+            string action = info.ActionName;
             string formattedException = FormatExceptionForLogging(info.Exception);
 
             StringBuilder sb = new StringBuilder();
@@ -87,9 +90,9 @@ namespace FortyThreeLime.Logging
                 action,
                 formattedException);
 
-            using (StreamWriter writer = new StreamWriter(LogFilePath))
+            using (StreamWriter writer = new StreamWriter(LogFilePath, true))
             {
-                writer.WriteLine(sb.ToString());
+                writer.WriteLine(CleanString(sb.ToString()));
             }
             return;
         }
@@ -105,8 +108,8 @@ namespace FortyThreeLime.Logging
             string message = logInfo.Message;
             string data = FormatILogInfoData(logInfo.Data);
 
-            string controller = CleanString(errorInfo.ControllerName);
-            string action = CleanString(errorInfo.ActionName);
+            string controller = errorInfo.ControllerName;
+            string action = errorInfo.ActionName;
             string formattedException = FormatExceptionForLogging(errorInfo.Exception);
 
             StringBuilder sb = new StringBuilder();
@@ -119,9 +122,9 @@ namespace FortyThreeLime.Logging
                 message,
                 data);
 
-            using (StreamWriter writer = new StreamWriter(LogFilePath))
+            using (StreamWriter writer = new StreamWriter(LogFilePath, true))
             {
-                writer.WriteLine(sb.ToString());
+                writer.WriteLine(CleanString(sb.ToString()));
             }
             return;
         }
@@ -141,9 +144,9 @@ namespace FortyThreeLime.Logging
                 timestamp,
                 formattedException);
 
-            using (StreamWriter writer = new StreamWriter(LogFilePath))
+            using (StreamWriter writer = new StreamWriter(LogFilePath, true))
             {
-                writer.WriteLine(sb.ToString());
+                writer.WriteLine(CleanString(sb.ToString()));
             }
             return;
         }
@@ -157,8 +160,8 @@ namespace FortyThreeLime.Logging
             string timestamp = Timestamp;
             string formattedException = FormatExceptionForLogging(ex);
 
-            string controller = CleanString(info.ControllerName);
-            string action = CleanString(info.ActionName);
+            string controller = info.ControllerName;
+            string action = info.ActionName;
             string message = info.Message;
             string data = FormatILogInfoData(info.Data);
 
@@ -172,9 +175,9 @@ namespace FortyThreeLime.Logging
                 message,
                 data);
 
-            using (StreamWriter writer = new StreamWriter(LogFilePath))
+            using (StreamWriter writer = new StreamWriter(LogFilePath, true))
             {
-                writer.WriteLine(sb.ToString());
+                writer.WriteLine(CleanString(sb.ToString()));
             }
             return;
         }
@@ -204,11 +207,11 @@ namespace FortyThreeLime.Logging
         {
             string data = FormatExceptionData(ex.Data);
             string hResult = ex.HResult.ToString().Trim();
-            string innerException = ex.InnerException != null && string.IsNullOrEmpty(ex.InnerException.Message) ? CleanString(ex.InnerException.Message.ToString()) : string.Empty;
-            string message = !string.IsNullOrEmpty(ex.Message) ? CleanString(ex.Message.ToString()) : string.Empty;
-            string source = !string.IsNullOrEmpty(ex.Source) ? CleanString(ex.Source.ToString()) : string.Empty;
-            string stackTrace = !string.IsNullOrEmpty(ex.StackTrace) ? CleanString(ex.StackTrace.ToString()) : string.Empty;
-            string targetSite = ex.TargetSite != null && !string.IsNullOrEmpty(ex.TargetSite.ToString()) ? CleanString(ex.TargetSite.ToString()) : string.Empty;
+            string innerException = ex.InnerException != null && string.IsNullOrEmpty(ex.InnerException.Message) ? ex.InnerException.Message.ToString() : string.Empty;
+            string message = !string.IsNullOrEmpty(ex.Message) ? ex.Message.ToString() : string.Empty;
+            string source = !string.IsNullOrEmpty(ex.Source) ? ex.Source.ToString() : string.Empty;
+            string stackTrace = !string.IsNullOrEmpty(ex.StackTrace) ? ex.StackTrace.ToString() : string.Empty;
+            string targetSite = ex.TargetSite != null && !string.IsNullOrEmpty(ex.TargetSite.ToString()) ? ex.TargetSite.ToString() : string.Empty;
 
             StringBuilder sb = new StringBuilder();
             sb.AppendFormat("Data: {0}  | HResult: {1}  | InnerException: {2}  | Message : {3}  | Source: {4}  | Stack Trace: {5}  | Target Site: {6}",
@@ -220,7 +223,7 @@ namespace FortyThreeLime.Logging
                 stackTrace,
                 targetSite);
 
-            return CleanString(sb.ToString());
+            return sb.ToString();
         }
 
         /// <summary>
@@ -232,14 +235,15 @@ namespace FortyThreeLime.Logging
 
             foreach (DictionaryEntry d in data)
             {
-                string key = CleanString(d.Key.ToString());
-                string value = CleanString(d.Value.ToString());
+                string key = d.Key.ToString();
+                string value = d.Value.ToString();
                 FormattableString valueString = $"| {{Header: {key} | Value: {value}}} |";
-                sb.AppendFormat(CleanString(valueString.ToString()));
+                sb.AppendFormat(valueString.ToString());
             }
-            return CleanString(sb.ToString());
+            return sb.ToString();
         }
 
         #endregion
     }
+
 }

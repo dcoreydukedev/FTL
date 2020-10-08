@@ -74,6 +74,9 @@ namespace FortyThreeLime.API.Controllers
             }
             catch (Exception ex)
             {
+                // Log the Exception
+                LogError("ButtonCommands", "Get", ex);
+
                 return StatusCode(StatusCodes.Status500InternalServerError, ex);
             }
         }
@@ -140,6 +143,9 @@ namespace FortyThreeLime.API.Controllers
             }
             catch (Exception ex)
             {
+                // Log the Exception
+                LogError("ButtonCommands", "Get", ex);
+
                 return StatusCode(StatusCodes.Status500InternalServerError, ex);
             }
         }

@@ -1,20 +1,25 @@
 ﻿/*************************************************************************
  * Author: DCoreyDuke
-
+ * Logs Actions to ~/Logs/{Application}/Action.log
  ************************************************************************/
 
 namespace FortyThreeLime.Logging
 {
-    using System;
-    using System.IO;
-    using System.Text;
+    public interface IActionLogger
+    {
+        void Log(ILogInfo info);
+        void Log(string message);
+    }
 
     /// <summary>
-    /// Logs User Actions
+    /// Logs Actions
     /// </summary>
-    public class UserLogger : Logger, ILogger
+    public class ActionLogger : Logger, IActionLogger
     {
-        public UserLogger() : base("UserLog.log")
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ActionLogger"/> class.
+        /// </summary>
+        public ActionLogger() : base("Action.log")
         {
         }
 
@@ -26,12 +31,13 @@ namespace FortyThreeLime.Logging
             base.Log(message);
         }
 
-        // <summary>
         /// Override Base Log Method; Log The LogInfo Object
         /// </summary>
         public override void Log(ILogInfo info)
         {
             base.Log(info);
         }
+
     }
+
 }

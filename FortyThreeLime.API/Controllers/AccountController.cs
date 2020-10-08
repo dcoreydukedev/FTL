@@ -79,12 +79,20 @@ namespace FortyThreeLime.API.Controllers
                 AppAuth appAuth = new AppAuth(loginData);
                 _AppAuthService.CreateAppAuth(appAuth);
 
+                // Log the Action
+                string logmsg = String.Format("User {0} | {1} has logged in", _User.UserId, _User.Username);
+                LogAction("Account", "Login", logmsg);
 
+                // Return Status code 200 Success + LoginData
                 return Ok(loginData);
 
             }
             catch (Exception ex)
             {
+                // Log the Exception
+                LogError("Account", "Login", ex);
+
+                // Return Status Code 500 + exception
                 return StatusCode(StatusCodes.Status500InternalServerError, ex);
             }
         }
@@ -139,11 +147,18 @@ namespace FortyThreeLime.API.Controllers
 
                 // Delete AppAuth Record
                 _AppAuthService.DeleteAppAuth(appAuth.Id);
+
+                // Log the Action
+                string logmsg = String.Format("User {0} | {1} has logged out", _User.UserId, _User.Username);
+                LogAction("Account", "Logout", logmsg);
+
+                // Return Status code 200 Success + LoginData
                 return Ok(loginData);
 
             }
             catch (Exception ex)
             {
+                // Return Status Code 500 + exception
                 return StatusCode(StatusCodes.Status500InternalServerError, ex);
             }
         }

@@ -4,7 +4,6 @@
  ************************************************************************/
 
 using System;
-using System.Collections.Generic;
 using FortyThreeLime.Logging;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,10 +14,7 @@ namespace FortyThreeLime.API.Controllers
     /// </summary>
     public class ApiControllerBase : ControllerBase
     {
-        /// <summary>
-        /// Private Instance of Admin Logger
-        /// </summary>
-        private readonly AdminLogger _adminLogger;
+       
 
         /// <summary>
         /// Private Instance of ErrorLogger
@@ -26,46 +22,17 @@ namespace FortyThreeLime.API.Controllers
         private readonly ErrorLogger _errorLogger;
 
         /// <summary>
-        /// Private Instance of ApiRequestLogger
+        /// Private Instance of ActionLogger
         /// </summary>
-        private readonly APIResponseLogger _apiLogger;
+        private readonly ActionLogger _actionLogger;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ApiControllerBase"/> class.
         /// </summary>
         public ApiControllerBase() : base()
         {
-            _adminLogger = new AdminLogger();
             _errorLogger = new ErrorLogger();
-            _apiLogger = new APIResponseLogger();
-        }
-
-
-        /// <summary>
-        /// Logs the admin.
-        /// </summary>
-        /// <param name="controllerName">Name of the controller.</param>
-        /// <param name="actionName">Name of the action.</param>
-        /// <param name="message">The message.</param>
-        internal void LogAdmin(string controllerName, string actionName, string message)
-        {
-            ILogInfo info = new LogInfo(controllerName, actionName, message, null);
-
-            _adminLogger.Log(info);
-        }
-
-        /// <summary>
-        /// Logs the admin.
-        /// </summary>
-        /// <param name="controllerName">Name of the controller.</param>
-        /// <param name="actionName">Name of the action.</param>
-        /// <param name="message">The message.</param>
-        /// <param name="data">The data.</param>
-        internal void LogAdmin(string controllerName, string actionName, string message, IDictionary<string, string> data)
-        {
-            ILogInfo info = new LogInfo(controllerName, actionName, message, data);
-
-            _adminLogger.Log(info);
+            _actionLogger = new ActionLogger();
         }
 
         /// <summary>
@@ -80,6 +47,17 @@ namespace FortyThreeLime.API.Controllers
             _errorLogger.Log(info);
         }
 
+        /// <summary>
+        /// Logs the action
+        /// </summary>
+        /// <param name="controllerName">Name of the controller.</param>
+        /// <param name="actionName">Name of the action.</param>
+        /// <param name="message">The message</param>
+        internal void LogAction(string controllerName, string actionName, string message)
+        {
+            LogInfo info = new LogInfo(controllerName, actionName, message);
+            _actionLogger.Log(info);
+        }
 
         /* -- Return Messages -- */
        

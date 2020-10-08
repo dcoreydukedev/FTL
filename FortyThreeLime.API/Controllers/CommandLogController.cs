@@ -64,6 +64,9 @@ namespace FortyThreeLime.API.Controllers
             }
             catch (Exception ex)
             {
+                // Log the Exception
+                LogError("CommandLog", "Create", ex);
+
                 return StatusCode(StatusCodes.Status500InternalServerError, ex);
             }
 

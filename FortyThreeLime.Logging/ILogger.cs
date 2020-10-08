@@ -23,6 +23,7 @@ namespace FortyThreeLime.Logging
 
     /// <summary>
     /// Abstract Implementation of ILogger
+    /// LogFile: Action|Error
     /// </summary>
     public abstract class Logger : ILogger
     {
@@ -42,7 +43,7 @@ namespace FortyThreeLime.Logging
          
             LogFile = logFile;
 
-            LogName = LogFile.Replace("Log.log", " ").Trim();
+            LogName = LogFile.Replace(".log", " ").Trim();
 
             if (Directory.Exists(this.LogsDirectory))
             {
@@ -80,25 +81,7 @@ namespace FortyThreeLime.Logging
             }
         }
 
-        /// <summary>
-        ///  Removes Unwanted Spaces, NewLines, and/or Other Characters
-        /// </summary>
-        /// <param name="rawString"></param>
-        /// <returns></returns>
-        public string CleanString(string rawString)
-        {
-            //if (string.IsNullOrEmpty(rawString))
-            //{
-            //    throw new ArgumentException("Raw String Value must be provided!");
-            //}
-
-            // Replace any White Space (i.e. Tabs, NewLines, etc 
-            // Regualar Expression \s is equivalent to  [  \f\n\r\t\v]
-            rawString = Regex.Replace(rawString, @"(\s)\s+", " ");
-
-            return rawString.ToString().Trim();
-        }
-
+       
         /// <summary>
         /// Logs the Message
         /// </summary>
@@ -107,11 +90,11 @@ namespace FortyThreeLime.Logging
             string logRecordId = GetLogRecordId().ToString();
             string timestamp = Timestamp;
 
-            FormattableString logInfoString = $@"| {{ Id: {CleanString(logRecordId)} }}
-                                                 | {{ Timestamp: {CleanString(timestamp)} }}
-                                                 | {{ Message: {CleanString(message)} }}";
+            FormattableString logInfoString = $@"| {{ Id: {logRecordId} }}
+                                                 | {{ Timestamp: {timestamp} }}
+                                                 | {{ Message: {message} }}";
 
-            using (StreamWriter writer = new StreamWriter(LogFilePath))
+            using (StreamWriter writer = new StreamWriter(LogFilePath, true))
             {
                 writer.WriteLine(CleanString(logInfoString.ToString()));
             }
@@ -129,14 +112,14 @@ namespace FortyThreeLime.Logging
             string data;
             
             data = FormatILogInfoData(info.Data);
-            logInfoString = $@"| {{ Id: {CleanString(logRecordId)} }}
-                            | {{ Timestamp: {CleanString(timestamp)} }}
-                            | {{ Action: {CleanString(info.ActionName)} }} 
-                            | {{ Controller: {CleanString(info.ActionName)} }}
-                            | {{ Message: {CleanString(info.Message)} }}
-                            | {{ Data: {CleanString(data)} }}";            
+            logInfoString = $@"| {{ Id: {logRecordId} }}
+                            | {{ Timestamp: {timestamp} }}
+                            | {{ Action: {info.ActionName} }} 
+                            | {{ Controller: {info.ControllerName} }}
+                            | {{ Message: {info.Message} }}
+                            | {{ Data: {data} }}";            
 
-            using (StreamWriter writer = new StreamWriter(LogFilePath))
+            using (StreamWriter writer = new StreamWriter(LogFilePath, true))
             {
                 writer.WriteLine(CleanString(logInfoString.ToString()));
             }
@@ -153,7 +136,7 @@ namespace FortyThreeLime.Logging
             {
                 foreach (KeyValuePair<string, string> kvp in data)
                 {
-                    sb.AppendFormat("{0} | {1}", CleanString(kvp.Key), CleanString(kvp.Value));
+                    sb.AppendFormat("{0} | {1}", kvp.Key, kvp.Value);
                 }
             }
             return CleanString(sb.ToString());
@@ -189,6 +172,25 @@ namespace FortyThreeLime.Logging
             }
             File.Create(LogFilePath);
             return;
+        }
+
+        /// <summary>
+        ///  Removes Unwanted Spaces, NewLines, and/or Other Characters
+        /// </summary>
+        /// <param name="rawString"></param>
+        /// <returns></returns>
+        public string CleanString(string rawString)
+        {
+            //if (string.IsNullOrEmpty(rawString))
+            //{
+            //    throw new ArgumentException("Raw String Value must be provided!");
+            //}
+
+            // Replace any White Space (i.e. Tabs, NewLines, etc 
+            // Regular Expression \s is equivalent to  [  \f\n\r\t\v]
+            rawString = Regex.Replace(rawString, @"(\s)\s+", " ");
+
+            return rawString.ToString().Trim();
         }
     }
 }

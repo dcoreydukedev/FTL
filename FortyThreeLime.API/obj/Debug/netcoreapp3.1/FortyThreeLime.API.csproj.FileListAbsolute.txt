@@ -71,3 +71,6 @@ C:\Users\DCoreyDuke Developer\source\repos\FTL\FortyThreeLime.API\obj\Debug\netc
 C:\Users\DCoreyDuke Developer\source\repos\FTL\FortyThreeLime.API\obj\Debug\netcoreapp3.1\FortyThreeLime.API.genruntimeconfig.cache
 C:\Users\DCoreyDuke Developer\source\repos\FTL\FortyThreeLime.API\bin\Debug\netcoreapp3.1\app.xml
 C:\Users\DCoreyDuke Developer\source\repos\FTL\FortyThreeLime.API\bin\Debug\netcoreapp3.1\Geocoding.Core.dll
+C:\Users\DCoreyDuke Developer\source\repos\FTL\FortyThreeLime.API\obj\Debug\netcoreapp3.1\FortyThreeLime.API.csproj.CoreCompileInputs.cache
+C:\Users\DCoreyDuke Developer\source\repos\FTL\FortyThreeLime.API\obj\Debug\netcoreapp3.1\FortyThreeLime.API.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\DCoreyDuke Developer\source\repos\FTL\FortyThreeLime.API\bin\Debug\netcoreapp3.1\Geocoding.Google.dll

@@ -18,9 +18,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FortyThreeLime.Mobile", "FortyThreeLime.Mobile\FortyThreeLime.Mobile.csproj", "{94B5331A-4F61-47DB-8A78-75B1923C37E3}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FortyThreeLime.Admin", "FortyThreeLime.Admin\FortyThreeLime.Admin.csproj", "{981F66BA-216C-4C3B-9C18-198F65114E70}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FortyThreeLime.Admin", "FortyThreeLime.Admin\FortyThreeLime.Admin.csproj", "{981F66BA-216C-4C3B-9C18-198F65114E70}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -48,10 +46,6 @@ Global
 		{722E427C-B683-4C28-A005-0DCCFE4295ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{722E427C-B683-4C28-A005-0DCCFE4295ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{722E427C-B683-4C28-A005-0DCCFE4295ED}.Release|Any CPU.Build.0 = Release|Any CPU
-		{94B5331A-4F61-47DB-8A78-75B1923C37E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{94B5331A-4F61-47DB-8A78-75B1923C37E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{94B5331A-4F61-47DB-8A78-75B1923C37E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{94B5331A-4F61-47DB-8A78-75B1923C37E3}.Release|Any CPU.Build.0 = Release|Any CPU
 		{981F66BA-216C-4C3B-9C18-198F65114E70}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{981F66BA-216C-4C3B-9C18-198F65114E70}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{981F66BA-216C-4C3B-9C18-198F65114E70}.Release|Any CPU.ActiveCfg = Release|Any CPU
