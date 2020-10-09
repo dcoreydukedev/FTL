@@ -1,23 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Administrator\\Source\\Repos\\FTL\\FortyThreeLime.Logging\\FortyThreeLime.Logging.csproj": {}
+    "C:\\Users\\DCoreyDuke Developer\\source\\repos\\FTL\\FortyThreeLime.Logging\\FortyThreeLime.Logging.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Administrator\\Source\\Repos\\FTL\\FortyThreeLime.Logging\\FortyThreeLime.Logging.csproj": {
+    "C:\\Users\\DCoreyDuke Developer\\source\\repos\\FTL\\FortyThreeLime.Logging\\FortyThreeLime.Logging.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Administrator\\Source\\Repos\\FTL\\FortyThreeLime.Logging\\FortyThreeLime.Logging.csproj",
+        "projectUniqueName": "C:\\Users\\DCoreyDuke Developer\\source\\repos\\FTL\\FortyThreeLime.Logging\\FortyThreeLime.Logging.csproj",
         "projectName": "FortyThreeLime.Logging",
-        "projectPath": "C:\\Users\\Administrator\\Source\\Repos\\FTL\\FortyThreeLime.Logging\\FortyThreeLime.Logging.csproj",
-        "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Administrator\\Source\\Repos\\FTL\\FortyThreeLime.Logging\\obj\\",
+        "projectPath": "C:\\Users\\DCoreyDuke Developer\\source\\repos\\FTL\\FortyThreeLime.Logging\\FortyThreeLime.Logging.csproj",
+        "packagesPath": "C:\\Users\\DCoreyDuke Developer\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\DCoreyDuke Developer\\source\\repos\\FTL\\FortyThreeLime.Logging\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Microsoft\\Xamarin\\NuGet\\"
+          "C:\\Microsoft\\Xamarin\\NuGet\\",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\DCoreyDuke Developer\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],

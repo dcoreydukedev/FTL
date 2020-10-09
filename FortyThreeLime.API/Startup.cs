@@ -44,16 +44,20 @@ namespace FortyThreeLime.API
 
             services.AddDistributedMemoryCache();
 
+            services.AddMvc(opts => {
+                opts.EnableEndpointRouting = false;
+            });
+
             services.AddCors();
 
             services.AddEntityFrameworkSqlite();
 
             // Session State 
-            services.AddSession(opts => { opts.Cookie.HttpOnly = true; opts.Cookie.IsEssential = true; opts.IdleTimeout = TimeSpan.FromDays(1); });
+            services.AddSession(opts => { opts.Cookie.HttpOnly = true; opts.Cookie.IsEssential = true; opts.IdleTimeout = TimeSpan.FromHours(12); });
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
-
-            services.AddControllers(options => {
+            // Changed to ~WithViews For MVC Homepage
+            services.AddControllersWithViews(options => {
                 options.InputFormatters.Insert(0, GetJsonPatchInputFormatter());
                 options.OutputFormatters.RemoveType<XmlSerializerOutputFormatter>();
                 options.OutputFormatters.RemoveType<StringOutputFormatter>();
@@ -71,8 +75,16 @@ namespace FortyThreeLime.API
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            else if(env.IsProduction())
+            {
+                app.UseExceptionHandler("/Error");
+                app.UseHsts();
+            }
             app.UseHttpsRedirection();
+
+            app.UseStaticFiles();
+
+            app.UseMvc();
 
             app.UseRouting();
 
@@ -84,7 +96,10 @@ namespace FortyThreeLime.API
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
+                //endpoints.MapControllers();
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }
         private static NewtonsoftJsonPatchInputFormatter GetJsonPatchInputFormatter()

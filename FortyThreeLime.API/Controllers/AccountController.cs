@@ -9,6 +9,7 @@ using FortyThreeLime.Models.Domain;
 using FortyThreeLime.API.Services;
 using Microsoft.Extensions.Configuration;
 using System.Threading.Tasks;
+using System.Net.Mime;
 
 namespace FortyThreeLime.API.Controllers
 {

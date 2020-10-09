@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "rMSdhdm5ZUqnvZ/i1l0i4DbekdwA6Qpt/eXWPxpL/XxqDFrF0OIwa0/BjuPl2o8e4ZxaVe62/IM6hCL7eHv9Fw==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\DCoreyDuke Developer\\source\\repos\\FTL\\FortyThreeLime.WebServices\\FortyThreeLime.WebServices.csproj",
+  "expectedPackageFiles": [
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}

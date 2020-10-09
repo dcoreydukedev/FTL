@@ -2,6 +2,10 @@
   "iisSettings": {
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
+    "iis": {
+      "applicationUrl": "http://localhost",
+      "sslPort": 443
+    },
     "iisExpress": {
       "applicationUrl": "http://localhost:54012",
       "sslPort": 44315
@@ -10,23 +14,32 @@
   "$schema": "http://json.schemastore.org/launchsettings.json",
   "profiles": {
     "IIS Express": {
+      "ancmHostingModel": "InProcess",
       "commandName": "IISExpress",
+      "environmentVariables": {
+        "APPLICATION_NAME": "FortyThreeLime.API",
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "FILE_DIRECTORY": "C:\\FortyThreeLime",
+        "LOGS_DIRECTORY": "C:\\FortyThreeLime\\Logs",
+        "SQLITE_DB_DIRECTORY": "C:\\FortyThreeLime\\DB"
+      },
       "launchBrowser": true,
       "launchUrl": "http://localhost:54012",
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
-      },
-      "ancmHostingModel": "InProcess",
       "use64Bit": true
     },
-    "FortyThreeLime.API": {
-      "commandName": "Project",
-      "launchBrowser": true,
-      "launchUrl": "weatherforecast",
+    "IIS": {
+      "ancmHostingModel": "InProcess",
+      "commandName": "IIS",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "APPLICATION_NAME": "FortyThreeLime.API",
+        "ASPNETCORE_ENVIRONMENT": "Production",
+        "FILE_DIRECTORY": "C:\\FortyThreeLime",
+        "LOGS_DIRECTORY": "C:\\FortyThreeLime\\Logs",
+        "SQLITE_DB_DIRECTORY": "C:\\FortyThreeLime\\DB"
       },
-      "applicationUrl": "https://localhost:5001;http://localhost:5000"
+      "launchBrowser": true,
+      "launchUrl": "http://localhost",
+      "use64Bit": true
     }
   }
 }

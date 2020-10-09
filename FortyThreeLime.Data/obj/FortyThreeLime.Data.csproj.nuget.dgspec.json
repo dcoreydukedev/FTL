@@ -1,23 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Administrator\\Source\\Repos\\FTL\\FortyThreeLime.Data\\FortyThreeLime.Data.csproj": {}
+    "C:\\Users\\DCoreyDuke Developer\\source\\repos\\FTL\\FortyThreeLime.Data\\FortyThreeLime.Data.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Administrator\\Source\\Repos\\FTL\\FortyThreeLime.Data\\FortyThreeLime.Data.csproj": {
+    "C:\\Users\\DCoreyDuke Developer\\source\\repos\\FTL\\FortyThreeLime.Data\\FortyThreeLime.Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Administrator\\Source\\Repos\\FTL\\FortyThreeLime.Data\\FortyThreeLime.Data.csproj",
+        "projectUniqueName": "C:\\Users\\DCoreyDuke Developer\\source\\repos\\FTL\\FortyThreeLime.Data\\FortyThreeLime.Data.csproj",
         "projectName": "FortyThreeLime.Data",
-        "projectPath": "C:\\Users\\Administrator\\Source\\Repos\\FTL\\FortyThreeLime.Data\\FortyThreeLime.Data.csproj",
-        "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Administrator\\Source\\Repos\\FTL\\FortyThreeLime.Data\\obj\\",
+        "projectPath": "C:\\Users\\DCoreyDuke Developer\\source\\repos\\FTL\\FortyThreeLime.Data\\FortyThreeLime.Data.csproj",
+        "packagesPath": "C:\\Users\\DCoreyDuke Developer\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\DCoreyDuke Developer\\source\\repos\\FTL\\FortyThreeLime.Data\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Microsoft\\Xamarin\\NuGet\\"
+          "C:\\Microsoft\\Xamarin\\NuGet\\",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\DCoreyDuke Developer\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
@@ -31,8 +32,8 @@
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
-              "C:\\Users\\Administrator\\Source\\Repos\\FTL\\FortyThreeLime.Models\\FortyThreeLime.Models.csproj": {
-                "projectPath": "C:\\Users\\Administrator\\Source\\Repos\\FTL\\FortyThreeLime.Models\\FortyThreeLime.Models.csproj"
+              "C:\\Users\\DCoreyDuke Developer\\source\\repos\\FTL\\FortyThreeLime.Models\\FortyThreeLime.Models.csproj": {
+                "projectPath": "C:\\Users\\DCoreyDuke Developer\\source\\repos\\FTL\\FortyThreeLime.Models\\FortyThreeLime.Models.csproj"
               }
             }
           }
@@ -95,20 +96,21 @@
         }
       }
     },
-    "C:\\Users\\Administrator\\Source\\Repos\\FTL\\FortyThreeLime.Models\\FortyThreeLime.Models.csproj": {
+    "C:\\Users\\DCoreyDuke Developer\\source\\repos\\FTL\\FortyThreeLime.Models\\FortyThreeLime.Models.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Administrator\\Source\\Repos\\FTL\\FortyThreeLime.Models\\FortyThreeLime.Models.csproj",
+        "projectUniqueName": "C:\\Users\\DCoreyDuke Developer\\source\\repos\\FTL\\FortyThreeLime.Models\\FortyThreeLime.Models.csproj",
         "projectName": "FortyThreeLime.Models",
-        "projectPath": "C:\\Users\\Administrator\\Source\\Repos\\FTL\\FortyThreeLime.Models\\FortyThreeLime.Models.csproj",
-        "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Administrator\\Source\\Repos\\FTL\\FortyThreeLime.Models\\obj\\",
+        "projectPath": "C:\\Users\\DCoreyDuke Developer\\source\\repos\\FTL\\FortyThreeLime.Models\\FortyThreeLime.Models.csproj",
+        "packagesPath": "C:\\Users\\DCoreyDuke Developer\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\DCoreyDuke Developer\\source\\repos\\FTL\\FortyThreeLime.Models\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Microsoft\\Xamarin\\NuGet\\"
+          "C:\\Microsoft\\Xamarin\\NuGet\\",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\DCoreyDuke Developer\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],

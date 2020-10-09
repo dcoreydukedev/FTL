@@ -1,11 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+/*************************************************************************
+ * Author: DCoreyDuke
+ ************************************************************************/
+
+using System.IO;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 
 namespace FortyThreeLime.API
 {
@@ -18,9 +18,31 @@ namespace FortyThreeLime.API
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
+            .ConfigureAppConfiguration((hostingContext, config) =>
+            {
+
+                config.Sources.Clear();
+
+                var env = hostingContext.HostingEnvironment;
+
+                config.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                      .AddJsonFile($"appsettings.{env.EnvironmentName}.json",
+                                     optional: true, reloadOnChange: true);
+
+                config.AddEnvironmentVariables();
+
+                if (args != null)
                 {
-                    webBuilder.UseStartup<Startup>();
-                });
+                    config.AddCommandLine(args);
+                }
+            })
+            .ConfigureWebHostDefaults(webBuilder =>
+            {
+                webBuilder.UseContentRoot(Directory.GetCurrentDirectory());
+                webBuilder.UseIIS();
+                webBuilder.UseIISIntegration();
+                webBuilder.UseStartup<Startup>();
+                
+            });
     }
 }
