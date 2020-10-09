@@ -1,0 +1,9 @@
+C:\Users\DCoreyDuke Developer\source\repos\FTL\FortyThreeLime.WebServices\bin\Debug\netstandard2.0\FortyThreeLime.WebServices.deps.json
+C:\Users\DCoreyDuke Developer\source\repos\FTL\FortyThreeLime.WebServices\bin\Debug\netstandard2.0\FortyThreeLime.WebServices.dll
+C:\Users\DCoreyDuke Developer\source\repos\FTL\FortyThreeLime.WebServices\bin\Debug\netstandard2.0\FortyThreeLime.WebServices.pdb
+C:\Users\DCoreyDuke Developer\source\repos\FTL\FortyThreeLime.WebServices\obj\Debug\netstandard2.0\FortyThreeLime.WebServices.csprojAssemblyReference.cache
+C:\Users\DCoreyDuke Developer\source\repos\FTL\FortyThreeLime.WebServices\obj\Debug\netstandard2.0\FortyThreeLime.WebServices.AssemblyInfoInputs.cache
+C:\Users\DCoreyDuke Developer\source\repos\FTL\FortyThreeLime.WebServices\obj\Debug\netstandard2.0\FortyThreeLime.WebServices.AssemblyInfo.cs
+C:\Users\DCoreyDuke Developer\source\repos\FTL\FortyThreeLime.WebServices\obj\Debug\netstandard2.0\FortyThreeLime.WebServices.csproj.CoreCompileInputs.cache
+C:\Users\DCoreyDuke Developer\source\repos\FTL\FortyThreeLime.WebServices\obj\Debug\netstandard2.0\FortyThreeLime.WebServices.dll
+C:\Users\DCoreyDuke Developer\source\repos\FTL\FortyThreeLime.WebServices\obj\Debug\netstandard2.0\FortyThreeLime.WebServices.pdb

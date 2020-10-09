@@ -35,3 +35,4 @@ C:\Users\DCoreyDuke Developer\source\repos\FTL\FortyThreeLime.Admin\obj\Debug\ne
 C:\Users\DCoreyDuke Developer\source\repos\FTL\FortyThreeLime.Admin\obj\Debug\netcoreapp3.1\FortyThreeLime.Admin.pdb
 C:\Users\DCoreyDuke Developer\source\repos\FTL\FortyThreeLime.Admin\obj\Debug\netcoreapp3.1\FortyThreeLime.Admin.genruntimeconfig.cache
 C:\Users\DCoreyDuke Developer\source\repos\FTL\FortyThreeLime.Admin\obj\Debug\netcoreapp3.1\FortyThreeLime.Admin.csproj.CopyComplete
+C:\Users\DCoreyDuke Developer\source\repos\FTL\FortyThreeLime.Admin\bin\Debug\netcoreapp3.1\libman.json
