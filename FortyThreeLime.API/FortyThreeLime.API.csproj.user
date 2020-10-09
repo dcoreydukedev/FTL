@@ -4,7 +4,11 @@
     <DebuggerFlavor>ProjectDebugger</DebuggerFlavor>
   </PropertyGroup>
   <PropertyGroup>
-    <ActiveDebugProfile>IIS Express</ActiveDebugProfile>
+    <ActiveDebugProfile>IIS</ActiveDebugProfile>
     <NameOfLastUsedPublishProfile>FolderProfile</NameOfLastUsedPublishProfile>
+    <ShowAllFiles>true</ShowAllFiles>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DebuggerFlavor>ProjectDebugger</DebuggerFlavor>
   </PropertyGroup>
 </Project>
