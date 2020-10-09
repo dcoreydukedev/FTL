@@ -12,3 +12,17 @@ C:\Users\DCoreyDuke Developer\source\repos\FTL\FortyThreeLime.Repository\obj\Rel
 C:\Users\DCoreyDuke Developer\source\repos\FTL\FortyThreeLime.Repository\obj\Release\netcoreapp3.1\FortyThreeLime.Repository.csproj.CopyComplete
 C:\Users\DCoreyDuke Developer\source\repos\FTL\FortyThreeLime.Repository\obj\Release\netcoreapp3.1\FortyThreeLime.Repository.dll
 C:\Users\DCoreyDuke Developer\source\repos\FTL\FortyThreeLime.Repository\obj\Release\netcoreapp3.1\FortyThreeLime.Repository.pdb
+C:\Users\Administrator\Source\Repos\FTL\FortyThreeLime.Repository\bin\Release\netcoreapp3.1\FortyThreeLime.Repository.deps.json
+C:\Users\Administrator\Source\Repos\FTL\FortyThreeLime.Repository\bin\Release\netcoreapp3.1\FortyThreeLime.Repository.dll
+C:\Users\Administrator\Source\Repos\FTL\FortyThreeLime.Repository\bin\Release\netcoreapp3.1\FortyThreeLime.Repository.pdb
+C:\Users\Administrator\Source\Repos\FTL\FortyThreeLime.Repository\bin\Release\netcoreapp3.1\FortyThreeLime.Data.dll
+C:\Users\Administrator\Source\Repos\FTL\FortyThreeLime.Repository\bin\Release\netcoreapp3.1\FortyThreeLime.Models.dll
+C:\Users\Administrator\Source\Repos\FTL\FortyThreeLime.Repository\bin\Release\netcoreapp3.1\FortyThreeLime.Data.pdb
+C:\Users\Administrator\Source\Repos\FTL\FortyThreeLime.Repository\bin\Release\netcoreapp3.1\FortyThreeLime.Models.pdb
+C:\Users\Administrator\Source\Repos\FTL\FortyThreeLime.Repository\obj\Release\netcoreapp3.1\FortyThreeLime.Repository.csprojAssemblyReference.cache
+C:\Users\Administrator\Source\Repos\FTL\FortyThreeLime.Repository\obj\Release\netcoreapp3.1\FortyThreeLime.Repository.AssemblyInfoInputs.cache
+C:\Users\Administrator\Source\Repos\FTL\FortyThreeLime.Repository\obj\Release\netcoreapp3.1\FortyThreeLime.Repository.AssemblyInfo.cs
+C:\Users\Administrator\Source\Repos\FTL\FortyThreeLime.Repository\obj\Release\netcoreapp3.1\FortyThreeLime.Repository.csproj.CoreCompileInputs.cache
+C:\Users\Administrator\Source\Repos\FTL\FortyThreeLime.Repository\obj\Release\netcoreapp3.1\FortyThreeLime.Repository.csproj.CopyComplete
+C:\Users\Administrator\Source\Repos\FTL\FortyThreeLime.Repository\obj\Release\netcoreapp3.1\FortyThreeLime.Repository.dll
+C:\Users\Administrator\Source\Repos\FTL\FortyThreeLime.Repository\obj\Release\netcoreapp3.1\FortyThreeLime.Repository.pdb

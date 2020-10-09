@@ -10,3 +10,15 @@ C:\Users\DCoreyDuke Developer\source\repos\FTL\FortyThreeLime.Models\obj\Release
 C:\Users\DCoreyDuke Developer\source\repos\FTL\FortyThreeLime.Models\obj\Release\netcoreapp3.1\FortyThreeLime.Models.dll
 C:\Users\DCoreyDuke Developer\source\repos\FTL\FortyThreeLime.Models\obj\Release\netcoreapp3.1\FortyThreeLime.Models.pdb
 C:\Users\DCoreyDuke Developer\source\repos\FTL\FortyThreeLime.Models\obj\Release\netcoreapp3.1\FortyThreeLime.Models.genruntimeconfig.cache
+C:\Users\Administrator\Source\Repos\FTL\FortyThreeLime.Models\bin\Release\netcoreapp3.1\FortyThreeLime.Models.deps.json
+C:\Users\Administrator\Source\Repos\FTL\FortyThreeLime.Models\bin\Release\netcoreapp3.1\FortyThreeLime.Models.runtimeconfig.json
+C:\Users\Administrator\Source\Repos\FTL\FortyThreeLime.Models\bin\Release\netcoreapp3.1\FortyThreeLime.Models.runtimeconfig.dev.json
+C:\Users\Administrator\Source\Repos\FTL\FortyThreeLime.Models\bin\Release\netcoreapp3.1\FortyThreeLime.Models.dll
+C:\Users\Administrator\Source\Repos\FTL\FortyThreeLime.Models\bin\Release\netcoreapp3.1\FortyThreeLime.Models.pdb
+C:\Users\Administrator\Source\Repos\FTL\FortyThreeLime.Models\obj\Release\netcoreapp3.1\FortyThreeLime.Models.csprojAssemblyReference.cache
+C:\Users\Administrator\Source\Repos\FTL\FortyThreeLime.Models\obj\Release\netcoreapp3.1\FortyThreeLime.Models.AssemblyInfoInputs.cache
+C:\Users\Administrator\Source\Repos\FTL\FortyThreeLime.Models\obj\Release\netcoreapp3.1\FortyThreeLime.Models.AssemblyInfo.cs
+C:\Users\Administrator\Source\Repos\FTL\FortyThreeLime.Models\obj\Release\netcoreapp3.1\FortyThreeLime.Models.csproj.CoreCompileInputs.cache
+C:\Users\Administrator\Source\Repos\FTL\FortyThreeLime.Models\obj\Release\netcoreapp3.1\FortyThreeLime.Models.dll
+C:\Users\Administrator\Source\Repos\FTL\FortyThreeLime.Models\obj\Release\netcoreapp3.1\FortyThreeLime.Models.pdb
+C:\Users\Administrator\Source\Repos\FTL\FortyThreeLime.Models\obj\Release\netcoreapp3.1\FortyThreeLime.Models.genruntimeconfig.cache

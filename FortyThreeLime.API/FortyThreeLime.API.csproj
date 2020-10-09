@@ -33,5 +33,9 @@
     <ProjectReference Include="..\FortyThreeLime.Repository\FortyThreeLime.Repository.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Properties\PublishProfiles\" />
+  </ItemGroup>
+
 
 </Project>

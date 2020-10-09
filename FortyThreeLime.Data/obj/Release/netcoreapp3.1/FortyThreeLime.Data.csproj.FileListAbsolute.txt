@@ -13,3 +13,18 @@ C:\Users\DCoreyDuke Developer\source\repos\FTL\FortyThreeLime.Data\obj\Release\n
 C:\Users\DCoreyDuke Developer\source\repos\FTL\FortyThreeLime.Data\obj\Release\netcoreapp3.1\FortyThreeLime.Data.dll
 C:\Users\DCoreyDuke Developer\source\repos\FTL\FortyThreeLime.Data\obj\Release\netcoreapp3.1\FortyThreeLime.Data.pdb
 C:\Users\DCoreyDuke Developer\source\repos\FTL\FortyThreeLime.Data\obj\Release\netcoreapp3.1\FortyThreeLime.Data.genruntimeconfig.cache
+C:\Users\Administrator\Source\Repos\FTL\FortyThreeLime.Data\bin\Release\netcoreapp3.1\FortyThreeLime.Data.deps.json
+C:\Users\Administrator\Source\Repos\FTL\FortyThreeLime.Data\bin\Release\netcoreapp3.1\FortyThreeLime.Data.runtimeconfig.json
+C:\Users\Administrator\Source\Repos\FTL\FortyThreeLime.Data\bin\Release\netcoreapp3.1\FortyThreeLime.Data.runtimeconfig.dev.json
+C:\Users\Administrator\Source\Repos\FTL\FortyThreeLime.Data\bin\Release\netcoreapp3.1\FortyThreeLime.Data.dll
+C:\Users\Administrator\Source\Repos\FTL\FortyThreeLime.Data\bin\Release\netcoreapp3.1\FortyThreeLime.Data.pdb
+C:\Users\Administrator\Source\Repos\FTL\FortyThreeLime.Data\bin\Release\netcoreapp3.1\FortyThreeLime.Models.dll
+C:\Users\Administrator\Source\Repos\FTL\FortyThreeLime.Data\bin\Release\netcoreapp3.1\FortyThreeLime.Models.pdb
+C:\Users\Administrator\Source\Repos\FTL\FortyThreeLime.Data\obj\Release\netcoreapp3.1\FortyThreeLime.Data.csprojAssemblyReference.cache
+C:\Users\Administrator\Source\Repos\FTL\FortyThreeLime.Data\obj\Release\netcoreapp3.1\FortyThreeLime.Data.AssemblyInfoInputs.cache
+C:\Users\Administrator\Source\Repos\FTL\FortyThreeLime.Data\obj\Release\netcoreapp3.1\FortyThreeLime.Data.AssemblyInfo.cs
+C:\Users\Administrator\Source\Repos\FTL\FortyThreeLime.Data\obj\Release\netcoreapp3.1\FortyThreeLime.Data.csproj.CoreCompileInputs.cache
+C:\Users\Administrator\Source\Repos\FTL\FortyThreeLime.Data\obj\Release\netcoreapp3.1\FortyThreeLime.Data.csproj.CopyComplete
+C:\Users\Administrator\Source\Repos\FTL\FortyThreeLime.Data\obj\Release\netcoreapp3.1\FortyThreeLime.Data.dll
+C:\Users\Administrator\Source\Repos\FTL\FortyThreeLime.Data\obj\Release\netcoreapp3.1\FortyThreeLime.Data.pdb
+C:\Users\Administrator\Source\Repos\FTL\FortyThreeLime.Data\obj\Release\netcoreapp3.1\FortyThreeLime.Data.genruntimeconfig.cache

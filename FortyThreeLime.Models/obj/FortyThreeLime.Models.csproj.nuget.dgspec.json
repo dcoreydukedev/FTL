@@ -1,24 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\DCoreyDuke Developer\\source\\repos\\FTL\\FortyThreeLime.Models\\FortyThreeLime.Models.csproj": {}
+    "C:\\Users\\Administrator\\Source\\Repos\\FTL\\FortyThreeLime.Models\\FortyThreeLime.Models.csproj": {}
   },
   "projects": {
-    "C:\\Users\\DCoreyDuke Developer\\source\\repos\\FTL\\FortyThreeLime.Models\\FortyThreeLime.Models.csproj": {
+    "C:\\Users\\Administrator\\Source\\Repos\\FTL\\FortyThreeLime.Models\\FortyThreeLime.Models.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\DCoreyDuke Developer\\source\\repos\\FTL\\FortyThreeLime.Models\\FortyThreeLime.Models.csproj",
+        "projectUniqueName": "C:\\Users\\Administrator\\Source\\Repos\\FTL\\FortyThreeLime.Models\\FortyThreeLime.Models.csproj",
         "projectName": "FortyThreeLime.Models",
-        "projectPath": "C:\\Users\\DCoreyDuke Developer\\source\\repos\\FTL\\FortyThreeLime.Models\\FortyThreeLime.Models.csproj",
-        "packagesPath": "C:\\Users\\DCoreyDuke Developer\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\DCoreyDuke Developer\\source\\repos\\FTL\\FortyThreeLime.Models\\obj\\",
+        "projectPath": "C:\\Users\\Administrator\\Source\\Repos\\FTL\\FortyThreeLime.Models\\FortyThreeLime.Models.csproj",
+        "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Administrator\\Source\\Repos\\FTL\\FortyThreeLime.Models\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Microsoft\\Xamarin\\NuGet\\",
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+          "C:\\Microsoft\\Xamarin\\NuGet\\"
         ],
         "configFilePaths": [
-          "C:\\Users\\DCoreyDuke Developer\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],

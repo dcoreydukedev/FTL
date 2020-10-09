@@ -7,3 +7,12 @@ C:\Users\DCoreyDuke Developer\source\repos\FTL\FortyThreeLime.Logging\obj\Releas
 C:\Users\DCoreyDuke Developer\source\repos\FTL\FortyThreeLime.Logging\obj\Release\netcoreapp3.1\FortyThreeLime.Logging.csproj.CoreCompileInputs.cache
 C:\Users\DCoreyDuke Developer\source\repos\FTL\FortyThreeLime.Logging\obj\Release\netcoreapp3.1\FortyThreeLime.Logging.dll
 C:\Users\DCoreyDuke Developer\source\repos\FTL\FortyThreeLime.Logging\obj\Release\netcoreapp3.1\FortyThreeLime.Logging.pdb
+C:\Users\Administrator\Source\Repos\FTL\FortyThreeLime.Logging\bin\Release\netcoreapp3.1\FortyThreeLime.Logging.deps.json
+C:\Users\Administrator\Source\Repos\FTL\FortyThreeLime.Logging\bin\Release\netcoreapp3.1\FortyThreeLime.Logging.dll
+C:\Users\Administrator\Source\Repos\FTL\FortyThreeLime.Logging\bin\Release\netcoreapp3.1\FortyThreeLime.Logging.pdb
+C:\Users\Administrator\Source\Repos\FTL\FortyThreeLime.Logging\obj\Release\netcoreapp3.1\FortyThreeLime.Logging.csprojAssemblyReference.cache
+C:\Users\Administrator\Source\Repos\FTL\FortyThreeLime.Logging\obj\Release\netcoreapp3.1\FortyThreeLime.Logging.AssemblyInfoInputs.cache
+C:\Users\Administrator\Source\Repos\FTL\FortyThreeLime.Logging\obj\Release\netcoreapp3.1\FortyThreeLime.Logging.AssemblyInfo.cs
+C:\Users\Administrator\Source\Repos\FTL\FortyThreeLime.Logging\obj\Release\netcoreapp3.1\FortyThreeLime.Logging.csproj.CoreCompileInputs.cache
+C:\Users\Administrator\Source\Repos\FTL\FortyThreeLime.Logging\obj\Release\netcoreapp3.1\FortyThreeLime.Logging.dll
+C:\Users\Administrator\Source\Repos\FTL\FortyThreeLime.Logging\obj\Release\netcoreapp3.1\FortyThreeLime.Logging.pdb
